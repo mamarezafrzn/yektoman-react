@@ -11,22 +11,13 @@ import Cta from './components/CTA/Cta';
 import News from './components/News/News';
 import Footer from './components/Footer/Footer';
 import GoTotop from './components/GoToTop/GoToTop';
+import AppRouter from './Router/AppRouter';
+
 
 function App() {
   return (
     <body>
-      <Header/>
-      <MainBanner/>
-      <FeaturedSection/>
-      <CaseStudies/>
-      <Quote/>
-      <Services/>
-      <FunFacts/>
-      <PricingArea/>
-      <Cta/>
-      <News/>
-      <Footer/>
-      <GoTotop/>
+      <AppRouter/>
     </body>
   );
 }

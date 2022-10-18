@@ -1,3 +1,5 @@
+import Icofont from "react-icofont"
+import logoSmall from "../../assets/img/logo_small.png"
 
 
 const Footer = () =>{
@@ -8,7 +10,7 @@ const Footer = () =>{
                 <div className="col-lg-3 col-md-6 col-sm-6">
                     <div className="single-footer-widget">
                         <div className="logo">
-                            <a href="#"><img src="logo_small.png" alt="image"/></a>
+                            <a href="#"><img src={logoSmall} alt="image"/></a>
                         </div>
     
                     </div>
@@ -37,7 +39,7 @@ const Footer = () =>{
                             <li><a href="https://facebook.com"><i className="icofont-facebook"></i></a></li>
                             <li><a href="https://twitter.com"><i className="icofont-twitter"></i></a></li>
                             <li><a href="https://telegram.com"><i className="icofont-telegram"></i></a></li>
-                            <li><a href="https://instagram.com"><i className="icofont-instagram"></i></a></li>
+                            <li style={{marginRight:"2px"}}><a href="https://instagram.com"><i className="icofont-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -47,9 +49,9 @@ const Footer = () =>{
                         <h3>ارتباط با ما</h3>
     
                         <ul className="get-in-touch">
-                            <li><i className="icofont-home"></i>ایران ، تهران</li>
-                            <li><i className="icofont-live-support"></i> <a href="tel:02188971898">021-88971898</a></li>
-                            <li><i className="icofont-envelope"></i> <a href="mailto:info@yektoman.ir">info@yektoman.ir</a></li>
+                            <li style={{marginBottom:"30px"}}><i className="icofont-home"></i>ایران ، تهران</li>
+                            <li style={{marginBottom:"30px"}}><i className="icofont-live-support"></i> <a href="tel:02188971898">021-88971898</a></li>
+                            <li style={{marginBottom:"30px"}}><i className="icofont-envelope"></i> <a href="mailto:info@yektoman.ir">info@yektoman.ir</a></li>
                         </ul>
                     </div>
                 </div>
