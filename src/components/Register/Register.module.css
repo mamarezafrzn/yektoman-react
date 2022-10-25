@@ -80,7 +80,7 @@ direction: ltr;
     .card-container{
         height: auto;
     }
-    .login-btn{width: auto;}
+    .login-btn{width: 80%;}
 }
 
 @media only screen and (min-width: 1100px) {
