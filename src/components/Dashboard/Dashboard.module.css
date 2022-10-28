@@ -17,6 +17,7 @@
 }
 .mainDescriptionHeading{
     text-align: right;
+    margin-bottom: 20px;
 }
 .cardHeading{
     font-size: 16px;
@@ -29,9 +30,77 @@
     color: rgb(144, 144, 144);
 }
 .cardDetails{
-    
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start; 
+   margin-bottom: 10px;
+}
+.cardDetails p{
+    color: rgb(63, 63, 63);
+    font-size: 12px;
+    font-weight: 400;
+    margin: 0px;
+}
+.btnContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 5px;
+}
+.membersModalBtn{
+    width: 80px;
+    height: 40px;
+    border: none;
+    background-color: rgb(19, 151, 151);
+    color: white;
+    font-size: 10px;
+    font-weight: 400;
+    border-radius: 5px;
+}
+.warningBtn{
+    width: 60px;
+    height: 40px;
+    background-color: rgb(255, 187, 0);
+    border-radius: 5px;
+    border: none;
+}
+.trashBtn{
+    width: 60px;
+    height: 40px;
+    background-color: rgb(228, 73, 73);
+    border-radius: 5px;
+    border: none;
+}
+.editBtn{
+    width: 60px;
+    height: 60px;
+    background-color: rgb(255, 187, 0);
+    border-radius: 5px;
+    border: none;
 }
 .cardItemFooter{
     width: 100%;
     height: 10%;
+    border-top: 1px solid rgb(203, 203, 203);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    padding-bottom: 0px;
+    margin-top: 10px;
+}
+.cardItemFooter p{
+    margin: 0px;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(144, 144, 144);
+}
+
+@media (max-width: 950px){
+    .cardItemContainer{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
