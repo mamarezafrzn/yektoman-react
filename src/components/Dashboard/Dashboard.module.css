@@ -1,0 +1,37 @@
+.cardItemContainer{
+    width: 50%;
+    box-shadow: 0px 0px 1px 1px rgb(244, 241, 241);
+    border-radius: 5px;
+    direction: rtl;
+    padding: 10px;
+}
+.cardItemBody{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.mainDescription{
+    width: 50%;
+
+}
+.mainDescriptionHeading{
+    text-align: right;
+}
+.cardHeading{
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+}
+.headingDescription{
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(144, 144, 144);
+}
+.cardDetails{
+    
+}
+.cardItemFooter{
+    width: 100%;
+    height: 10%;
+}
