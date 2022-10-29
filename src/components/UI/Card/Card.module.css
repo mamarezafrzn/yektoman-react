@@ -2,12 +2,12 @@ body{
     background-color: rgb(246, 246, 246);
 }
 .gridContainer{
-    display: grid;
-    grid-template-columns: 20% 76%;
-    justify-content: end;
-    /* grid-template-columns: 75% 25% 0px 0px; */
-    gap: 10px;
-    width: 100%;
+    display: grid !important;
+    grid-template-columns: 20% 76% !important;
+    justify-content: end !important;
+    gap: 10px !important;
+    width: 100% !important;
+
 }
 .cardContainer{
     margin-top: 50px;
@@ -58,12 +58,17 @@ body{
 
 @media (max-width: 950px){
     .gridContainer{
-        display: block;
-        width: 100%;
+        display: block !important;
+        width: 100% !important;
         margin: 0px auto;
     }
     .cardContainer{
+        display: block ;
         margin: 0px auto;
+        width: 100%;
+    }
+    .menuSlot{
+        display: none;
     }
 }
 

@@ -17,13 +17,13 @@ const DesktopMenu = () => {
             صندوق قرض الحسنه
         </h2>
       <div className={styles.itemsContainer}>
-        <Link href="/">
+        <Link to="/dashboard">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>داشبورد</h3>
             <DashboardIcon color="action" />
           </div>
         </Link>
-        <Link href="/">
+        <Link to="/">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>لیست کاربران</h3>
             <FormatListBulletedIcon
@@ -32,37 +32,37 @@ const DesktopMenu = () => {
             />
           </div>
         </Link>
-        <Link href="/">
+        <Link to="/dashboard/create-coffer">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>ایجاد طرح</h3>
             <AddIcon color="action" />
           </div>
         </Link>
-        <Link href="/">
+        <Link to="/dashboard/join">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>پیوستن به طرح</h3>
             <HandshakeIcon color="action" />
           </div>
         </Link>
-        <Link href="/">
+        <Link to="/">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>اعلانات</h3>
             <NotificationsIcon color="action" />
           </div>
         </Link>
-        <Link href="/">
+        <Link to="/">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>پروفایل</h3>
             <PersonIcon color="action" />
           </div>
         </Link>
-        <Link href="/">
+        <Link to="/">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>تنظیمات</h3>
             <SettingsIcon color="action" />
           </div>
         </Link>
-        <Link href="/">
+        <Link to="/">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>خروج</h3>
             <LogoutIcon color="action" />

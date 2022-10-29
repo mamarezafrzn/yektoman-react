@@ -1,12 +1,16 @@
 import {Routes,Route} from "react-router-dom"
 import App from "../App";
 import Dashboard from "../components/Dashboard/Dashboard";
+import Join from "../components/Dashboard/Join/Join";
+import Newcoffer from "../components/Dashboard/NewCoffer/NewCoffer";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import WithCode from "../components/Login/WithCode/WithCode";
 import WithPassword from "../components/Login/WithPassword/WithPassword";
 import Register from "../components/Register/Register";
 import Verify from "../components/Verify/Verify";
+
+
 
 const AppRouter = () =>{
     return(
@@ -19,6 +23,8 @@ const AppRouter = () =>{
             <Route path="/register" element={<Register/>} exact={true}/>
             <Route path="/verify" element={<Verify/>} exact={true}/>
             <Route path="/dashboard" element={<Dashboard/>} exact={true}/>
+            <Route path="/dashboard/create-coffer" element={<Newcoffer/>} exact={true}/>
+            <Route path="/dashboard/join" element={<Join/>} exact={true}/>
         </Routes>
     )
 }

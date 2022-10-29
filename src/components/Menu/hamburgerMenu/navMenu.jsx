@@ -67,8 +67,9 @@ export function NavMenu({ isOpen }) {
   return (
     <NavMenuContainer>
       <NavList>
-        <Link to="#">
+       
           <NavLink
+          to="/dashboard"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -86,9 +87,9 @@ export function NavMenu({ isOpen }) {
 
             <a style={aStyle} href="#">داشبورد</a>
           </NavLink>
-        </Link>
-        <Link to="#">
+       
           <NavLink
+            to="#"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -106,9 +107,10 @@ export function NavMenu({ isOpen }) {
             <FormatListBulletedIcon sx={{fontWeight:"bold"}} color="action"/>
             <a style={aStyle} href="#">لیست کاربران</a>
           </NavLink>
-        </Link>
-        <Link to="#">
+  
+
           <NavLink
+          to="/dashboard/create-coffer"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -125,9 +127,10 @@ export function NavMenu({ isOpen }) {
             <AddIcon color="action"/>
             <a style={aStyle} href="#"> ایجاد طرح</a>
           </NavLink>
-        </Link>
-        <Link to="#">
+
+   
           <NavLink
+          to="/dashboard/join"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -144,9 +147,9 @@ export function NavMenu({ isOpen }) {
             <HandshakeIcon color="action"/>
             <a style={aStyle} href="#">پیوستن به طرح</a>
           </NavLink>
-        </Link>
-        <Link to="#">
+
           <NavLink
+          to="#"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -163,9 +166,9 @@ export function NavMenu({ isOpen }) {
             <NotificationsIcon color="action"/>
             <a style={aStyle} href="#">اعلانات</a>
           </NavLink>
-        </Link>
-        <Link to="#">
+        
           <NavLink
+          to="#"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -182,9 +185,10 @@ export function NavMenu({ isOpen }) {
            <AttachMoneyIcon color="action"/>
             <a style={aStyle} href="#">پرداختی ها</a>
           </NavLink>
-        </Link>
-        <Link to="#">
+ 
+
           <NavLink
+          to="#"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -201,9 +205,9 @@ export function NavMenu({ isOpen }) {
              <PersonIcon color="action"/>
             <a style={aStyle} href="#"> پروفایل</a>
           </NavLink>
-        </Link>
-        <Link to="#">
+
           <NavLink
+          to="#"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -220,9 +224,9 @@ export function NavMenu({ isOpen }) {
             <SettingsIcon color="action"/>
             <a style={aStyle} href="#"> تنظیمات</a>
           </NavLink>
-        </Link>
-        <Link to="#">
+
           <NavLink
+          to="#"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -239,7 +243,6 @@ export function NavMenu({ isOpen }) {
             <LogoutIcon color="action"/>
             <a style={aStyle} href="#"> خروج</a>
           </NavLink>
-        </Link>
       </NavList>
     </NavMenuContainer>
   );

@@ -128,7 +128,7 @@ export function HamburgerMenu(props) {
         transition={menuTransition}
       >
         <TopContainer>
-         <p> صندوق قرض الحسنه</p>
+         <p style={{fontSize:"18px",fontWeight:"800"}}> صندوق قرض الحسنه</p>
          <br style={{color:"black",backgroundColor:"black"}}/>
         </TopContainer>
         <ContentContainer>
