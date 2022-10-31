@@ -149,7 +149,7 @@ export function NavMenu({ isOpen }) {
           </NavLink>
 
           <NavLink
-          to="#"
+          to="/dashboard/notifications"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{

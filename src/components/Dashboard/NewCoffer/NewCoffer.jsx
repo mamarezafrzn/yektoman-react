@@ -33,13 +33,13 @@ const Newcoffer = () => {
             <input type="text"/>
           </label>
           <div className={styles.chackboxContainer}>
-            <label>
+            <label style={{display:"flex"}} >
               صندوق با امتیاز
-              <input type="checkbox"/>
+              <input style={{margin:"0px"}} type="checkbox"/>
             </label>
-            <label>
+            <label style={{display:"flex"}}>
               نفر اول سرگروه
-              <input type="checkbox"/>
+              <input style={{margin:"0px"}} type="checkbox"/>
             </label>
           </div>
           <button type="submit" className={styles.submitBtn}>

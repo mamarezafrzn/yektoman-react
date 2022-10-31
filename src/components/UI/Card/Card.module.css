@@ -31,10 +31,22 @@ body{
     top: 60px;
     color: white;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 5px;
+}
+.headerTitle{
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+}
+.headerBtn{
+    border: none;
     border-radius: 5px;
+    font: 10px;
+    background-color: rgb(68, 123, 123);
+    color: white;
 }
 .cardBody{
     width: 100%;
@@ -42,7 +54,7 @@ body{
     background-color: white;
     box-shadow: 0px 0px 1px 1px #f0f0f0;
     border-radius: 5px;
-    padding: 80px 10px 40px 0px;
+    padding: 80px 10px 40px 10px;
 }
 .heading{
     font-size: 18px;

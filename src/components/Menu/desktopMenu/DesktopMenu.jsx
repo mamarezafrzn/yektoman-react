@@ -44,7 +44,7 @@ const DesktopMenu = () => {
             <HandshakeIcon color="action" />
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/dashboard/notifications">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>اعلانات</h3>
             <NotificationsIcon color="action" />
