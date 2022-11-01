@@ -4,6 +4,7 @@ import Dashboard from "../components/Dashboard/Dashboard";
 import Join from "../components/Dashboard/Join/Join";
 import Newcoffer from "../components/Dashboard/NewCoffer/NewCoffer";
 import Notifications from "../components/Dashboard/Notifications/Notifications";
+import Settings from "../components/Dashboard/Settings/Settings";
 import Transactions from "../components/Dashboard/Transactions/Transactions";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
@@ -29,6 +30,7 @@ const AppRouter = () =>{
             <Route path="/dashboard/join" element={<Join/>} exact={true}/>
             <Route path="/dashboard/notifications" element={<Notifications/>} exact={true}/>
             <Route path="/dashboard/transactions" element={<Transactions/>} exact={true}/>
+            <Route path="/dashboard/settings" element={<Settings/>} exact={true}/>
         </Routes>
     )
 }

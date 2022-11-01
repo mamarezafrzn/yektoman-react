@@ -56,7 +56,7 @@ const DesktopMenu = () => {
             <PersonIcon color="action" />
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/dashboard/settings">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>تنظیمات</h3>
             <SettingsIcon color="action" />

@@ -102,6 +102,7 @@ const Transactions = () => {
       </Modal>
       <Navbar />
       <DesktopMenu />
+
       <Card
         heading="لیست اعلانات"
         description="لیست تمامی اعلانات مربوط به شما"
@@ -150,6 +151,7 @@ const Transactions = () => {
       </Table>
     </TableContainer>
       </Card>
+
     </React.Fragment>
   );
 };
