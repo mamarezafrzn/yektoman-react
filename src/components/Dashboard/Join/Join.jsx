@@ -8,8 +8,8 @@ import styles from "./Join.module.css"
 const Join = () => {
   return (
     <React.Fragment>
-      <Navbar />
-      <DesktopMenu />
+      {/* <Navbar />
+      <DesktopMenu /> */}
       <Card heading="پیوستن به طرح" description="پس از جست و جو به طرح خود بپیوندید">
       <form className={styles.searchForm}>
       <label>

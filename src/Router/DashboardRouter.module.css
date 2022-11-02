@@ -1,0 +1,37 @@
+body{
+    background-color: rgb(246, 246, 246);
+}
+.gridContainer{
+    /* display: grid !important;
+    grid-template-columns: 20% 76% !important;
+    justify-content: end !important;
+    gap: 10px !important;
+    width: 100% !important; */
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start
+
+}
+
+.menuSlot{
+    width: 20%;
+ 
+}
+
+@media (max-width: 950px){
+.gridContainer{
+    display: block !important;
+}
+
+    .menuSlot{
+        display: none;
+    }
+}
+
+
+@media (min-width: 1200px) {
+
+    .menuSlot{
+        width: 20%;
+    }
+  }  

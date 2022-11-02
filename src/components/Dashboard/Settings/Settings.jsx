@@ -42,8 +42,6 @@ const Settings = () => {
     }
   return (
     <React.Fragment>
-      <Navbar />
-      <DesktopMenu />
       <Card
         heading="لیست تنظیمات"
         description="لیست تمامی تنظیمات مربوط به سایت"

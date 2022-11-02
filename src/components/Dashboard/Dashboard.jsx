@@ -37,8 +37,7 @@ const Dashboard = () => {
 
   return (
     <React.Fragment>
-      <Navbar />
-      <DesktopMenu />
+
       <Modal
         open={openModal}
         onClose={openModalHandler}

@@ -89,7 +89,7 @@ export function NavMenu({ isOpen }) {
           </NavLink>
        
           <NavLink
-            to="#"
+            to="/dashboard/user-list"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -168,7 +168,7 @@ export function NavMenu({ isOpen }) {
           </NavLink>
         
           <NavLink
-          to="#"
+          to="/dashboard/transactions"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -188,7 +188,7 @@ export function NavMenu({ isOpen }) {
  
 
           <NavLink
-          to="#"
+          to="/dashboard/profile"
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{

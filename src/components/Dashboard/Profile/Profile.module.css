@@ -1,0 +1,160 @@
+
+.cardContainer{
+    margin-top: 11px;
+    width: 25%;
+    min-height: 200px;
+    margin-right: 50px;
+
+}
+
+.cardHeader{
+    width: 120px;
+    margin: 0px auto;
+    padding: 10px;
+    background-color: rgb(19, 151, 151);
+    box-shadow: 0px 0px 1px 2px rgb(221, 221, 221);
+    height: 120px;
+    position: relative;
+    top: 80px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 100%;
+}
+.headerTitle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.headerBtn{
+    border: none;
+    border-radius: 5px;
+    font: 10px;
+    background-color: rgb(68, 123, 123);
+    color: white;
+}
+.cardBody{
+    width: 100%;
+    min-height: 200px;
+    background-color: white;
+    box-shadow: 0px 0px 1px 1px #f0f0f0;
+    border-radius: 5px;
+    padding: 80px 10px 40px 10px;
+}
+.heading{
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+}
+.description{
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
+}
+.newForm{
+    width: 100%;
+    margin: 0px auto;
+    box-shadow: 0px 0px 1px 1px rgb(244, 241, 241);
+    border-radius: 5px;
+    direction: rtl;
+    padding: 20px;
+    text-align: right;
+    min-height: 300px;
+    overflow: overlay;
+}
+.newForm label{
+    width: 100%;
+    color: rgb(144, 144, 144);
+    font-size: smaller;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.newForm input ,.newForm input :focus-visible , .newForm input :focus{
+    width: 90%;
+    border: none !important;
+    border-bottom: 1px solid rgb(177, 177, 177) !important;
+    margin-top: 10px;
+}
+
+.submitBtn{
+    width: 100px;
+    height: 50px;
+    background-color: rgb(72, 155, 109);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    float: left;
+}
+.formHorizontal{
+    display: flex;
+    flex-direction: row;
+}
+.formVertical{
+    display: flex;
+    flex-direction: column;
+}
+.fileBtn{
+    width: 20%;
+    height: 30px;
+    border: 1px solid rgb(72, 155, 109);
+    border-radius: 5px;
+    background-color: transparent;
+    color: rgb(72, 155, 109);
+    float: right;
+}
+.userInfo{
+    text-align: center;
+    margin-top: 20px;
+}
+.userInfo p{
+    margin: 0px;
+    color: rgb(144, 144, 144);
+}
+.userHeader{
+    color:rgb(82, 82, 82) ;
+    font-weight: bolder;
+    padding-bottom: 10px;
+}
+.cardPics{
+    margin-top: 30px;
+    gap: 5px;
+    display: flex;
+    flex-direction: row;
+    text-align: right;
+}
+.cardPics p{
+    margin: 0px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(144, 144, 144);
+}
+
+@media (max-width: 950px){
+
+    .cardContainer{
+        display: block ;
+        margin: 0px auto;
+        width: 95%;
+    }
+    .fileBtn{
+        width: 100%;
+    }
+    .cardPics{
+        flex-direction: column;
+    }
+    .cardPics div{
+        width: 80%;
+        margin: 0px auto;
+    }
+
+}
+@media (max-width: 1400px){
+    .cardContainer{
+        margin-right: 20px;
+     
+    }
+}
+

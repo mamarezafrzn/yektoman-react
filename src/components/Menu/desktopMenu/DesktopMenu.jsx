@@ -11,6 +11,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const DesktopMenu = () => {
+
   return (
     <div className={styles.menuContainer}>
         <h2 className={styles.heading}>
@@ -23,7 +24,7 @@ const DesktopMenu = () => {
             <DashboardIcon color="action" />
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/dashboard/user-list">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>لیست کاربران</h3>
             <FormatListBulletedIcon
@@ -50,7 +51,13 @@ const DesktopMenu = () => {
             <NotificationsIcon color="action" />
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/dashboard/transactions">
+          <div className={styles.menuItems}>
+            <h3 className={styles.menuHeadings}>پرداختی ها</h3>
+            <NotificationsIcon color="action" />
+          </div>
+        </Link>
+        <Link to="/dashboard/profile">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>پروفایل</h3>
             <PersonIcon color="action" />

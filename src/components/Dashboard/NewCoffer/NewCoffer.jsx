@@ -7,9 +7,6 @@ import styles from "./NewCoffer.module.css";
 const Newcoffer = () => {
   return (
     <React.Fragment>
-      <Navbar />
-      <DesktopMenu />
-
       <Card heading="ایجاد صندوق جدید" description="افتتاح صندوق قرض الحسنه">
         <form className={styles.newForm}>
           <label>
