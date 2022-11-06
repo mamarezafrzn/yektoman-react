@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import undraw_investing from "../../assets/img/undraw_investing_7u74.svg"
 
 
@@ -18,8 +19,8 @@ const MainBanner = () =>{
                                     یک تومن جهت تسهیل در اجرای روند صندوق دوستانه و فامیلی ایجاد شده است
                                 </p>
     
-                                <a href="" className="btn btn-primary">ورود</a>
-                                <a href="" className="btn btn-secondary">شروع کنید</a>
+                                <Link to="/login" className="btn btn-primary">ورود</Link>
+                                <Link to="/register" className="btn btn-secondary">شروع کنید</Link>
                             </div>
                         </div>
     
