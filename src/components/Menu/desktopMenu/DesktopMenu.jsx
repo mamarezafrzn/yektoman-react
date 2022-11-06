@@ -53,8 +53,9 @@ const DesktopMenu = () => {
         </Link>
         <Link to="/dashboard/transactions">
           <div className={styles.menuItems}>
-            <h3 className={styles.menuHeadings}>پرداختی ها</h3>
-            <NotificationsIcon color="action" />
+            <h3 className={`${styles.menuHeadings} ${styles.pays}`}>پرداختی ها</h3>
+            <AttachMoneyIcon color="action" />
+            
           </div>
         </Link>
         <Link to="/dashboard/profile">

@@ -39,6 +39,21 @@
 .menuHeadings{
     font-size: 16px;
 }
+.pays{
+    display: contents;
+}
+.pays::before{
+    content: "۱";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgb(87, 87, 198);
+    color: white;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+}
 @media (max-width: 950px) {
     .menuContainer{
         display: none;

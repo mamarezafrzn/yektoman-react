@@ -6,9 +6,18 @@ import { useState } from "react";
 import styled from "styled-components";
 import { MenuToggle } from "./menuToggle";
 import { NavMenu } from "./navMenu";
+import styles from "./navMenu.module.css"
+import logo from "../../../assets/img/logo_small.png"
+
+
 
 const HamburgerMenuContainer = styled.div`
   display: flex;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;
 
 const HamburgerIcon = styled.div`
@@ -120,6 +129,7 @@ export function HamburgerMenu(props) {
 
   return (
     <HamburgerMenuContainer>
+      <img style={{width:"50px",height:"50px"}} src={logo}/>
       <MenuToggle toggle={toggleMenu} isOpen={isOpen} />
       <MenuContainer
         initial={false}
@@ -128,8 +138,10 @@ export function HamburgerMenu(props) {
         transition={menuTransition}
       >
         <TopContainer>
-         <p style={{fontSize:"18px",fontWeight:"800"}}> صندوق قرض الحسنه</p>
-         <br style={{color:"black",backgroundColor:"black"}}/>
+         <div className={styles.menuHeading}>
+         <p style={{fontSize:"18px",fontWeight:"800",width:"100%"}}> صندوق قرض الحسنه</p>
+         </div>
+
         </TopContainer>
         <ContentContainer>
           <NavMenu isOpen={isOpen} />

@@ -12,6 +12,9 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 
+import styles from "./navMenu.module.css"
+
+
 
 const NavMenuContainer = styled.div`
   width: 100%;
@@ -67,6 +70,12 @@ export function NavMenu({ isOpen }) {
   return (
     <NavMenuContainer>
       <NavList>
+        <p className={styles.details} style={{fontWeight:"700"}}>
+          <span style={{color:"violet"}}>شهریار</span>خوش آمدید.
+        </p>
+        <p className={styles.details}>
+          اعتبار: ۰ تومان
+        </p>
        
           <NavLink
           to="/dashboard"
@@ -183,7 +192,7 @@ export function NavMenu({ isOpen }) {
             }}
           >
            <AttachMoneyIcon color="action"/>
-            <a style={aStyle} href="#">پرداختی ها</a>
+            <a style={aStyle} className={styles.pays} href="#">پرداختی ها</a>
           </NavLink>
  
 
