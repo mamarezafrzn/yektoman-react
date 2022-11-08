@@ -45,7 +45,7 @@ body{
     display: contents;
 }
 .headerNotification ::before {
-    content: "10";
+    content: attr(data-count);
     position: relative;
     top: 10px;
     right: 0px;

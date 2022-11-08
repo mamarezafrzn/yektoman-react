@@ -30,8 +30,8 @@ const DashboardRouter = (props) => {
               <br />
               تومان
             </p>
-            <span className={styles.headerNotification}>
-              <p>
+            <span className={styles.headerNotification} >
+              <p data-count="3">
                 <NotificationsIcon sx={{ color: grey[800] }} />
               </p>
             </span>
