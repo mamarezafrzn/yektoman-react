@@ -38,6 +38,12 @@
 }
 .menuHeadings{
     font-size: 16px;
+    font-weight: 600;
+    color: rgb(41, 41, 41);
+}
+.menuItems :hover{
+    font-weight: 400 !important;
+    color: rgb(104, 104, 104) !important;
 }
 .pays{
     display: contents;

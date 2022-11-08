@@ -31,7 +31,7 @@ const NavList = styled.ul`
 `;
 
 const NavLink = styled(motion.li)`
-  font-weight: 500;
+  font-weight: 600;
 
   height: 62px;
   display: flex;
@@ -39,21 +39,22 @@ const NavLink = styled(motion.li)`
   cursor: pointer;
   // margin-top:10px;
 
-  a {
+  Link {
     text-decoration: none;
     font-weight: 500;
-    color: #777;
+    color: #666;
     font-size: 17px;
     transition: all 200ms ease-in-out;
   }
 
   &:hover {
-    a {
-      color: #000;
+    Link {
+      color: black;
+      font-weight:800;
     }
   }
 `;
-const aStyle = {marginRight:"10px"}
+
 
 const variants = {
   show: {
@@ -78,7 +79,7 @@ export function NavMenu({ isOpen }) {
         </p>
        
           <NavLink
-          to="/dashboard"
+       
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -94,11 +95,11 @@ export function NavMenu({ isOpen }) {
           >
             <DashboardIcon color="action"/>
 
-            <a style={aStyle} href="#">داشبورد</a>
+            <Link className={styles.links} to="/dashboard">داشبورد</Link>
           </NavLink>
        
           <NavLink
-            to="/dashboard/user-list"
+            
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -114,12 +115,12 @@ export function NavMenu({ isOpen }) {
           >
 
             <FormatListBulletedIcon sx={{fontWeight:"bold"}} color="action"/>
-            <a style={aStyle} href="#">لیست کاربران</a>
+            <Link className={styles.links} to="/dashboard/user-list">لیست کاربران</Link>
           </NavLink>
   
 
           <NavLink
-          to="/dashboard/create-coffer"
+          
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -134,12 +135,12 @@ export function NavMenu({ isOpen }) {
             }}
           >
             <AddIcon color="action"/>
-            <a style={aStyle} href="#"> ایجاد طرح</a>
+            <Link className={styles.links} to="/dashboard/create-coffer"> ایجاد طرح</Link>
           </NavLink>
 
    
           <NavLink
-          to="/dashboard/join"
+          
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -154,11 +155,11 @@ export function NavMenu({ isOpen }) {
             }}
           >
             <HandshakeIcon color="action"/>
-            <a style={aStyle} href="#">پیوستن به طرح</a>
+            <Link className={styles.links} to="/dashboard/join">پیوستن به طرح</Link>
           </NavLink>
 
           <NavLink
-          to="/dashboard/notifications"
+         
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -173,11 +174,11 @@ export function NavMenu({ isOpen }) {
             }}
           >
             <NotificationsIcon color="action"/>
-            <a style={aStyle} href="#">اعلانات</a>
+            <Link className={styles.links}  to="/dashboard/notifications">اعلانات</Link>
           </NavLink>
         
           <NavLink
-          to="/dashboard/transactions"
+          
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -192,12 +193,12 @@ export function NavMenu({ isOpen }) {
             }}
           >
            <AttachMoneyIcon color="action"/>
-            <a style={aStyle} className={styles.pays} href="#">پرداختی ها</a>
+            <Link className={styles['links','pays']} to="/dashboard/transactions">پرداختی ها</Link>
           </NavLink>
  
 
           <NavLink
-          to="/dashboard/profile"
+         
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -212,11 +213,11 @@ export function NavMenu({ isOpen }) {
             }}
           >
              <PersonIcon color="action"/>
-            <a style={aStyle} href="#"> پروفایل</a>
+            <Link className={styles.links}  to="/dashboard/profile"> پروفایل</Link>
           </NavLink>
 
           <NavLink
-          to="/dashboard/settings"
+          
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -231,11 +232,11 @@ export function NavMenu({ isOpen }) {
             }}
           >
             <SettingsIcon color="action"/>
-            <a style={aStyle} href="#"> تنظیمات</a>
+            <Link className={styles.links} to="/dashboard/settings"> تنظیمات</Link>
           </NavLink>
 
           <NavLink
-          to="#"
+        
             initial={false}
             animate={isOpen ? "show" : "hide"}
             variants={{
@@ -250,7 +251,7 @@ export function NavMenu({ isOpen }) {
             }}
           >
             <LogoutIcon color="action"/>
-            <a style={aStyle} href="#"> خروج</a>
+            <Link className={styles.links} to="#"> خروج</Link>
           </NavLink>
       </NavList>
     </NavMenuContainer>

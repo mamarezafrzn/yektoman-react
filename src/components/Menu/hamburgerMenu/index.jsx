@@ -6,10 +6,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import { MenuToggle } from "./menuToggle";
 import { NavMenu } from "./navMenu";
-import styles from "./navMenu.module.css"
-import logo from "../../../assets/img/logo_small.png"
-
-
+import styles from "./navMenu.module.css";
+import logo from "../../../assets/img/logo_small.png";
 
 const HamburgerMenuContainer = styled.div`
   display: flex;
@@ -25,7 +23,6 @@ const HamburgerIcon = styled.div`
   cursor: pointer;
   z-index: 99;
   transition: all 250ms ease-in-out;
-
 `;
 
 const MenuContainer = styled(motion.div)`
@@ -42,13 +39,18 @@ const MenuContainer = styled(motion.div)`
   transform: translateX(4em);
   user-select: none;
   padding: 1em 2.5em;
+  overflow:scroll;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar { 
+      display: none;  /* Safari and Chrome */
+  
 `;
 
 const TopContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-
 `;
 
 const IconContainer = styled.div`
@@ -129,7 +131,7 @@ export function HamburgerMenu(props) {
 
   return (
     <HamburgerMenuContainer>
-      <img style={{width:"50px",height:"50px"}} src={logo}/>
+      <img style={{ width: "50px", height: "50px" }} src={logo} />
       <MenuToggle toggle={toggleMenu} isOpen={isOpen} />
       <MenuContainer
         initial={false}
@@ -138,10 +140,12 @@ export function HamburgerMenu(props) {
         transition={menuTransition}
       >
         <TopContainer>
-         <div className={styles.menuHeading}>
-         <p style={{fontSize:"18px",fontWeight:"800",width:"100%"}}> صندوق قرض الحسنه</p>
-         </div>
-
+          <div className={styles.menuHeading}>
+            <p style={{ fontSize: "18px", fontWeight: "800", width: "100%" }}>
+              {" "}
+              صندوق قرض الحسنه
+            </p>
+          </div>
         </TopContainer>
         <ContentContainer>
           <NavMenu isOpen={isOpen} />
