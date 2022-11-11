@@ -17,6 +17,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Link } from "react-router-dom";
 
 
 
@@ -108,9 +109,9 @@ const Dashboard = () => {
               </div>
             </div>
             <div className={styles.editBtnContainer}>
-              <button className={styles.editBtn}>
+              <Link className={styles.editBtn} to="/dashboard/create-coffer" state="edit">
                 <EditIcon sx={{ color: grey[100] }} />
-              </button>
+              </Link>
             </div>
           </div>
           <div className={styles.cardItemFooter}>

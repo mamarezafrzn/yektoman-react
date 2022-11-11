@@ -1,6 +1,7 @@
 import { useState } from "react";
 import logo from "../../assets/img/logo_small.png";
 import styles from "./Register.module.css";
+import { checkIfLetter,checkIfNumber } from "../Validation/Validation";
 
 const Register = () => {
   const [nameInput, setNameInput] = useState({ value: "", isValid: true });
@@ -12,29 +13,7 @@ const Register = () => {
   const [mobileInput, setmobile] = useState({ value: "", isValid: true });
   const [rules, setRules] = useState({ checked: false, isValid: true });
 
-  const checkIfNumber = (dataInput) => {
-    const re = /^[0-9\b]+$/;
 
-    // if value is not blank, then test the regex
-
-    if (dataInput !== "" && re.test(dataInput)) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const checkIfLetter = (dataInput) => {
-    const re = /^(?:[A-Za-z])+$/;
-
-    // if value is not blank, then test the regex
-
-    if (dataInput !== "" && re.test(dataInput)) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   const nameChange = (event) => {
     if (checkIfLetter(event.target.value)) {

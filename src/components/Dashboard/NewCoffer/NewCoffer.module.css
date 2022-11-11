@@ -40,6 +40,17 @@
     border-radius: 5px;
     float: left;
 }
+.dateLabel{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+   
+}
+.dateLabel input{
+    border-bottom: none !important;
+}
+
 @media (max-width: 950px){
     .newForm{
         width: 95%;
