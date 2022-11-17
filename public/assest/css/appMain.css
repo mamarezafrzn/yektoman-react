@@ -10,6 +10,9 @@
   font-weight: normal;
   font-style: normal;
 }
+input:focus-visible{
+  outline: 0 !important;
+}
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
