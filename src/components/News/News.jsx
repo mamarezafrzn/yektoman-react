@@ -44,7 +44,7 @@ const News = () => {
 
 
                     <div className="post-content" style={{borderRadius:"0px 0px 10px 10px",backgroundColor:"#ececec"}}>
-                      <ul className="post-meta">
+                      <ul className="post-meta" style={{display:"flex"}}>
                         <li>
                           <i className="icofont-tags"></i>{" "}
                           <p>{item.subtitle}</p>

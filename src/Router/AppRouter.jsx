@@ -14,6 +14,7 @@ import Login from "../components/Login/Login";
 import WithCode from "../components/Login/WithCode/WithCode";
 import WithPassword from "../components/Login/WithPassword/WithPassword";
 import Register from "../components/Register/Register";
+import RegisterVerification from "../components/Register/RegisterVerification";
 import Verify from "../components/Verify/Verify";
 import DashboardRouter from "./DashboardRouter";
 
@@ -40,6 +41,7 @@ const AppRouter = () =>{
             <Route path="/login/with-password" element={<WithPassword/>} exact={true}/>
             <Route path="/login/with-code" element={<WithCode/>} exact={true}/>
             <Route path="/register" element={<Register/>} exact={true}/>
+            <Route path="/register/verification" element={<RegisterVerification/>}/>
             <Route path="/verify" element={<Verify/>} exact={true}/>
             </Routes>                   
             </React.Fragment>

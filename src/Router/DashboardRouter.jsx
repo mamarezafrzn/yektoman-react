@@ -5,12 +5,17 @@ import Navbar from "../components/Menu/navbar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import PersonIcon from "@mui/icons-material/Person";
 import { grey } from "@mui/material/colors";
+import { useCookies } from 'react-cookie';
+
 
 import Logo from "../assets/img/logo_small.png";
 
 import styles from "./DashboardRouter.module.css";
 
 const DashboardRouter = (props) => {
+  const [cookies, setCookie] = useCookies(['user']);
+  console.log(cookies)
+  
   return (
     <React.Fragment>
       <Navbar />
@@ -20,7 +25,7 @@ const DashboardRouter = (props) => {
           <img src={Logo} />
           <div className={styles.headerWelcome}>
             <p>
-              <span style={{ color: "magenta" }}>شهریار</span>
+              <span style={{ color: "magenta" }}>{cookies.Name}{" "}</span>
               خوش آمدید.
             </p>
             <p>

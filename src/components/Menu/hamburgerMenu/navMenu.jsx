@@ -11,6 +11,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useCookies } from 'react-cookie';
 
 import styles from "./navMenu.module.css"
 
@@ -68,11 +69,12 @@ const variants = {
 };
 
 export function NavMenu({ isOpen }) {
+  const [cookies, setCookie] = useCookies(['user']);
   return (
     <NavMenuContainer>
       <NavList>
         <p className={styles.details} style={{fontWeight:"700"}}>
-          <span style={{color:"violet"}}>شهریار</span>خوش آمدید.
+          <span style={{color:"violet"}}>{cookies.Name}{" "}</span>خوش آمدید.
         </p>
         <p className={styles.details}>
           اعتبار: ۰ تومان
