@@ -19,7 +19,7 @@ const RegisterVerification = () => {
   });
 
 
-  const coneInputChange = (event) => {
+  const codeInputChange = (event) => {
     setCodeInput({ value: event.target.value, validation: { isValid: true } });
   };
 
@@ -39,6 +39,7 @@ const RegisterVerification = () => {
     setCodeInput({ ...codeInput, validation: checkIfNumber(codeInput.value) });
     if(codeInput.validation.isValid){
         postCode()
+       
     }else{
         return
     }
@@ -75,7 +76,7 @@ const RegisterVerification = () => {
               }
               type="text"
               placeholder="کد تایید"
-              onChange={coneInputChange}
+              onChange={codeInputChange}
               value={codeInput.value}
             />
             {!codeInput.validation.isValid && <p className={styles.errorLine}>کد وارد شده صحیح نمی باشد</p>}

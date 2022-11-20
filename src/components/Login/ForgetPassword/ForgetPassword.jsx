@@ -1,13 +1,13 @@
 import styles from "../Login.module.css";
 import logo from "../../../assets/img/logo_small.png";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { checkIfNumber } from "../../Validation/Validation";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import axios from "../../../apis/axiosBase";
 import { useCookies } from "react-cookie";
 
-const WithPassword = () => {
+const ForgetPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
@@ -28,7 +28,7 @@ const WithPassword = () => {
     axiosFetch({
       axiosInstance: axios,
       method: "post",
-      url: `/login/${location.state.nationalCode}/password`,
+      url: `/login/${location.state.key}/password`,
       requestConfig: {
         password: passwordInput.value,
       },
@@ -48,6 +48,7 @@ const WithPassword = () => {
       return;
     }
   };
+  console.log(posts)
 
   if (posts.status == "Success") {
     setCookie("Token", posts.data.token_detail.token, { path: "/" });
@@ -81,7 +82,7 @@ const WithPassword = () => {
             {posts.status == "failed" && (
               <p className={styles.errorLine}>{posts.meta.message}</p>
             )}
-            
+            <Link style={{textAlign:"left",width:"80%",margin:"0px auto 0px auto"}} to="/forget-password">فراموشی رمز عبور</Link>
             <button type="submit" className={styles["login-btn"]}>
               ورود به سامانه
             </button>
@@ -92,4 +93,4 @@ const WithPassword = () => {
   );
 };
 
-export default WithPassword;
+export default ForgetPassword;

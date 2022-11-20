@@ -1,33 +1,69 @@
 import styles from "./Login.module.css";
 import logo from "../../assets/img/logo_small.png";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { checkIfNumber } from "../Validation/Validation";
+import useAxiosFunction from "../../axiosFetch/useAxiosFunction";
+import axios from "../../apis/axiosBase";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [posts, error, loading, axiosFetch] = useAxiosFunction();
   const [nationalCodeInput, setNationalCodeInput] = useState({
     value: "",
-    isValid: true,
+    validation: { isValid: true },
   });
+  const [newUrl, setNewUrl] = useState();
 
-  const checkIfNumber = (dataInput) => {
-    const re = /^[0-9\b]+$/;
+  const nationalCodeInputChange = (event) => {
+    setNationalCodeInput({
+      value: event.target.value,
+      validation: { isValid: true },
+    });
+  };
+  const loginPost = (url) => {
+    axiosFetch({
+      axiosInstance: axios,
+      method: "post",
+      url: `/login${url ? url : ""}`,
+      requestConfig: {
+        national_code: nationalCodeInput.value,
+      },
+    });
+  };
 
-    // if value is not blank, then test the regex
-
-    if (dataInput !== "" && re.test(dataInput)) {
-      return true;
+  const onLoginWithPassword = (event) => {
+    event.preventDefault();
+    setNationalCodeInput({
+      ...nationalCodeInput,
+      validation: checkIfNumber(nationalCodeInput.value),
+    });
+    if (nationalCodeInput.validation.isValid) {
+      loginPost();
+      setNewUrl("/login/with-password");
     } else {
-      return false;
+      return;
+    }
+  };
+  const onLoginWithCode = (event) => {
+    event.preventDefault();
+    setNationalCodeInput({
+      ...nationalCodeInput,
+      validation: checkIfNumber(nationalCodeInput.value),
+    });
+    if (nationalCodeInput.validation.isValid) {
+      loginPost("/sms");
+      setNewUrl("/login/with-code");
+    } else {
+      return;
     }
   };
 
-  const nationalCodeChange = (event) => {
-    if (checkIfNumber(event.target.value)) {
-      setNationalCodeInput({ value: event.target.value, isValid: true });
-    } else {
-      setNationalCodeInput({ value: event.target.value, isValid: false });
-    }
-  };
+  if (posts.status == "Success") {
+    navigate(newUrl, { state: { key: posts.data.key,nationalCode: posts.data.national_code } });
+  }
+
   return (
     <div className={styles["main-container"]}>
       <div className={styles["card-container"]}>
@@ -40,17 +76,30 @@ const Login = () => {
             <label htmlFor="">کدملی</label>
             <br />
             <input
-              className={!nationalCodeInput.isValid ? styles.inputError : null}
+              className={
+                !nationalCodeInput.validation.isValid ? styles.inputError : null
+              }
               type="text"
               placeholder="کد ملی خود را وارد کنید"
-              onChange={nationalCodeChange}
+              onChange={nationalCodeInputChange}
               value={nationalCodeInput.value}
             />
-            <button type="submit" className={styles["login-btn"]}>
-              <Link to="/login/with-code">ورود با رمز یکبار مصرف</Link>
+            {!nationalCodeInput.validation.isValid && (
+              <p className={styles.errorLine}>کد وارد شده صحیح نمی باشد</p>
+            )}
+            {/* <button style={{float:"left",width:"20%",height:"20px",fontSize:"10px",display:"block",border:"none",backgroundColor:"transparent",color:"blue"}} to="/forget-password">فراموشی رمز عبور</button> */}
+            <button
+              onClick={onLoginWithCode}
+              className={styles["login-btn"]}
+            >
+              ورود با رمز یکبار مصرف
             </button>
-            <button type="submit" className={styles["login-btn"]}>
-              <Link to="/login/with-password">ورود با رمز عبور</Link>
+            <button
+              onClick={onLoginWithPassword}
+              type="submit"
+              className={styles["login-btn"]}
+            >
+              ورود با رمز عبور
             </button>
           </form>
         </div>

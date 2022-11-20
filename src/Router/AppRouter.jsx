@@ -10,6 +10,7 @@ import Settings from "../components/Dashboard/Settings/Settings";
 import Transactions from "../components/Dashboard/Transactions/Transactions";
 import UserList from "../components/Dashboard/UserList/UserList";
 import Home from "../components/Home/Home";
+import ForgetPassword from "../components/Login/ForgetPassword/ForgetPassword";
 import Login from "../components/Login/Login";
 import WithCode from "../components/Login/WithCode/WithCode";
 import WithPassword from "../components/Login/WithPassword/WithPassword";
@@ -43,6 +44,7 @@ const AppRouter = () =>{
             <Route path="/register" element={<Register/>} exact={true}/>
             <Route path="/register/verification" element={<RegisterVerification/>}/>
             <Route path="/verify" element={<Verify/>} exact={true}/>
+            <Route path="/forget-password" element={<ForgetPassword/>} exact={true}/>
             </Routes>                   
             </React.Fragment>
     )

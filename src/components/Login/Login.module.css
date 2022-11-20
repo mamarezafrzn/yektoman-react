@@ -54,6 +54,15 @@
     border: 2px solid rgb(194, 98, 98) !important;
     box-shadow: none;
 }
+
+.errorLine{
+    text-align: right;
+    color: rgb(194, 98, 98);
+    font-size: 10px;
+    font-weight: 600;
+    width: 80%;
+    margin: auto;
+}
 .login-btn{
     background: linear-gradient(45deg, #82808063, transparent);
     width: 80%;
