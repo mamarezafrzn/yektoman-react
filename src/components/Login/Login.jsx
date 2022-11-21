@@ -5,7 +5,7 @@ import { checkIfNumber } from "../Validation/Validation";
 import useAxiosFunction from "../../axiosFetch/useAxiosFunction";
 import axios from "../../apis/axiosBase";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const Login = () => {
     axiosFetch({
       axiosInstance: axios,
       method: "post",
-      url: `/change/password/${url ? url : ""}`,
+      url: `/login${url ? url : ""}`,
       requestConfig: {
         national_code: nationalCodeInput.value,
       },
