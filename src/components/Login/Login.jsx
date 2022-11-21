@@ -26,7 +26,17 @@ const Login = () => {
     axiosFetch({
       axiosInstance: axios,
       method: "post",
-      url: `/login${url ? url : ""}`,
+      url: `/change/password/${url ? url : ""}`,
+      requestConfig: {
+        national_code: nationalCodeInput.value,
+      },
+    });
+  };
+  const forgetPass = () => {
+    axiosFetch({
+      axiosInstance: axios,
+      method: "post",
+      url: "/forget/password",
       requestConfig: {
         national_code: nationalCodeInput.value,
       },
@@ -60,6 +70,20 @@ const Login = () => {
     }
   };
 
+  const onForgetPassword = (event) =>{
+    event.preventDefault();
+    setNationalCodeInput({
+      ...nationalCodeInput,
+      validation: checkIfNumber(nationalCodeInput.value),
+    });
+    if (nationalCodeInput.validation.isValid) {
+      forgetPass();
+      setNewUrl("/forget-password");
+    } else {
+      return;
+    }
+  }
+
   if (posts.status == "Success") {
     navigate(newUrl, { state: { key: posts.data.key,nationalCode: posts.data.national_code } });
   }
@@ -87,7 +111,8 @@ const Login = () => {
             {!nationalCodeInput.validation.isValid && (
               <p className={styles.errorLine}>کد وارد شده صحیح نمی باشد</p>
             )}
-            {/* <button style={{float:"left",width:"20%",height:"20px",fontSize:"10px",display:"block",border:"none",backgroundColor:"transparent",color:"blue"}} to="/forget-password">فراموشی رمز عبور</button> */}
+            <p onClick={onForgetPassword} className={styles.forgetPass}>فراموشی رمز عبور</p>
+            <div className={styles.loginWithBtnContainer}>
             <button
               onClick={onLoginWithCode}
               className={styles["login-btn"]}
@@ -101,6 +126,7 @@ const Login = () => {
             >
               ورود با رمز عبور
             </button>
+            </div>
           </form>
         </div>
       </div>

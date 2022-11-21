@@ -1,8 +1,7 @@
 import styles from "../Login.module.css";
 import logo from "../../../assets/img/logo_small.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { checkIfNumber } from "../../Validation/Validation";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import axios from "../../../apis/axiosBase";
 import { useCookies } from "react-cookie";
@@ -11,16 +10,40 @@ const ForgetPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const re = /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/;
+
+  const [codeInput, setCodeInput] = useState({
+    value: "",
+    validation: { isValid: true, error: "" },
+  });
+
   const [passwordInput, setPasswordInput] = useState({
     value: "",
-    validation: { isValid: true },
+    validation: { isValid: true, error: "" },
   });
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
+  const [confirmInput, setConfirmInput] = useState({
+    value: "",
+    validation: { isValid: true, error: "" },
+  });
+
+  const codeInputChange = (event) => {
+    setCodeInput({
+      value: event.target.value,
+      validation: { isValid: true, error: "" },
+    });
+  };
   const passwordInputChange = (event) => {
     setPasswordInput({
       value: event.target.value,
-      validation: { isValid: true },
+      validation: { isValid: true, error: "" },
+    });
+  };
+  const confirmInputChange = (event) => {
+    setConfirmInput({
+      value: event.target.value,
+      validation: { isValid: true, error: "" },
     });
   };
 
@@ -28,32 +51,49 @@ const ForgetPassword = () => {
     axiosFetch({
       axiosInstance: axios,
       method: "post",
-      url: `/login/${location.state.key}/password`,
+      url: `/change/password/${location.state.key}`,
       requestConfig: {
+        code: codeInput,
         password: passwordInput.value,
+        password_confirmation: confirmInput.value,
       },
     });
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setPasswordInput({
-      ...passwordInput,
-      validation: checkIfNumber(passwordInput.value),
-    });
 
-    if (passwordInput.validation.isValid) {
+    if (codeInput.value.trim().length <= 0) {
+      setCodeInput({
+        value: codeInput.value,
+        validation: { isValid: false, error: "پر کردن این فیلد ضروری است" },
+      });
+    } else if (!re.test(passwordInput.value)) {
+      setPasswordInput({
+        value: passwordInput.value,
+        validation: { isValid: false, error: "رمز عبور ساده است" },
+      });
+    } else if (passwordInput.value !== confirmInput.value) {
+      setConfirmInput({
+        value: confirmInput.value,
+        validation: {
+          isValid: false,
+          error: "تکرار رمز عبور با رمز عبور مغایرت دارد",
+        },
+      });
+    } else if (
+      passwordInput.validation.isValid &&
+      confirmInput.validation.isValid &&
+      codeInput.validation.isValid
+    ) {
       loginPost();
     } else {
       return;
     }
   };
-  console.log(posts)
 
   if (posts.status == "Success") {
-    setCookie("Token", posts.data.token_detail.token, { path: "/" });
-    // expires:posts.data.token_detail.expires_in
-    navigate("/dashboard");
+    navigate("/login");
   }
 
   return (
@@ -65,9 +105,33 @@ const ForgetPassword = () => {
         <hr className="hr-dashed m-0" />
         <div className={styles["form-container"]}>
           <form action="" onSubmit={onSubmit} className={styles["login-form"]}>
-            <label htmlFor="">رمز عبور خود را وارد کنید</label>
+            <label style={{ marginTop: "10px" }} htmlFor="code">
+              کد
+            </label>
             <br />
             <input
+              type="text"
+              id="code"
+              placeholder="کد ارسال شده"
+              value={codeInput.value}
+              onChange={codeInputChange}
+              className={
+                !codeInput.validation.isValid || posts.status == "failed" ? styles.inputError : null
+              }
+            />
+                        {!codeInput.validation.isValid && (
+              <p className={styles.errorLine}>{codeInput.validation.error}</p>
+            )}
+            {posts.status == "failed" && (
+              <p className={styles.errorLine}>{posts.meta?.message}</p>
+            )}
+
+            <label style={{ marginTop: "10px" }} htmlFor="password">
+              رمز عبور
+            </label>
+            <br />
+            <input
+              id="password"
               className={
                 !passwordInput.validation.isValid ? styles.inputError : null
               }
@@ -75,16 +139,41 @@ const ForgetPassword = () => {
               placeholder="رمز عبور"
               value={passwordInput.value}
               onChange={passwordInputChange}
+              style={{ direction: "ltr", textAlign: "right" }}
             />
             {!passwordInput.validation.isValid && (
-              <p className={styles.errorLine}>کد وارد شده صحیح نمی باشد</p>
+              <p className={styles.errorLine}>
+                {passwordInput.validation.error}
+              </p>
             )}
-            {posts.status == "failed" && (
-              <p className={styles.errorLine}>{posts.meta.message}</p>
+
+            <label style={{ marginTop: "10px" }} htmlFor="confirm-pass">
+              تکرار رمز عبور
+            </label>
+            <br />
+            <input
+              id="confirm-pass"
+              className={
+                !passwordInput.validation.isValid ? styles.inputError : null
+              }
+              style={{ direction: "ltr", textAlign: "right" }}
+              type="text"
+              placeholder="تکرار رمز عبور"
+              value={confirmInput.value}
+              onChange={confirmInputChange}
+            />
+            {!confirmInput.validation.isValid && (
+              <p className={styles.errorLine}>
+                {confirmInput.validation.error}
+              </p>
             )}
-            <Link style={{textAlign:"left",width:"80%",margin:"0px auto 0px auto"}} to="/forget-password">فراموشی رمز عبور</Link>
-            <button type="submit" className={styles["login-btn"]}>
-              ورود به سامانه
+
+            <button
+              type="submit"
+              className={styles["login-btn"]}
+              style={{ width: "90%" }}
+            >
+              ثبت
             </button>
           </form>
         </div>
