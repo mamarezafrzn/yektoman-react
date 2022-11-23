@@ -71,6 +71,20 @@
     cursor: pointer;
     color: blue;
 }
+.sendAgain{
+    font-size: 10px;
+    width: 35%;
+    float: left;
+    cursor: pointer;
+    color: blue;
+}
+.sendInvalid{
+    color: rgb(95, 95, 95);
+    cursor: default;
+    font-size: 10px;
+    width: 35%;
+    float: left;
+}
 .loginWithBtnContainer{
     width: 100%;
     display: flex;

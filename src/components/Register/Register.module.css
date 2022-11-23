@@ -60,10 +60,11 @@
     direction: ltr;
 }
 .errorLine{
-    text-align: right;
     color: rgb(194, 98, 98);
     font-size: 10px;
     font-weight: 600;
+    width: 44%;
+    float: right;
 }
 
 .login-btn{

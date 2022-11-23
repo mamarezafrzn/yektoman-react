@@ -1,7 +1,7 @@
 import styles from "../Login.module.css";
 import withCodeStyle from "./WithCode.module.css";
 import logo from "../../../assets/img/logo_small.png";
-import { json, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { checkIfNumber } from "../../Validation/Validation";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";

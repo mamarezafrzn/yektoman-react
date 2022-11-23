@@ -55,14 +55,44 @@
     box-shadow: none;
 }
 .errorLine{
-    text-align: right;
     color: rgb(194, 98, 98);
     font-size: 10px;
     font-weight: 600;
+    width: 44%;
+    float: right;
+}
+.errorLine{
+    
+    color: rgb(194, 98, 98);
+    font-size: 10px;
+    font-weight: 600;
+    width: 44%;
+    float: right;
+}
+.forgetPass{
+    font-size: 10px;
+    width: 35%;
+    float: left;
+    cursor: pointer;
+    color: blue;
+}
+.sendAgain{
+    font-size: 10px;
+    width: 35%;
+    float: left;
+    cursor: pointer;
+    color: blue;
+}
+.sendInvalid{
+    color: rgb(95, 95, 95);
+    cursor: default;
+    font-size: 10px;
+    width: 35%;
+    float: left;
 }
 .login-btn{
     background: linear-gradient(45deg, #82808063, transparent);
-    width: 80%;
+    width: 80% !important;
     border-radius: 7px;
     border: 2px solid #dfdfdf;
     transition-duration: 0.4s;

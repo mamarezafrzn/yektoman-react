@@ -101,7 +101,11 @@ const Register = () => {
   };
   if (posts.status == "Success") {
     navigate("/register/verification", {
-      state: { key: posts.data.key, mobile: posts.data.mobile },
+      state: {
+        key: posts.data.key,
+        mobile: posts.data.mobile,
+        nationalCode: nationalCodeInput.value,
+      },
     });
   }
 
@@ -109,7 +113,7 @@ const Register = () => {
     <div className={styles["main-container"]}>
       <div className={styles["card-container"]}>
         <div className={styles["logo-container"]}>
-          <img src={logo} alt="..." className={styles.logo} />
+          <img src={logo} alt="logo" className={styles.logo} />
         </div>
         <hr className="hr-dashed m-0" />
         <div className={styles["form-container"]}>
