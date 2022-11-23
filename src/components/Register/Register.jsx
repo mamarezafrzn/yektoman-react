@@ -99,6 +99,7 @@ const Register = () => {
       return;
     }
   };
+
   if (posts.status == "Success") {
     navigate("/register/verification", {
       state: {

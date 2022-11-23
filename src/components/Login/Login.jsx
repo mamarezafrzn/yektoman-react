@@ -15,12 +15,14 @@ const Login = () => {
     validation: { isValid: true },
   });
   const [newUrl, setNewUrl] = useState();
+  const [inputError,setInputError] = useState(false) 
 
   const nationalCodeInputChange = (event) => {
     setNationalCodeInput({
       value: event.target.value,
       validation: { isValid: true },
     });
+    setInputError(false)
   };
   const loginPost = (url) => {
     axiosFetch({
@@ -55,6 +57,9 @@ const Login = () => {
     } else {
       return;
     }
+    if(error.length >= 1){
+      setInputError(true)
+    }
   };
   const onLoginWithCode = (event) => {
     event.preventDefault();
@@ -68,6 +73,9 @@ const Login = () => {
     } else {
       return;
     }
+    if(error.length >= 1){
+      setInputError(true)
+    }
   };
 
   const onForgetPassword = (event) =>{
@@ -80,6 +88,7 @@ const Login = () => {
       forgetPass();
       setNewUrl("/forget-password");
     } else {
+      
       return;
     }
   }
@@ -87,7 +96,6 @@ const Login = () => {
   if (posts.status == "Success") {
     navigate(newUrl, { state: { key: posts.data.key,nationalCode: posts.data.national_code } });
   }
-
   return (
     <div className={styles["main-container"]}>
       <div className={styles["card-container"]}>
@@ -108,7 +116,7 @@ const Login = () => {
               onChange={nationalCodeInputChange}
               value={nationalCodeInput.value}
             />
-            {!nationalCodeInput.validation.isValid && (
+            {!nationalCodeInput.validation.isValid || inputError && (
               <p className={styles.errorLine}>کد وارد شده صحیح نمی باشد</p>
             )}
             <p onClick={onForgetPassword} className={styles.forgetPass}>فراموشی رمز عبور</p>

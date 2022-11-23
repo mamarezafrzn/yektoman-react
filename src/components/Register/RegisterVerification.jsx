@@ -13,7 +13,7 @@ const RegisterVerification = () => {
   const navigate = useNavigate();
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
   const [counter, setCounter] = useState(150);
-
+const [sendKey , setSendKey] = useState(location.state.key)
   const [codeInput, setCodeInput] = useState({
     value: "",
     validation: { isValid: true },
@@ -27,22 +27,29 @@ const RegisterVerification = () => {
   }
 
   const sendCodeAgain = async () => {
-    if (counter == 0) {
+    // if (counter) {
       var postBody = {
-        national_code: location.state.nationalCode,
+        mobile: location.state.mobile,
         time_spend: true,
+        key: sendKey
       };
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/v1/login/${location.state.nationalCode}/send/again/${location.state.key}`,
+        `http://127.0.0.1:8000/api/v1/register/send/again`,
         {
           body: JSON.stringify(postBody),
           method: "POST",
           headers: { "Content-Type": "application/json" },
         }
       );
-    }
+      if(response.status == "Success"){
+        const data = response.json()
+        setSendKey(data.data.key)
+      }
+    // }
+    
   };
+  console.log(location.state)
 
   const codeInputChange = (event) => {
     setCodeInput({ value: event.target.value, validation: { isValid: true } });
@@ -74,7 +81,7 @@ const RegisterVerification = () => {
     setCookie("Family", posts.data.user.family, { path: "/" });
     setCookie("Token", posts.data.token_detail.token, { path: "/" });
     // expires:posts.data.token_detail.expires_in
-    // navigate("/dashboard");
+    navigate("/dashboard");
   }
 
   console.log(location.state);
