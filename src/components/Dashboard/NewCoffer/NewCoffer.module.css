@@ -50,6 +50,14 @@
 .dateLabel input{
     border-bottom: none !important;
 }
+.inputError{
+    border-color: rgb(206, 73, 73);
+    color: rgb(206, 73, 73);
+}
+.errorLine{
+    font-size: 10px;
+    color: rgb(206, 73, 73);
+}
 
 @media (max-width: 950px){
     .newForm{

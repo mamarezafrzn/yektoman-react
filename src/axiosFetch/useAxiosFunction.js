@@ -13,7 +13,7 @@ const useAxiosFunction = () => {
             url,
             requestConfig = {}
         } = configObj;
-
+        
         try {
             setLoading(true);
             const ctrl = new AbortController();
@@ -22,8 +22,9 @@ const useAxiosFunction = () => {
                 ...requestConfig,
                 signal: ctrl.signal
             });
-           
+            
             setResponse(res.data);
+  
         } catch (err) {
        
             setError(err.message);

@@ -3,6 +3,7 @@ import logo from "../../assets/img/logo_small.png";
 import styles from "./Register.module.css";
 import { checkIfLetter, checkIfNumber } from "../Validation/Validation";
 import useAxiosFunction from "../../axiosFetch/useAxiosFunction";
+// import axios from "../../apis/axiosBase";
 import axios from "../../apis/axiosBase";
 import { useNavigate } from "react-router-dom";
 

@@ -33,7 +33,7 @@ const DesktopMenu = () => {
             />
           </div>
         </Link>
-        <Link to="/dashboard/create-coffer">
+        <Link to="/dashboard/create-coffer" state="create">
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>ایجاد طرح</h3>
             <AddIcon color="action" />

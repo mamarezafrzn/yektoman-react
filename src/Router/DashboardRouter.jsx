@@ -14,7 +14,7 @@ import styles from "./DashboardRouter.module.css";
 
 const DashboardRouter = (props) => {
   const [cookies, setCookie] = useCookies(['user']);
-  console.log(cookies)
+  // console.log(cookies)
   
   return (
     <React.Fragment>

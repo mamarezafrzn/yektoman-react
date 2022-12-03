@@ -12,44 +12,58 @@ const RegisterVerification = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
-  const [counter, setCounter] = useState(150);
-const [sendKey , setSendKey] = useState(location.state.key)
+  const [counter, setCounter] = useState(120);
+  const [resetCounter, setResetCounter] = useState(false);
+  const [sendKey, setSendKey] = useState(location.state.key);
   const [codeInput, setCodeInput] = useState({
     value: "",
     validation: { isValid: true },
   });
+  const startTimer = () => {
+    if (resetCounter) {
+      setCounter(120);
+      setResetCounter(false);
+      clearTimeout();
+    } else {
+      setCounter(counter - 1);
+    }
+  };
+  console.log(resetCounter);
 
   useEffect(() => {
-    counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
-  }, [counter]);
+    // console.log("rerender")
+    counter > 0 && setTimeout(() => startTimer(), 1000);
+
+    // clearTimeout();
+  }, [counter, resetCounter]);
   function fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
   }
 
   const sendCodeAgain = async () => {
-    // if (counter) {
+    if (counter <= 0) {
+      setResetCounter(true);
+      setCounter(120);
       var postBody = {
         mobile: location.state.mobile,
         time_spend: true,
-        key: sendKey
+        key: sendKey,
       };
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/v1/register/send/again`,
+        `https://ws.yektoman.ir/api/v1/register/send/again`,
         {
           body: JSON.stringify(postBody),
           method: "POST",
           headers: { "Content-Type": "application/json" },
         }
       );
-      if(response.status == "Success"){
-        const data = response.json()
-        setSendKey(data.data.key)
+      if (response.status == "Success") {
+        const data = response.json();
+        setSendKey(data.data.key);
       }
-    // }
-    
+    }
   };
-  console.log(location.state)
 
   const codeInputChange = (event) => {
     setCodeInput({ value: event.target.value, validation: { isValid: true } });
@@ -84,7 +98,6 @@ const [sendKey , setSendKey] = useState(location.state.key)
     navigate("/dashboard");
   }
 
-  console.log(location.state);
   return (
     <div className={styles["main-container"]}>
       <div className={styles["card-container"]}>

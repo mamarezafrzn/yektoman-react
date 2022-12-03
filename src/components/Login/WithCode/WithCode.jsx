@@ -12,16 +12,31 @@ const WithCode = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
-  const [counter, setCounter] = useState(150);
+  const [counter, setCounter] = useState(120);
+  const [resetCounter, setResetCounter] = useState(false);
   const [codeInput, setCodeInput] = useState({
     value: "",
     validation: { isValid: true },
   });
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
+  const startTimer = () => {
+    if (resetCounter) {
+      setCounter(20);
+      setResetCounter(false);
+      clearTimeout();
+    } else {
+      setCounter(counter - 1);
+    }
+  };
+  console.log(resetCounter);
+
   useEffect(() => {
-    counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
-  }, [counter]);
+    // console.log("rerender")
+    counter > 0 && setTimeout(() => startTimer(), 1000);
+
+    // clearTimeout();
+  }, [counter, resetCounter]);
   function fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
   }
@@ -45,14 +60,16 @@ const WithCode = () => {
   };
 
   const sendCodeAgain = async () => {
-    if (counter == 0) {
+    if (counter <= 0) {
+      setResetCounter(true);
+      setCounter(120);
       var postBody = {
         national_code: location.state.nationalCode,
         time_spend: true,
       };
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/v1/login/${location.state.nationalCode}/send/again/${location.state.key}`,
+        `https://ws.yektoman.ir/api/v1/login/${location.state.nationalCode}/send/again/${location.state.key}`,
         {
           body: JSON.stringify(postBody),
           method: "POST",
