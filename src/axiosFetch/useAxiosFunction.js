@@ -41,7 +41,7 @@ const useAxiosFunction = () => {
 
     }, [controller]);
 
+    
     return [response, error, loading, axiosFetch];
 }
-
 export default useAxiosFunction

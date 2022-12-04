@@ -10,24 +10,24 @@ import { checkIfLetter, checkIfNumber } from "../../../Validation/Validation";
 
 const CofferForm = (props) => {
   const [nameInput, setNameInput] = useState({
-    value: "",
+    value: props.isEdit ? props.fundData.title : "",
     validation: { isValid: true },
     isFocus: false,
   });
 
   const [monthlyAmountInput, setMonthlyAmountInput] = useState({
-    value: "",
+    value: props.isEdit ? props.fundData.price_period : "",
     validation: { isValid: true },
     isFocus: false,
   });
   const [numberOfMembersInput, setNumberOfMembersInput] = useState({
-    value: "",
+    value: props.isEdit ? props.fundData.num_member : "",
     validation: { isValid: true },
     isFocus: false,
   });
 
   const [daysToDrawInput, setDaysToDrawInput] = useState({
-    value: "",
+    value: props.isEdit ? props.fundData.every_few_day_lottery : "",
     validation: { isValid: true },
     isFocus: false,
   });
@@ -115,7 +115,7 @@ const CofferForm = (props) => {
         every_few_day_lottery: daysToDrawInput.value,
         start_date: format(value, "yyyy/MM/dd"),
       });
-      console.log(format(value, "yyyy/MM/dd"))
+      // console.log(format(value, "yyyy/MM/dd"))
     } else {
       return;
     }
@@ -126,7 +126,7 @@ const CofferForm = (props) => {
   
 
   return (
-    <form className={styles.newForm} onSubmit={onFormSubmit}>
+    <form className={styles.newForm} onSubmit={onFormSubmit}> 
       <label>
         نام صندوق
         {nameInput.isFocus ? (
