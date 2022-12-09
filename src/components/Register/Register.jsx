@@ -5,12 +5,15 @@ import { checkIfLetter, checkIfNumber } from "../Validation/Validation";
 import useAxiosFunction from "../../axiosFetch/useAxiosFunction";
 // import axios from "../../apis/axiosBase";
 import axios from "../../apis/axiosBase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ErrorToast from "../ErrorToast/ErrorToast";
+import BackBtn from "../BackBtn/BackBtn";
 
 const Register = () => {
   const navigate = useNavigate();
 
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
+  const [showError,setShowError] = useState(true)
 
   const [nameInput, setNameInput] = useState({
     value: "",
@@ -55,6 +58,7 @@ const Register = () => {
   const onRuleCheck = (event) => {
     setRules({ checked: event.target.checked, validation: true });
   };
+  
 
   const postData = () => {
     axiosFetch({
@@ -69,6 +73,7 @@ const Register = () => {
         rule: rules.checked,
       },
     });
+
   };
 
   const onFormSubmit = (event) => {
@@ -96,6 +101,7 @@ const Register = () => {
       nationalCodeInput.validation.isValid
     ) {
       postData();
+      setShowError(true)
     } else {
       return;
     }
@@ -111,10 +117,18 @@ const Register = () => {
     });
   }
 
+  const cleanError=()=>{
+    setShowError(false)
+  }
+
   return (
     <div className={styles["main-container"]}>
+      {error.response?.data.status == "failed" && showError==true ? (
+        <ErrorToast error={error} cleanError={cleanError}/>
+        ) : null}
       <div className={styles["card-container"]}>
         <div className={styles["logo-container"]}>
+        <BackBtn/>
           <img src={logo} alt="logo" className={styles.logo} />
         </div>
         <hr className="hr-dashed m-0" />
@@ -215,6 +229,7 @@ const Register = () => {
               ثبت نام
             </button>
           </form>
+          <Link to="/login" style={{textAlign:"right",marginTop:"5px",color:"#0000ffc4",fontSize:"14px"}}>ثبت نام کرده اید؟ ورود</Link>
         </div>
       </div>
     </div>

@@ -10,6 +10,8 @@ import useAxiosFunction from "../../axiosFetch/useAxiosFunction";
 import baseUrlWithAuthFunc from "../../apis/axiosBaseWithAuth";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
+import format from "date-fns-jalali/format";
+import { DateObject } from "react-multi-date-picker";
 
 const FundItem = (props) => {
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
@@ -36,7 +38,14 @@ const FundItem = (props) => {
       url: `funds/destroy/${id}`,
     });
   }
-console.log(posts.data?.funds)
+  if(deletePosts.status == "Success"){
+    window.location.reload()
+  }
+// console.log(posts.data?.funds.data[0].start_date)
+// console.log(new DateObject({
+//   date: posts.data?.funds.data[0].start_date,
+//   format: "MMMM DD YYYY, HH:mm a",
+// }).year)
   return (
     <React.Fragment>
       {posts.data &&
@@ -53,7 +62,7 @@ console.log(posts.data?.funds)
                   <p>وام ماهیانه: {item.price_period} تومان</p>
                   <p>تهداد نفرات: {item.num_member} نفر</p>
                   <p>تعداد قرعه کشی انجام شده: {item.num_lottery}</p>
-                  <p>تاریخ قرعه کشی: {item.date_lottery}</p>
+                  <p>تاریخ قرعه کشی: {item.date_lottery.slice(0, 10)}</p>
                   <p>اخرین دریافت کننده وام علی بکماز</p>
                 </div>
                 <div className={styles.btnContainer}>
@@ -83,10 +92,10 @@ console.log(posts.data?.funds)
             </div>
             <div className={styles.cardItemFooter}>
               <p>
-                <CalendarMonthIcon fontSize="small" /> شروع {item.start_date}
+                <CalendarMonthIcon fontSize="small" /> شروع {item.start_date.slice(0, 10)}
               </p>
               <p>
-                <CalendarMonthIcon fontSize="small" /> پایان {item.end_date}
+                <CalendarMonthIcon fontSize="small" /> پایان {item.end_date.slice(0, 10)}
               </p>
             </div>
           </div>

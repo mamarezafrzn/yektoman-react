@@ -6,11 +6,14 @@ import { checkIfNumber } from "../../Validation/Validation";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import axios from "../../../apis/axiosBase";
 import { useCookies } from "react-cookie";
+import ErrorToast from "../../ErrorToast/ErrorToast";
+import BackBtn from "../../BackBtn/BackBtn";
 
 const WithPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
+  const [showError,setShowError] = useState(true)
   const [passwordInput, setPasswordInput] = useState({
     value: "",
     validation: { isValid: true },
@@ -44,6 +47,7 @@ const WithPassword = () => {
 
     if (passwordInput.validation.isValid) {
       loginPost();
+      setShowError(true)
     } else {
       return;
     }
@@ -54,10 +58,16 @@ const WithPassword = () => {
     // expires:posts.data.token_detail.expires_in
     navigate("/dashboard");
   }
-
+  const cleanError=()=>{
+    setShowError(false)
+  }
   return (
     <div className={styles["main-container"]}>
+      {error.response?.data.status == "failed" && showError==true ? (
+        <ErrorToast error={error} cleanError={cleanError}/>
+      ) : null}
       <div className={styles["card-container"]}>
+        <BackBtn/>
         <div className={styles["logo-container"]}>
           <img src={logo} alt="..." className={styles.logo} />
         </div>
@@ -81,7 +91,7 @@ const WithPassword = () => {
             {posts.status == "failed" && (
               <p className={styles.errorLine}>{posts.meta.message}</p>
             )}
-            
+
             <button type="submit" className={styles["login-btn"]}>
               ورود به سامانه
             </button>

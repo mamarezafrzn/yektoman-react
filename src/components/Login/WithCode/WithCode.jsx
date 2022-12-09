@@ -7,6 +7,8 @@ import { checkIfNumber } from "../../Validation/Validation";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import axios from "../../../apis/axiosBase";
 import { useCookies } from "react-cookie";
+import ErrorToast from "../../ErrorToast/ErrorToast";
+import BackBtn from "../../BackBtn/BackBtn";
 
 const WithCode = () => {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ const WithCode = () => {
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
   const [counter, setCounter] = useState(120);
   const [resetCounter, setResetCounter] = useState(false);
+  const [showError,setShowError] = useState(true)
   const [codeInput, setCodeInput] = useState({
     value: "",
     validation: { isValid: true },
@@ -29,7 +32,7 @@ const WithCode = () => {
       setCounter(counter - 1);
     }
   };
-  console.log(resetCounter);
+
 
   useEffect(() => {
     // console.log("rerender")
@@ -87,6 +90,7 @@ const WithCode = () => {
 
     if (codeInput.validation.isValid) {
       loginPost();
+      setShowError(true)
     } else {
       return;
     }
@@ -97,10 +101,16 @@ const WithCode = () => {
     // expires:posts.data.token_detail.expires_in
     navigate("/dashboard");
   }
-
+  const cleanError=()=>{
+    setShowError(false)
+  }
   return (
     <div className={styles["main-container"]}>
+      {error.response?.data.status == "failed" && showError==true ? (
+        <ErrorToast error={error} cleanError={cleanError}/>
+      ) : null}
       <div className={styles["card-container"]}>
+        <BackBtn/>
         <div className={styles["logo-container"]}>
           <img src={logo} alt="..." className={styles.logo} />
         </div>

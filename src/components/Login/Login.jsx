@@ -1,30 +1,37 @@
 import styles from "./Login.module.css";
 import logo from "../../assets/img/logo_small.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { checkIfNumber } from "../Validation/Validation";
 import useAxiosFunction from "../../axiosFetch/useAxiosFunction";
 import axios from "../../apis/axiosBase";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import ErrorToast from "../ErrorToast/ErrorToast";
+import BackBtn from "../BackBtn/BackBtn";
 
 const Login = () => {
   const navigate = useNavigate();
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
+  const [showError, setShowError] = useState(true);
+
   const [nationalCodeInput, setNationalCodeInput] = useState({
     value: "",
     validation: { isValid: true },
   });
   const [newUrl, setNewUrl] = useState();
-  const [inputError,setInputError] = useState(false) 
+  const [inputError, setInputError] = useState(false);
+
+
+
 
   const nationalCodeInputChange = (event) => {
     setNationalCodeInput({
       value: event.target.value,
       validation: { isValid: true },
     });
-    setInputError(false)
+    setInputError(false);
+   
   };
-  const loginPost = (url) => {
+  const loginPost = async (url) => {
     axiosFetch({
       axiosInstance: axios,
       method: "post",
@@ -34,6 +41,7 @@ const Login = () => {
       },
     });
   };
+
   const forgetPass = () => {
     axiosFetch({
       axiosInstance: axios,
@@ -52,13 +60,17 @@ const Login = () => {
       validation: checkIfNumber(nationalCodeInput.value),
     });
     if (nationalCodeInput.validation.isValid) {
+
       loginPost();
+
+      setShowError(true);
+
       setNewUrl("/login/with-password");
     } else {
       return;
     }
-    if(error.length >= 1){
-      setInputError(true)
+    if (error.length >= 1) {
+      setInputError(true);
     }
   };
   const onLoginWithCode = (event) => {
@@ -69,36 +81,50 @@ const Login = () => {
     });
     if (nationalCodeInput.validation.isValid) {
       loginPost("/sms");
+
+      setShowError(true);
+
       setNewUrl("/login/with-code");
     } else {
       return;
     }
-    if(error.length >= 1){
-      setInputError(true)
+    if (error.length >= 1) {
+      setInputError(true);
     }
   };
 
-  const onForgetPassword = (event) =>{
+  const onForgetPassword = (event) => {
     event.preventDefault();
     setNationalCodeInput({
       ...nationalCodeInput,
       validation: checkIfNumber(nationalCodeInput.value),
     });
+
     if (nationalCodeInput.validation.isValid) {
       forgetPass();
+
       setNewUrl("/forget-password");
     } else {
-      
       return;
     }
-  }
+  };
 
   if (posts.status == "Success") {
-    navigate(newUrl, { state: { key: posts.data.key,nationalCode: posts.data.national_code } });
+    navigate(newUrl, {
+      state: { key: posts.data.key, nationalCode: posts.data.national_code },
+    });
   }
+
+  const cleanError = () => {
+    setShowError(false);
+  };
   return (
     <div className={styles["main-container"]}>
+      {error.response?.data.status == "failed" && showError == true ? (
+        <ErrorToast error={error} cleanError={cleanError} />
+        ) : null}
       <div className={styles["card-container"]}>
+        <BackBtn/>
         <div className={styles["logo-container"]}>
           <img src={logo} alt="..." className={styles.logo} />
         </div>
@@ -116,26 +142,28 @@ const Login = () => {
               onChange={nationalCodeInputChange}
               value={nationalCodeInput.value}
             />
-            {!nationalCodeInput.validation.isValid || inputError && (
-              <p className={styles.errorLine}>کد وارد شده صحیح نمی باشد</p>
-            )}
-            <p onClick={onForgetPassword} className={styles.forgetPass}>فراموشی رمز عبور</p>
+            {!nationalCodeInput.validation.isValid ||
+              (inputError && (
+                <p className={styles.errorLine}>کد وارد شده صحیح نمی باشد</p>
+              ))}
+            <p onClick={onForgetPassword} className={styles.forgetPass}>
+              فراموشی رمز عبور
+            </p>
             <div className={styles.loginWithBtnContainer}>
-            <button
-              onClick={onLoginWithCode}
-              className={styles["login-btn"]}
-            >
-              ورود با رمز یکبار مصرف
-            </button>
-            <button
-              onClick={onLoginWithPassword}
-              type="submit"
-              className={styles["login-btn"]}
-            >
-              ورود با رمز عبور
-            </button>
+              <button onClick={onLoginWithCode} className={styles["login-btn"]}>
+                ورود با رمز یکبار مصرف
+              </button>
+              <button
+                onClick={onLoginWithPassword}
+                type="submit"
+                className={styles["login-btn"]}
+              >
+                ورود با رمز عبور
+              </button>
             </div>
           </form>
+          <Link to="/register" style={{textAlign:"right",marginTop:"5px",color:"#0000ffc4",paddingRight:"10px",fontSize:"14px"}}>ثبت نام نکرده اید؟ ثبت نام</Link>
+
         </div>
       </div>
     </div>

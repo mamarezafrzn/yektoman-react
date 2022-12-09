@@ -1,5 +1,5 @@
-import React from "react";
-import { Outlet, Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import DesktopMenu from "../components/Menu/desktopMenu/DesktopMenu";
 import Navbar from "../components/Menu/navbar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -13,9 +13,14 @@ import Logo from "../assets/img/logo_small.png";
 import styles from "./DashboardRouter.module.css";
 
 const DashboardRouter = (props) => {
+  const navigate = useNavigate()
   const [cookies, setCookie] = useCookies(['user']);
-  // console.log(cookies)
-  
+
+  useEffect(() => {
+    if(!cookies.Token){
+      navigate('/login')
+    }
+  });
   return (
     <React.Fragment>
       <Navbar />

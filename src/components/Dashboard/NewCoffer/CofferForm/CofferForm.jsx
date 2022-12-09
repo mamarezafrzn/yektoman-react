@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styles from "../NewCoffer.module.css";
 import AdapterJalali from "@date-io/date-fns-jalali";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import TextField from "@mui/material/TextField";
+// import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import format from "date-fns-jalali/format";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import TextField from "@mui/material/TextField";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { checkIfLetter, checkIfNumber } from "../../../Validation/Validation";
+import "react-multi-date-picker/styles/layouts/mobile.css";
+import DatePicker, { DateObject } from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
 const CofferForm = (props) => {
+  const priceRegex = /^[0-9]*\.?[0-9]*$/;
+  
   const [nameInput, setNameInput] = useState({
     value: props.isEdit ? props.fundData.title : "",
     validation: { isValid: true },
@@ -20,6 +26,7 @@ const CofferForm = (props) => {
     validation: { isValid: true },
     isFocus: false,
   });
+
   const [numberOfMembersInput, setNumberOfMembersInput] = useState({
     value: props.isEdit ? props.fundData.num_member : "",
     validation: { isValid: true },
@@ -31,21 +38,29 @@ const CofferForm = (props) => {
     validation: { isValid: true },
     isFocus: false,
   });
-  const [value, setValue] = useState(new Date(2022, 3, 7));
+  // const [value, setValue] = useState(
+  //   props.isEdit ? props.fundData.date : new Date().toJSON().slice(0, 10)
+  // );
   const [cofferWithScore, setCofferWithScore] = useState(null);
   const [firstPersonLeader, setFirstPersonLeader] = useState(null);
+// console.log(props.fundData?.start_date)
+  //-------------------------------------------------------- <date> --------------------------------------------------------------
+  const [dateValue, setDateValue] = useState(
+    props.isEdit
+      ? new DateObject({
+          date: props.fundData.start_date,
+          format: "YYYY MM DD",
+        })
+      : null
+  );
+  // console.log(props.isEdit ? dateValue.format("YYYY/MM/DD") : dateValue)
+  const onDateChange = (value) => {
+    setDateValue(value.format("YYYY/MM/DD"));
+    // console.log(value.format("YYYY/MM/DD hh:mm:ss.SSS a"))
+    // console.log(dateValue);
+  };
+  //---------------------------------------------------------<date/>-------------------------------------------------------------
 
-
-    //-------------------------------------------------------- <IsEdit> --------------------------------------------------------------
-
-    useEffect(()=>{
-      if(props.isEdit){
-        //fill inputs with get data
-      }
-    },[])
-
-    //---------------------------------------------------------<Is Edit/>-------------------------------------------------------------
-    
   const nameChange = (event) => {
     setNameInput({
       value: event.target.value,
@@ -54,8 +69,9 @@ const CofferForm = (props) => {
     });
   };
   const monthlyAmountInputChange = (event) => {
+        const clean = event.target.value.toString().replace(/,/g, '');
     setMonthlyAmountInput({
-      value: event.target.value,
+      value: clean.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       validation: { isValid: true },
       isFocus: true,
     });
@@ -108,12 +124,13 @@ const CofferForm = (props) => {
       numberOfMembersInput.validation.isValid &&
       daysToDrawInput.validation.isValid
     ) {
+     
       props.postData({
         title: nameInput.value,
         num_member: numberOfMembersInput.value,
         price: monthlyAmountInput.value,
         every_few_day_lottery: daysToDrawInput.value,
-        start_date: format(value, "yyyy/MM/dd"),
+        start_date: dateValue,
       });
       // console.log(format(value, "yyyy/MM/dd"))
     } else {
@@ -121,12 +138,10 @@ const CofferForm = (props) => {
     }
   };
 
-
-
-  
+  const month = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
 
   return (
-    <form className={styles.newForm} onSubmit={onFormSubmit}> 
+    <form className={styles.newForm} onSubmit={onFormSubmit}>
       <label>
         نام صندوق
         {nameInput.isFocus ? (
@@ -154,7 +169,7 @@ const CofferForm = (props) => {
       </label>
 
       <label>
-        مبلغ ماهیانه اقساط
+        مبلغ صندوق
         {monthlyAmountInput.isFocus ? (
           <input
             autoFocus
@@ -178,7 +193,7 @@ const CofferForm = (props) => {
             }
             type="text"
             onChange={monthlyAmountInputChange}
-            value={monthlyAmountInput.value}
+            value={monthlyAmountInput.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           />
         )}
         {!monthlyAmountInput.validation.isValid && (
@@ -258,8 +273,12 @@ const CofferForm = (props) => {
       </label>
       <label className={styles.dateLabel}>
         تاریخ شروع
-        <LocalizationProvider dateAdapter={AdapterJalali}>
+        {/* <LocalizationProvider dateAdapter={AdapterJalali}>
           <DatePicker
+          views={['year', 'month','day']}
+        
+          
+          orientation="landscape"
             mask="____/__/__"
             value={value}
             onChange={(newValue) => setValue(newValue)}
@@ -271,7 +290,23 @@ const CofferForm = (props) => {
               <TextField {...params} sx={{ direction: "rtl" }} />
             )}
           />
-        </LocalizationProvider>
+        </LocalizationProvider> */}
+        <DatePicker
+          value={dateValue}
+          onChange={onDateChange}
+          calendar={persian}
+          className="rmdp-prime"
+          showOtherDays
+          locale={persian_fa}
+          weekDays={month}
+          hideOnScroll
+          placeholder="برای مثال ۱/۱/۱۴۰۲"
+          style={{
+            border: "1px solid grey !important",
+            height: "30px",
+            textAlign: "center",
+          }}
+        />
       </label>
 
       <div className={styles.chackboxContainer}>

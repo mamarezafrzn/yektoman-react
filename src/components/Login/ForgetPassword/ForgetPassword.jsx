@@ -5,12 +5,15 @@ import { useState } from "react";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import axios from "../../../apis/axiosBase";
 import { useCookies } from "react-cookie";
+import ErrorToast from "../../ErrorToast/ErrorToast";
+import BackBtn from "../../BackBtn/BackBtn";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [showError,setShowError] = useState(true)
   const re = /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/;
 
   const [codeInput, setCodeInput] = useState({
@@ -87,6 +90,7 @@ const ForgetPassword = () => {
       codeInput.validation.isValid
     ) {
       loginPost();
+      setShowError(true)
     } else {
       return;
     }
@@ -95,10 +99,17 @@ const ForgetPassword = () => {
   if (posts.status == "Success") {
     navigate("/login");
   }
+  const cleanError=()=>{
+    setShowError(false)
+  }
 
   return (
     <div className={styles["main-container"]}>
+       {error.response?.data.status == "failed" && showError==true ? (
+        <ErrorToast error={error} cleanError={cleanError}/>
+      ) : null}
       <div className={styles["card-container"]}>
+        <BackBtn/>
         <div className={styles["logo-container"]}>
           <img src={logo} alt="..." className={styles.logo} />
         </div>
@@ -116,10 +127,12 @@ const ForgetPassword = () => {
               value={codeInput.value}
               onChange={codeInputChange}
               className={
-                !codeInput.validation.isValid || posts.status == "failed" ? styles.inputError : null
+                !codeInput.validation.isValid || posts.status == "failed"
+                  ? styles.inputError
+                  : null
               }
             />
-                        {!codeInput.validation.isValid && (
+            {!codeInput.validation.isValid && (
               <p className={styles.errorLine}>{codeInput.validation.error}</p>
             )}
             {posts.status == "failed" && (

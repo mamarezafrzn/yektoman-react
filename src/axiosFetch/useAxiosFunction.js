@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import ErrorToast from "../components/ErrorToast/ErrorToast";
+
 
 const useAxiosFunction = () => {
     const [response, setResponse] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false); //different!
     const [controller, setController] = useState();
+    
 
     const axiosFetch = async (configObj) => {
         const {
@@ -26,8 +29,9 @@ const useAxiosFunction = () => {
             setResponse(res.data);
   
         } catch (err) {
-       
-            setError(err.message);
+    //    console.log(err)
+            // return <ErrorToast error={err}/>
+            setError(err);
         } finally {
             setLoading(false);
         }

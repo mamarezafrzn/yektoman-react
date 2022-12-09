@@ -6,6 +6,8 @@ import axios from "../../apis/axiosBase";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import ErrorToast from "../ErrorToast/ErrorToast";
+import BackBtn from "../BackBtn/BackBtn";
 
 const RegisterVerification = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -15,6 +17,8 @@ const RegisterVerification = () => {
   const [counter, setCounter] = useState(120);
   const [resetCounter, setResetCounter] = useState(false);
   const [sendKey, setSendKey] = useState(location.state.key);
+  const [showError,setShowError] = useState(true)
+
   const [codeInput, setCodeInput] = useState({
     value: "",
     validation: { isValid: true },
@@ -28,10 +32,8 @@ const RegisterVerification = () => {
       setCounter(counter - 1);
     }
   };
-  console.log(resetCounter);
 
   useEffect(() => {
-    // console.log("rerender")
     counter > 0 && setTimeout(() => startTimer(), 1000);
 
     // clearTimeout();
@@ -85,6 +87,7 @@ const RegisterVerification = () => {
     setCodeInput({ ...codeInput, validation: checkIfNumber(codeInput.value) });
     if (codeInput.validation.isValid) {
       postCode();
+      setShowError(true)
     } else {
       return;
     }
@@ -98,9 +101,17 @@ const RegisterVerification = () => {
     navigate("/dashboard");
   }
 
+  const cleanError=()=>{
+    setShowError(false)
+  }
+
   return (
     <div className={styles["main-container"]}>
+      {error.response?.data.status == "failed" && showError==true ? (
+        <ErrorToast error={error} cleanError={cleanError}/>
+      ) : null}
       <div className={styles["card-container"]}>
+        <BackBtn/>
         <div className={styles["logo-container"]}>
           <img src={logo} alt="..." className={styles.logo} />
         </div>

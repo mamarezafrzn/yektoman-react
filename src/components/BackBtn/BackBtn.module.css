@@ -1,0 +1,16 @@
+.backBtnContainer {
+  width: 90%;
+  margin: 20px auto 0px auto;
+}
+.backBtn p {
+  font-size: 14px;
+  cursor: pointer;
+}
+.backBtn {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  float: left;
+  background-color: transparent;
+  border: none;
+}
