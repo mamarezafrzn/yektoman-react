@@ -107,7 +107,7 @@ const CofferForm = (props) => {
     setNameInput({ ...nameInput, validation: checkIfLetter(nameInput.value) });
     setMonthlyAmountInput({
       ...monthlyAmountInput,
-      validation: checkIfNumber(monthlyAmountInput.value),
+      validation: checkIfNumber(monthlyAmountInput.value.toString().replace(/,/g, '')),
     });
     setNumberOfMembersInput({
       ...numberOfMembersInput,
@@ -128,7 +128,7 @@ const CofferForm = (props) => {
       props.postData({
         title: nameInput.value,
         num_member: numberOfMembersInput.value,
-        price: monthlyAmountInput.value,
+        price: monthlyAmountInput.value.toString().replace(/,/g, ''),
         every_few_day_lottery: daysToDrawInput.value,
         start_date: dateValue,
       });
@@ -171,6 +171,7 @@ const CofferForm = (props) => {
       <label>
         مبلغ صندوق
         {monthlyAmountInput.isFocus ? (
+          <div style={{position:"relative"}}>
           <input
             autoFocus
             className={
@@ -186,8 +187,11 @@ const CofferForm = (props) => {
               })
             }
           />
+          <span className={styles.inputCurrency}>تومان</span>
+          </div>
         ) : (
-          <input
+          <div style={{position:"relative"}}>
+            <input
             className={
               !monthlyAmountInput.validation.isValid ? styles.inputError : null
             }
@@ -195,6 +199,9 @@ const CofferForm = (props) => {
             onChange={monthlyAmountInputChange}
             value={monthlyAmountInput.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           />
+         
+            <span className={styles.inputCurrency}>تومان</span>
+          </div>
         )}
         {!monthlyAmountInput.validation.isValid && (
           <p

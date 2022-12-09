@@ -58,8 +58,8 @@ const FundItem = (props) => {
                   <p className={styles.headingDescription}>سر گروه: شهریار</p>
                 </div>
                 <div className={styles.cardDetails}>
-                  <p>مبلغ کل: {item.price} تومان</p>
-                  <p>وام ماهیانه: {item.price_period} تومان</p>
+                  <p>مبلغ کل: {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان</p>
+                  <p>وام ماهیانه: {item.price_period.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان</p>
                   <p>تهداد نفرات: {item.num_member} نفر</p>
                   <p>تعداد قرعه کشی انجام شده: {item.num_lottery}</p>
                   <p>تاریخ قرعه کشی: {item.date_lottery.slice(0, 10)}</p>
