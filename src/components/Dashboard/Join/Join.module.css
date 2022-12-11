@@ -6,7 +6,7 @@
     direction: rtl;
     padding: 20px;
     text-align: right;
-    min-height: 300px;
+    min-height: 200px;
     overflow: overlay;
 }
 .searchForm label{
@@ -30,8 +30,26 @@
     border-radius: 5px;
     
 }
+.tableContainer{
+    width: 90%;
+    margin: 10px auto;
+    padding: 20px;
+}
+.tableBtn{
+    background-color: rgb(72, 155, 109);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.tableBtn:hover{
+    background-color: rgb(42, 97, 67) !important;
+}
 @media (max-width: 950px){
     .searchForm{
         width: 95%;
+    }
+    .tableContainer{
+        width: 95%;
+        padding: 10px;
     }
 }

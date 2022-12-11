@@ -10,8 +10,7 @@ import useAxiosFunction from "../../axiosFetch/useAxiosFunction";
 import baseUrlWithAuthFunc from "../../apis/axiosBaseWithAuth";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
-import format from "date-fns-jalali/format";
-import { DateObject } from "react-multi-date-picker";
+
 
 const FundItem = (props) => {
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
@@ -67,7 +66,8 @@ const FundItem = (props) => {
                 </div>
                 <div className={styles.btnContainer}>
                   <button
-                    onClick={props.onShowLicstClick}
+                    
+                    onClick={()=>props.onShowListClick(item.id)}
                     className={styles.membersModalBtn}
                   >
                     لیست اعضا

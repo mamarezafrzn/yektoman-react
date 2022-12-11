@@ -11,21 +11,47 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import FundItem from "./FundsItem";
-
-function createData(name, score, moavaghe, payed) {
-  return { name, score, moavaghe, payed };
-}
-const rows = [
-  createData("علی بکماز", 3, "-", 0),
-  createData("جواد ذرینچه", 2, "-", 1),
-];
+import useAxiosFunction from "../../axiosFetch/useAxiosFunction";
+import baseUrlWithAuthFunc from "../../apis/axiosBaseWithAuth";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 const Dashboard = () => {
+  const [posts, error, loading, axiosFetch] = useAxiosFunction();
   const [openModal, setOpenModal] = useState(false);
+  const [cookie, setCookie] = useCookies(["user"]);
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    if (openModal && posts.status == "Success") {
+      setRows(posts.data?.funds);
+    }
+  }, [posts]);
+
+  function createData(name, moavaghe, payed) {
+    return { name, moavaghe, payed };
+  }
+  // const rows = [
+  //   createData("", "", "", ""),
+  // ];
+
+  const getFundMember = (id) => {
+    axiosFetch({
+      axiosInstance: baseUrlWithAuthFunc(cookie.Token),
+      method: "get",
+      url: `/funds/members/${id}`,
+    });
+  };
 
   const openModalHandler = () => {
     setOpenModal(!openModal);
   };
+  const showId = (id) => {
+    openModalHandler();
+    getFundMember(id);
+  };
+
+
 
   return (
     <React.Fragment>
@@ -53,26 +79,27 @@ const Dashboard = () => {
                 <TableRow>
                   <TableCell align="right">شماره</TableCell>
                   <TableCell align="right">نام و نام خانوادگی</TableCell>
-                  <TableCell align="right">امتیاز</TableCell>
+
                   <TableCell align="right">معوقه</TableCell>
                   <TableCell align="right">پرداخت شده</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row, index) => (
-                  <TableRow
-                    key={index}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell align="right" component="th" scope="row">
-                      {index}
-                    </TableCell>
-                    <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right">{row.score}</TableCell>
-                    <TableCell align="right">{row.moavaghe}</TableCell>
-                    <TableCell align="right">{row.payed}</TableCell>
-                  </TableRow>
-                ))}
+                {rows &&
+                  rows?.map((row, index) => (
+                    <TableRow
+                      key={index}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell align="right" component="th" scope="row">
+                        {index}
+                      </TableCell>
+                      <TableCell align="right">{row.full_name}</TableCell>
+
+                      <TableCell align="right">{row.delayed}</TableCell>
+                      <TableCell align="right">{row.Paid}</TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
@@ -82,7 +109,7 @@ const Dashboard = () => {
         </Box>
       </Modal>
       <Card heading="داشبورد" description="لیست صندوق های شما">
-        <FundItem onShowLicstClick={openModalHandler} />
+        <FundItem onShowListClick={showId} />
       </Card>
     </React.Fragment>
   );

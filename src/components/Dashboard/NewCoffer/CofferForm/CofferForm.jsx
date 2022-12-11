@@ -45,14 +45,20 @@ const CofferForm = (props) => {
   const [firstPersonLeader, setFirstPersonLeader] = useState(null);
 // console.log(props.fundData?.start_date)
   //-------------------------------------------------------- <date> --------------------------------------------------------------
+  // const [dateValue, setDateValue] = useState(
+  //   props.isEdit
+  //     ? new DateObject({
+  //         date: props.fundData.start_date,
+  //         format: "YYYY MM DD",
+  //       })
+  //     : null
+  // );
   const [dateValue, setDateValue] = useState(
     props.isEdit
-      ? new DateObject({
-          date: props.fundData.start_date,
-          format: "YYYY MM DD",
-        })
+      ? props.fundData.start_date
       : null
   );
+  // console.log(props.isEdit && props.fundData.start_date)
   // console.log(props.isEdit ? dateValue.format("YYYY/MM/DD") : dateValue)
   const onDateChange = (value) => {
     setDateValue(value.format("YYYY/MM/DD"));
