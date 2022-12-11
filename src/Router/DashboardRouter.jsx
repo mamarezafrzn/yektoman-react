@@ -35,17 +35,15 @@ const DashboardRouter = (props) => {
             </p>
             <p>
               اعتبار:
-              <br />
               ۰
-              <br />
               تومان
             </p>
             <span className={styles.headerNotification} >
-              <p data-count="3">
+              <p data-count="3" style={{marginTop:"-10px"}}>
                 <NotificationsIcon sx={{ color: grey[800] }} />
               </p>
             </span>
-            <PersonIcon sx={{ color: grey[800] ,marginTop:"10px"}} />
+            <PersonIcon sx={{ color: grey[800]}} />
           </div>
         </div>
         <div className={styles.gridContainer}>

@@ -124,6 +124,28 @@
     margin: 25px 15px 15px 0px;
     float: right;
 }
+.infoForm{
+    display: flex;
+    flex-direction: column;
+}
+.infoForm button{
+    width: 20%;
+    margin-top: 10px;
+    margin-right: auto;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(19, 151, 151);
+    color: white;
+}
+.btnJoin{
+    width: 20%;
+    margin-top: 10px;
+    margin-right: auto;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(19, 151, 151);
+    color: white;
+}
 @media (max-width: 950px){
     .cardItemContainer{
         width: 90%;
@@ -132,5 +154,11 @@
     }
     .modal{
         width: 95%;
+    }
+    .infoForm button{
+        width: 100%;
+    }
+    .btnJoin{
+        width: 100%;
     }
 }

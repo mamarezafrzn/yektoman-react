@@ -18,25 +18,21 @@ const CofferForm = (props) => {
   const [nameInput, setNameInput] = useState({
     value: props.isEdit ? props.fundData.title : "",
     validation: { isValid: true },
-    isFocus: false,
   });
 
   const [monthlyAmountInput, setMonthlyAmountInput] = useState({
     value: props.isEdit ? props.fundData.price_period : "",
     validation: { isValid: true },
-    isFocus: false,
   });
 
   const [numberOfMembersInput, setNumberOfMembersInput] = useState({
     value: props.isEdit ? props.fundData.num_member : "",
     validation: { isValid: true },
-    isFocus: false,
   });
 
   const [daysToDrawInput, setDaysToDrawInput] = useState({
     value: props.isEdit ? props.fundData.every_few_day_lottery : "",
     validation: { isValid: true },
-    isFocus: false,
   });
   // const [value, setValue] = useState(
   //   props.isEdit ? props.fundData.date : new Date().toJSON().slice(0, 10)
@@ -71,7 +67,6 @@ const CofferForm = (props) => {
     setNameInput({
       value: event.target.value,
       validation: { isValid: true },
-      isFocus: true,
     });
   };
   const monthlyAmountInputChange = (event) => {
@@ -79,21 +74,18 @@ const CofferForm = (props) => {
     setMonthlyAmountInput({
       value: clean.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       validation: { isValid: true },
-      isFocus: true,
     });
   };
   const numberOfMembersInputChange = (event) => {
     setNumberOfMembersInput({
       value: event.target.value,
       validation: { isValid: true },
-      isFocus: true,
     });
   };
   const daysToDrawInputChange = (event) => {
     setDaysToDrawInput({
       value: event.target.value,
       validation: { isValid: true },
-      isFocus: true,
     });
   };
 
@@ -150,23 +142,13 @@ const CofferForm = (props) => {
     <form className={styles.newForm} onSubmit={onFormSubmit}>
       <label>
         نام صندوق
-        {nameInput.isFocus ? (
-          <input
+        <input
             autoFocus
             className={!nameInput.validation.isValid ? styles.inputError : null}
             type="text"
             onChange={nameChange}
             value={nameInput.value}
-            onBlur={() => setNameInput({ ...nameInput, isFocus: false })}
           />
-        ) : (
-          <input
-            className={!nameInput.validation.isValid ? styles.inputError : null}
-            type="text"
-            onChange={nameChange}
-            value={nameInput.value}
-          />
-        )}
         {!nameInput.validation.isValid && (
           <p
             className={styles.errorLine}
@@ -176,8 +158,7 @@ const CofferForm = (props) => {
 
       <label>
         مبلغ صندوق
-        {monthlyAmountInput.isFocus ? (
-          <div style={{position:"relative"}}>
+        <div style={{position:"relative"}}>
           <input
             autoFocus
             className={
@@ -186,29 +167,9 @@ const CofferForm = (props) => {
             type="text"
             onChange={monthlyAmountInputChange}
             value={monthlyAmountInput.value}
-            onBlur={() =>
-              setMonthlyAmountInput({
-                ...monthlyAmountInput,
-                isFocus: false,
-              })
-            }
           />
           <span className={styles.inputCurrency}>تومان</span>
-          </div>
-        ) : (
-          <div style={{position:"relative"}}>
-            <input
-            className={
-              !monthlyAmountInput.validation.isValid ? styles.inputError : null
-            }
-            type="text"
-            onChange={monthlyAmountInputChange}
-            value={monthlyAmountInput.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-          />
-         
-            <span className={styles.inputCurrency}>تومان</span>
-          </div>
-        )}
+          </div>       
         {!monthlyAmountInput.validation.isValid && (
           <p
             className={styles.errorLine}
@@ -217,8 +178,7 @@ const CofferForm = (props) => {
       </label>
       <label>
         تعداد اعضا
-        {numberOfMembersInput.isFocus ? (
-          <input
+        <input
             autoFocus
             className={
               !numberOfMembersInput.validation.isValid
@@ -228,25 +188,7 @@ const CofferForm = (props) => {
             type="text"
             onChange={numberOfMembersInputChange}
             value={numberOfMembersInput.value}
-            onBlur={() =>
-              setNumberOfMembersInput({
-                ...numberOfMembersInput,
-                isFocus: false,
-              })
-            }
           />
-        ) : (
-          <input
-            className={
-              !numberOfMembersInput.validation.isValid
-                ? styles.inputError
-                : null
-            }
-            type="text"
-            onChange={numberOfMembersInputChange}
-            value={numberOfMembersInput.value}
-          />
-        )}
         {!numberOfMembersInput.validation.isValid && (
           <p
             className={styles.errorLine}
@@ -255,8 +197,7 @@ const CofferForm = (props) => {
       </label>
       <label>
         قرعه کشی هر چند روز
-        {daysToDrawInput.isFocus ? (
-          <input
+        <input
             autoFocus
             className={
               !daysToDrawInput.validation.isValid ? styles.inputError : null
@@ -264,20 +205,7 @@ const CofferForm = (props) => {
             type="text"
             onChange={daysToDrawInputChange}
             value={daysToDrawInput.value}
-            onBlur={() =>
-              setDaysToDrawInput({ ...daysToDrawInput, isFocus: false })
-            }
           />
-        ) : (
-          <input
-            className={
-              !daysToDrawInput.validation.isValid ? styles.inputError : null
-            }
-            type="text"
-            onChange={daysToDrawInputChange}
-            value={daysToDrawInput.value}
-          />
-        )}
         {!daysToDrawInput.validation.isValid && (
           <p
             className={styles.errorLine}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from "../UI/Card/Card";
 import styles from "./Dashboard.module.css";
 
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Modal, Typography } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -28,12 +28,10 @@ const Dashboard = () => {
     }
   }, [posts]);
 
-  function createData(name, moavaghe, payed) {
-    return { name, moavaghe, payed };
-  }
-  // const rows = [
-  //   createData("", "", "", ""),
-  // ];
+  // function createData(name, moavaghe, payed) {
+  //   return { name, moavaghe, payed };
+  // }
+
 
   const getFundMember = (id) => {
     axiosFetch({

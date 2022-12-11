@@ -13,23 +13,26 @@ import { useState } from "react";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
 import { useCookies } from "react-cookie";
-import { useEffect } from "react";
+import JoinModal from "./JoinModal";
+
 
 const Join = () => {
-  const [searchInput, setSearchInput] = useState({ value: "", isFocus: true });
+  const [searchInput, setSearchInput] = useState("");
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
   const [cookie, setCookie] = useCookies(["user"]);
+  const [openModal, setOpenModal] = useState(false);
+  const [fundId,setFundId] = useState()
+
+  const openModalHandler = (id) => {
+    setFundId(id)  
+    setOpenModal(!openModal);
+  };
+
 
   const onSearchInputChange = (event) => {
-    setSearchInput({ value: event.target.value, isFocus: true });
-    if(searchInput.value.length >=1){
-      getFund()
-    }
+    setSearchInput({ value: event.target.value});
   };
-  const onblur = () => {
-    console.log("on blur")
-    setSearchInput({ ...searchInput, isFocus: false });
-  };
+
 
   const getFund = () => {
     axiosFetch({
@@ -37,19 +40,19 @@ const Join = () => {
       method: "post",
       url: "/funds/search",
       requestConfig: {
-        search: searchInput.value,
+        search: searchInput,
       },
     });
   };
 
   const onSearchHandler = (event) => {
-    console.log("post")
     event.preventDefault();
     getFund();
   };
 
   return (
     <React.Fragment>
+      <JoinModal openModalHandler={openModalHandler} openModal={openModal} fundId={fundId}/>
       <Card
         heading="پیوستن به طرح"
         description="پس از جست و جو به طرح خود بپیوندید"
@@ -57,21 +60,13 @@ const Join = () => {
         <form className={styles.searchForm} onSubmit={onSearchHandler}>
           <label>
             جست و جوی طرح
-            {searchInput.isFocus ? (
-              <input
+
+            <input
                 autoFocus
                 type="text"
                 value={searchInput.value}
                 onChange={onSearchInputChange}
-                onBlur={onblur}
               />
-            ) : (
-              <input
-                type="text"
-                value={searchInput.value}
-                onChange={onSearchInputChange}
-              />
-            )}
           </label>
           <button className={styles.searchBtn} type="submit">
             جست و جو
@@ -105,9 +100,9 @@ const Join = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {posts.data?.fund.map((row, index) => (
+                {posts.data?.fund.map((row, index) => (                 
                   <TableRow
-                    key={index}
+                    key={row.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell align="right" component="th" scope="row">
@@ -131,7 +126,7 @@ const Join = () => {
                     <TableCell align="right">{row.end_date}</TableCell>
                     <TableCell align="right">{row.status?.title}</TableCell>
                     <TableCell align="right">
-                      <button className={styles.tableBtn}>عضو شدن</button>
+                      <button className={styles.tableBtn} onClick={()=>openModalHandler(row.id)}>عضو شدن</button>
                     </TableCell>
                   </TableRow>
                 ))}

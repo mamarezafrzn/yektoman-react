@@ -36,7 +36,7 @@ const Profile = (props) => {
               <input type="text" />
             </label>
             <label>
-              پسن الکترونیک
+              پست الکترونیک
               <input type="text" />
             </label>
             <label>

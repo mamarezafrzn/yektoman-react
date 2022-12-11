@@ -55,6 +55,7 @@ const WithPassword = () => {
 
   if (posts.status == "Success") {
     setCookie("Token", posts.data.token_detail.token, { path: "/" });
+    setCookie("Name", posts.data.user.name, { path: "/" });
     // expires:posts.data.token_detail.expires_in
     navigate("/dashboard");
   }
