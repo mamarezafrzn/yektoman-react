@@ -18,6 +18,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import UserModal from "./UserModal";
+import { useEffect } from "react";
 
 const Notifications = () => {
   const [usersPosts, usersError, usersLoading, usersAxiosFetch] =
@@ -29,6 +30,10 @@ const Notifications = () => {
   const [searchBy, setSearchBy] = useState("name");
   const [filterBy, setFilterBy] = useState({});
 
+  useEffect(()=>{
+    getUsers()
+  },[])
+
   const openModalHandler = (id) => {
     setUserId(id);
     setOpenModal(!openModal);
@@ -39,7 +44,7 @@ const Notifications = () => {
     // switch (searchBy) {
     //   case "name":
     //     setFilterBy({
-    //       name: searchBy,
+    //       name: searchInput,
     //       family: "",
     //       mobile: "",
     //       national_code: "",
@@ -48,7 +53,7 @@ const Notifications = () => {
     //   case "family":
     //     setFilterBy({
     //       name: "",
-    //       family: searchBy,
+    //       family: searchInput,
     //       mobile: "",
     //       national_code: "",
     //     });
@@ -57,7 +62,7 @@ const Notifications = () => {
     //     setFilterBy({
     //       name: "",
     //       family: "",
-    //       mobile: searchBy,
+    //       mobile: searchInput,
     //       national_code: "",
     //     });
     //     break;
@@ -66,12 +71,12 @@ const Notifications = () => {
     //       name: "",
     //       family: "",
     //       mobile: "",
-    //       national_code: searchBy,
+    //       national_code: searchInput,
     //     });
     //     break;
     //   default:
     //     setFilterBy({
-    //       name: searchBy,
+    //       name: searchInput,
     //       family: "",
     //       mobile: "",
     //       national_code: "",
@@ -82,7 +87,7 @@ const Notifications = () => {
   const getUsers = () => {
     usersAxiosFetch({
       axiosInstance: baseUrlWithAuthFunc(cookie.Token),
-      method: "get",
+      method: "post",
       url: "/users/gets",
       requestConfig: {
         filters: filterBy,
@@ -90,9 +95,52 @@ const Notifications = () => {
     });
   };
 
+  
+
 
   const searchInputHandler = (event) => {
     setSearchInput(event.target.value);
+    switch (searchBy) {
+      case "name":
+        setFilterBy({
+          name: event.target.value,
+          family: "",
+          mobile: "",
+          national_code: "",
+        });
+        break;
+      case "family":
+        setFilterBy({
+          name: "",
+          family: event.target.value,
+          mobile: "",
+          national_code: "",
+        });
+        break;
+      case "mobile":
+        setFilterBy({
+          name: "",
+          family: "",
+          mobile: event.target.value,
+          national_code: "",
+        });
+        break;
+      case "national_code":
+        setFilterBy({
+          name: "",
+          family: "",
+          mobile: "",
+          national_code: event.target.value,
+        });
+        break;
+      default:
+        setFilterBy({
+          name: event.target.value,
+          family: "",
+          mobile: "",
+          national_code: "",
+        });
+    }
   };
   const searchBtnHandler = () => {
     // if (searchInput.length >= 1) {
