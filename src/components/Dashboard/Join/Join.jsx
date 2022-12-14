@@ -23,6 +23,7 @@ const Join = () => {
   const [openModal, setOpenModal] = useState(false);
   const [fundId,setFundId] = useState()
 
+
   const openModalHandler = (id) => {
     setFundId(id)  
     setOpenModal(!openModal);
@@ -49,7 +50,7 @@ const Join = () => {
     event.preventDefault();
     getFund();
   };
-
+console.log(posts)
   return (
     <React.Fragment>
       <JoinModal openModalHandler={openModalHandler} openModal={openModal} fundId={fundId}/>
@@ -79,7 +80,7 @@ const Join = () => {
             variant="h6"
             component="h2"
           >
-            لیست افراد
+            لیست صندوق ها
           </Typography>
           <TableContainer component={Paper}>
             <Table

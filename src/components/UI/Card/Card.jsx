@@ -35,7 +35,7 @@ const Card = (props) => {
           </button>
         )}
       </div>
-      <div className={styles.cardBody}>{props.children}</div>
+      <div className={styles.cardBody} style={props.cardBodyStyle}>{props.children}</div>
     </CardContainer>
 
   );

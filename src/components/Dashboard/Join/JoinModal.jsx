@@ -1,54 +1,75 @@
-import styles from "../Dashboard.module.css"
+import styles from "./Join.module.css";
 import { Box, Modal, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
 import { useCookies } from "react-cookie";
 
-
 const JoinModal = (props) => {
-    const [requestPosts, requestError, requestLoading, requestAxiosFetch] = useAxiosFunction();
-    const [cookie, setCookie] = useCookies(["user"]);
+  const [conventPosts, conventError, conventLoading, conventAxiosFetch] =
+    useAxiosFunction();
+  const [requestPosts, requestError, requestLoading, requestAxiosFetch] =
+    useAxiosFunction();
 
+  const [cookie, setCookie] = useCookies(["user"]);
 
-    const postRequest = () => {
-        requestAxiosFetch({
-          axiosInstance: baseUrlWithAuthFunc(cookie.Token),
-          method: "post",
-          url: `/funds/covenant/${props.fundId}`,
-        });
-      };
+  useEffect(() => {
+    console.log("get");
+    getConvent();
+  }, [props.fundId]);
 
+  const getConvent = () => {
+    conventAxiosFetch({
+      axiosInstance: baseUrlWithAuthFunc(cookie.Token),
+      method: "get",
+      url: `/funds/covenant/${props.fundId}`,
+    });
+  };
 
-    return(
-        <Modal
-        open={props.openModal}
-        onClose={props.openModalHandler}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className={styles.modal}>
-          <Typography
-            className="text-right"
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-          >
-            لیست افراد
-          </Typography>
+  const sendFundRequest = () => {
+    requestAxiosFetch({
+      axiosInstance: baseUrlWithAuthFunc(cookie.Token),
+      method: "post",
+      url: `/funds/request/${props.fundId}`,
+    });
+  };
 
-            <p>متن</p>
-            <p>متن</p>
-            <p>متن</p>
-            <p>متن</p>
-            <button className={styles.btnJoin} onClick={postRequest}>عضو شدن</button>
-          <button className={styles.closeModalBtn} onClick={props.openModalHandler}>
-            بستن
-          </button>
-        </Box>
-      </Modal>
-    )
-}
+  // if(props.openModal && requestPosts.status == "Success"){
+  // }
 
+  return (
+    <Modal
+      open={props.openModal}
+      onClose={props.openModalHandler}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+      sx={{ overflow: "scroll", position: "fixed", top: "50" }}
+    >
+      <Box className={styles.modal}>
+        {requestPosts.status == "Success" ? (
+          <div className={styles.modalSuccess}><p>درخواست با موفقیت ارسال شد</p></div>
+        ) : (
+          <div>
+            <div
+              className={styles.modalContent}
+              dangerouslySetInnerHTML={{
+                __html: conventPosts && conventPosts.data?.convent,
+              }}
+            ></div>
+            <button className={styles.btnJoin} onClick={sendFundRequest}>
+              عضو شدن
+            </button>
+          </div>
+        )}
+        <button
+          className={styles.closeModalBtn}
+          onClick={props.openModalHandler}
+        >
+          بستن
+        </button>
+      </Box>
+    </Modal>
+  );
+};
 
 export default JoinModal;

@@ -19,17 +19,16 @@ const FundItem = (props) => {
     useAxiosFunction();
   const [openModal, setOpenModal] = useState(false);
   const [cookie, setCookie] = useCookies(["user"]);
-  const [infoInput,setInfoInput] = useState({value : "" , id : ""});
+  const [infoInput, setInfoInput] = useState({ value: "", id: "" });
 
+  const onInfoInputChange = (event) => {
+    setInfoInput({ ...infoInput, value: event.target.value });
+  };
 
-  const onInfoInputChange = (event) =>{
-    setInfoInput({...infoInput,value:event.target.value})
-  }
-
-  const onSubmit = (event) =>{
-    event.preventDefault()
-    postInfoFunc()
-  }
+  const onSubmit = (event) => {
+    event.preventDefault();
+    postInfoFunc();
+  };
 
   const getFundItems = () => {
     axiosFetch({
@@ -65,15 +64,16 @@ const FundItem = (props) => {
 
   const openModalHandler = (id) => {
     setOpenModal(!openModal);
-     setInfoInput({...infoInput,id})  
+    setInfoInput({ ...infoInput, id });
+   
   };
 
   if (deletePosts.status == "Success") {
     window.location.reload();
   }
   if (postInfo.status == "Success" && openModal) {
-    setInfoInput({value:"",id:""})
-    setOpenModal(false)
+    setInfoInput({ value: "", id: "" });
+    setOpenModal(false);
     // window.location.reload();
   }
 
@@ -92,12 +92,16 @@ const FundItem = (props) => {
             variant="h6"
             component="h2"
           >
-            لیست افراد
+            متن پیام
           </Typography>
-            <form className={styles.infoForm} onSubmit={onSubmit}>
-              <textarea type="text" value={infoInput.value} onChange={onInfoInputChange}/>
-              <button type="submit">ارسال</button>
-            </form>
+          <form className={styles.infoForm} onSubmit={onSubmit}>
+            <textarea
+              type="text"
+              value={infoInput.value}
+              onChange={onInfoInputChange}
+            />
+            <button type="submit">ارسال</button>
+          </form>
           <button className={styles.closeModalBtn} onClick={openModalHandler}>
             بستن
           </button>
@@ -139,7 +143,10 @@ const FundItem = (props) => {
                   >
                     لیست اعضا
                   </button>
-                  <button className={styles.warningBtn} onClick={()=>openModalHandler(item.id)}>
+                  <button
+                    className={styles.warningBtn}
+                    onClick={() => openModalHandler(item.id)}
+                  >
                     <WarningIcon sx={{ color: grey[100] }} />
                   </button>
                   <button

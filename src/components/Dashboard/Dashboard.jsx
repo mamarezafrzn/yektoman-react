@@ -106,7 +106,7 @@ const Dashboard = () => {
           </button>
         </Box>
       </Modal>
-      <Card heading="داشبورد" description="لیست صندوق های شما">
+      <Card heading="داشبورد" description="لیست صندوق های شما" cardBodyStyle={{display:"flex",justifyContent:"space-around",flexWrap:"wrap"}}>
         <FundItem onShowListClick={showId} />
       </Card>
     </React.Fragment>
