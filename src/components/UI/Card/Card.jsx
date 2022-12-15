@@ -31,7 +31,7 @@ const Card = (props) => {
             onClick={props.modalClickHandler}
             className={styles.headerBtn}
           >
-            ثبت پرداخت جدید
+            {props.btnText}
           </button>
         )}
       </div>

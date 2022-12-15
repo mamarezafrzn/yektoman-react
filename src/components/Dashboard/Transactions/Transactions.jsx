@@ -123,6 +123,7 @@ const Transactions = () => {
         heading="لیست اعلانات"
         description="لیست تمامی اعلانات مربوط به شما"
         showBtn="true"
+        btnText="ثبت پرداخت جدید"
         modalClickHandler={modalClickHandler}
       >
         <label className={styles.searchLabel}>

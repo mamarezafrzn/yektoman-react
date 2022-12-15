@@ -1,10 +1,91 @@
-.searchLabel{
-    float: right;
+.searchLabel {
+  float: right;
 }
-.searchLabel input{
-    margin-right: 10px;
+.searchLabel input {
+  margin-right: 10px;
 }
-.searchBtn{
-    border: 1px solid rgb(167, 167, 167);
-    border-radius: 5px;
+.searchBtn {
+  border: 1px solid rgb(167, 167, 167);
+  border-radius: 5px;
+}
+.editBtn {
+  background-color: rgb(72, 155, 109);
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  background-color: white;
+  border: 2px solid #000;
+  box-shadow: 24;
+  padding: 40px;
+  padding-bottom: 10px;
+}
+.closeModalBtn {
+  width: 80px;
+  height: 40px;
+  border: none;
+  background-color: rgb(78, 92, 92);
+  color: white;
+  font-size: 10px;
+  font-weight: 400;
+  border-radius: 5px;
+  margin: 25px 15px 15px 0px;
+  float: right;
+}
+.modalForm{
+  direction: rtl;
+  text-align: right;
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between; */
+}
+.modalForm label{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  /* margin: 10px auto 0px auto; */
+  padding: 10px;
+}
+
+.modalForm input{
+  border: none;
+  border-bottom: 1px solid rgb(176, 176, 176);
+}
+.submitBtn{
+  background-color: rgb(72, 155, 109);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 30%;
+  float: left;
+}
+.deleteBtn{
+  background-color: rgb(194, 39, 39);
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+@media (max-width: 950px){
+  .modal{
+      width: 95%;
+  }
+  .btnJoin{
+      width: 100%;
+  }
+  .modalForm label{
+    width: 100%;
+  }
+  .submitBtn{
+    width: 100%;
+    margin: 20px auto;
+  }
 }
