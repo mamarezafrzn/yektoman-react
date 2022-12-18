@@ -16,10 +16,20 @@
 }
 
 .modal {
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 50%;
+  background-color: white;
+  border: 2px solid #000;
+  box-shadow: 24;
+  padding: 40px;
+  padding-bottom: 10px; */
+  transform: translate(-50%, 0%); 
+  position: absolute;
+  top: 0px;
+  margin: auto;
   width: 50%;
   background-color: white;
   border: 2px solid #000;
@@ -77,6 +87,7 @@
 @media (max-width: 950px){
   .modal{
       width: 95%;
+      transform: translate(-2.5%, 0%); 
   }
   .btnJoin{
       width: 100%;

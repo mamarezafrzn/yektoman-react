@@ -53,7 +53,9 @@ const Settings = () => {
     setSearchInput(event.target.value);
   };
   const searchBtnHandler = () => {
-
+        // if (searchInput.length >= 1) {
+    //   setTableRows(rows.filter((item) => item.mobile.includes(searchInput)));
+    // }
   };
   const onNewSettingsClick = () =>{
     setNewSettingsModal(!newSettingsModal)
@@ -82,12 +84,12 @@ const Settings = () => {
         btnText="تنظیمات جدید"
         modalClickHandler={onNewSettingsClick}
       >
-        <label className={styles.searchLabel}>
+        {/* <label className={styles.searchLabel}>
           <button className={styles.searchBtn} onClick={searchBtnHandler}>
             جست وجو
           </button>
           <input onChange={searchInputHandler} type="text" />
-        </label>
+        </label> */}
         <TableContainer sx={{ padding: "20px" }} component={Paper}>
           <Table
             sx={{ minWidth: 650, direction: "rtl", padding: "10px" }}

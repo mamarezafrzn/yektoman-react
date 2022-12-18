@@ -60,7 +60,7 @@ const SettingsForm = (props) => {
   return (
     <form className={styles.modalForm} onSubmit={onFormSubmit}>
       <label>
-        متغیر
+        <p>متغیر</p>
         <input type="text" value={variableInput} onChange={onVariableChange} />
       </label>
 
@@ -104,16 +104,20 @@ const SettingsForm = (props) => {
           <textarea value={valueData} onChange={onValueDataChange} />
         </label>
       ) : (
-        <CKEditor
-          editor={ClassicEditor}
-          data={editorData}
-          onReady={(editor) => {
-            // console.log("CKEditor5 React Component is ready to use!", editor);
-          }}
-          onChange={(event, editor) => {
-            setEditorData(editor.getData());
-          }}
-        />
+       <div dir="rtl" style={{direction:"rtl",textAlign:"right"}}> 
+         <CKEditor
+        
+        editor={ClassicEditor}
+        data={editorData}
+        
+        onReady={(editor) => {
+          // console.log("CKEditor5 React Component is ready to use!", editor);
+        }}
+        onChange={(event, editor) => {
+          setEditorData(editor.getData());
+        }}
+      />
+       </div>
       )}
       <div>
         <p style={{ marginBottom: "0px", marginTop: "10px" }}>وضعیت</p>

@@ -24,6 +24,7 @@ const Join = () => {
   const [fundId,setFundId] = useState()
 
 
+
   const openModalHandler = (id) => {
     setFundId(id)  
     setOpenModal(!openModal);

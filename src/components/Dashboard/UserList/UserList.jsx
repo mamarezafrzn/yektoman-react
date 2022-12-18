@@ -41,47 +41,6 @@ const Notifications = () => {
 
   const onSearchBy = (event) => {
     setSearchBy(event.target.value);
-    // switch (searchBy) {
-    //   case "name":
-    //     setFilterBy({
-    //       name: searchInput,
-    //       family: "",
-    //       mobile: "",
-    //       national_code: "",
-    //     });
-    //     break;
-    //   case "family":
-    //     setFilterBy({
-    //       name: "",
-    //       family: searchInput,
-    //       mobile: "",
-    //       national_code: "",
-    //     });
-    //     break;
-    //   case "mobile":
-    //     setFilterBy({
-    //       name: "",
-    //       family: "",
-    //       mobile: searchInput,
-    //       national_code: "",
-    //     });
-    //     break;
-    //   case "national_code":
-    //     setFilterBy({
-    //       name: "",
-    //       family: "",
-    //       mobile: "",
-    //       national_code: searchInput,
-    //     });
-    //     break;
-    //   default:
-    //     setFilterBy({
-    //       name: searchInput,
-    //       family: "",
-    //       mobile: "",
-    //       national_code: "",
-    //     });
-    // }
   };
 
   const getUsers = () => {

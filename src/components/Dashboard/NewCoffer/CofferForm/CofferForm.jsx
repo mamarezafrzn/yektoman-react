@@ -136,7 +136,7 @@ const CofferForm = (props) => {
     }
   };
 
-  const month = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
+  const weekDay = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
 
   return (
     <form className={styles.newForm} onSubmit={onFormSubmit}>
@@ -239,7 +239,7 @@ const CofferForm = (props) => {
           className="rmdp-prime"
           showOtherDays
           locale={persian_fa}
-          weekDays={month}
+          weekDays={weekDay}
           hideOnScroll
           placeholder="برای مثال ۱/۱/۱۴۰۲"
           style={{

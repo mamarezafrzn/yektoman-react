@@ -10,6 +10,10 @@
   font-weight: normal;
   font-style: normal;
 }
+.ck-editor__editable{
+  direction: rtl !important;
+  text-align: right !important;
+}
 input:focus-visible{
   outline: 0 !important;
 }

@@ -14,10 +14,10 @@ const JoinModal = (props) => {
   const [cookie, setCookie] = useCookies(["user"]);
 
   useEffect(() => {
-    console.log("get");
     getConvent();
   }, [props.fundId]);
-
+  console.log(conventPosts);
+  
   const getConvent = () => {
     conventAxiosFetch({
       axiosInstance: baseUrlWithAuthFunc(cookie.Token),

@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const ErrorToast = (props) => {
-
+  console.log(props)
   useEffect(() => {
 
       const errors = [];

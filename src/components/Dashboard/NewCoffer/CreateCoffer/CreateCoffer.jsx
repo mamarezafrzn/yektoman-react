@@ -13,7 +13,7 @@ const CreateCoffer = (props) => {
   const Navigate = useNavigate();
 
   const postData = (formData) => {
-    // console.log(formData)
+
     axiosFetch({
       axiosInstance: baseUrlWithAuthFunc(cookies.Token),
       method: "post",
