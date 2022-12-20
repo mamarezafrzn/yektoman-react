@@ -1,6 +1,6 @@
 import styles from "./Notifications.module.css";
 import { Box, Modal, Typography } from "@mui/material";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
 import { useCookies } from "react-cookie";
@@ -14,6 +14,12 @@ const NotificationModal = (props) => {
     notificationLoading,
     notificationAxiosFetch,
   ] = useAxiosFunction();
+  const [
+    operationPosts,
+    operationError,
+    operationLoading,
+    operationAxiosFetch,
+  ] = useAxiosFunction();
 
   useEffect(() => {
     getNotification();
@@ -26,7 +32,18 @@ const NotificationModal = (props) => {
       url: `/notifications/get/${props.fundId}`,
     });
   };
-console.log(notificationPosts)
+  const notificationOperation = (data) => {
+    operationAxiosFetch({
+      axiosInstance: baseUrlWithAuthFunc(cookie.Token),
+      method: "post",
+      url: `/notifications/change/${props.id}`,
+      requestConfig: {
+        status: data,
+      },
+    });
+  };
+
+
   return (
     <Modal
       open={props.openModal}
@@ -34,45 +51,79 @@ console.log(notificationPosts)
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box className={styles.modal}>
-        <Typography
-          className="text-right"
-          id="modal-modal-title"
-          variant="h6"
-          component="h2"
-        >
-          پرداخت جدید
-        </Typography>
-        <div className={styles.notifMessage}>
-          <h6>متن پیام</h6>
-          <p>{notificationPosts.data?.notification.message} </p>
-          {notificationPosts.data?.notification.type == "accept" &&
-            notificationPosts.data?.notification.status == "0" && (
-              <div className={styles.modalBtnContainer}>
-                <button className={style.confirmBtn}>تایید</button>
-                <button className={style.denyBtn}>تایید</button> رد
-              </div>
-            )}
-          {notificationPosts.data?.notification.type == "accept" &&
-            notificationPosts.data?.notification.status == "1" && (
-              <div className={styles.modalBtnContainer}>
-                <p>تایید شده</p>
-              </div>
-            )}
-                     {notificationPosts.data?.notification.type == "accept" &&
-            notificationPosts.data?.notification.status == "-1" && (
-              <div className={styles.modalBtnContainer}>
-                <p>رد شده</p>
-              </div>
-            )}
+      {notificationPosts.data?.notification.type == "info" && (
+        <React.Fragment>
+          {" "}
+          <Typography
+            className="text-right"
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+          >
+            پیام
+          </Typography>
+          <div className={styles.notifMessage}>
+            <h6>متن پیام</h6>
+            <p>{notificationPosts.data?.notification.message} </p>
+          </div>
+        </React.Fragment>
+      )}
+      {notificationPosts.data?.notification.type == "join" &&
+      operationPosts.status == "Success" ? (
+        <div className={styles.modalSuccess}>
+          <p>{operationPosts.meta?.message}</p>
         </div>
-        <button
-          className={styles.closeModalBtn}
-          onClick={props.modalClickHandler}
-        >
-          بستن
-        </button>
-      </Box>
+      ) : (
+        <Box className={styles.modal}>
+          <Typography
+            className="text-right"
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+          >
+            پیام
+          </Typography>
+          <div className={styles.notifMessage}>
+            <h6>متن پیام</h6>
+            <p>{notificationPosts.data?.notification.message} </p>
+            {notificationPosts.data?.notification.type == "join" &&
+              notificationPosts.data?.notification.status == "0" && (
+                <div className={styles.modalBtnContainer}>
+                  <button
+                    className={style.confirmBtn}
+                    onClick={() => notificationOperation("1")}
+                  >
+                    تایید
+                  </button>
+                  <button
+                    className={style.denyBtn}
+                    onClick={() => notificationOperation("-1")}
+                  >
+                    رد
+                  </button>
+                </div>
+              )}
+            {notificationPosts.data?.notification.type == "join" &&
+              notificationPosts.data?.notification.status == "1" && (
+                <div className={styles.modalBtnContainer}>
+                  <p>تایید شده</p>
+                </div>
+              )}
+            {notificationPosts.data?.notification.type == "join" &&
+              notificationPosts.data?.notification.status == "-1" && (
+                <div className={styles.modalBtnContainer}>
+                  <p>رد شده</p>
+                </div>
+              )}
+          </div>
+          <button
+            className={styles.closeModalBtn}
+            onClick={props.modalClickHandler}
+          >
+            بستن
+          </button>
+        </Box>
+      )}
     </Modal>
   );
 };
