@@ -1,12 +1,6 @@
 import React from "react";
-
 import Card from "../../UI/Card/Card";
-import DesktopMenu from "../../Menu/desktopMenu/DesktopMenu";
-import Navbar from "../../Menu/navbar";
-
 import styles from "./Notifications.module.css"
-
-
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -15,6 +9,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useState } from "react";
+import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
+import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 
 function createData(name, sender,message, date,status) {
@@ -28,8 +26,26 @@ function createData(name, sender,message, date,status) {
 
 const Notifications = () => {
     const [searchInput,setSearchInput] = useState("");
-    const [tableRows,setTableRows] = useState(rows)
+    const [tableRows,setTableRows] = useState(rows);
+    const [cookie, setCookie] = useCookies(["user"]);
+    const [
+      notificationsPosts,
+      notificationsError,
+      notificationsLoading,
+      notificationsAxiosFetch,
+    ] = useAxiosFunction();
 
+    useEffect(()=>{
+      getNotifications()
+    },[notificationsPosts])
+
+    const getNotifications = () => {
+      notificationsAxiosFetch({
+        axiosInstance: baseUrlWithAuthFunc(cookie.Token),
+        method: "get",
+        url: "/notifications/gets",
+      });
+    };
     const searchInputHandler = (event) =>{
         setSearchInput(event.target.value)
     }
@@ -59,12 +75,11 @@ const Notifications = () => {
             <TableCell align="right">فرستنده</TableCell>
             <TableCell align="right">پیام</TableCell>
             <TableCell align="right">زمان ارسال</TableCell>
-            <TableCell align="right"> وضعیت</TableCell>
             
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableRows.map((row,index) => (
+          {notificationsPosts.data?.notifications.data.map((row,index) => (
             <TableRow
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -72,11 +87,11 @@ const Notifications = () => {
               <TableCell align="right" component="th" scope="row">
                 {index}
               </TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row.sender}</TableCell>
+              <TableCell align="right">{row.fund?.title}</TableCell>
+              <TableCell align="right">{row.from?.family}</TableCell>
               <TableCell align="right">{row.message}</TableCell>
-              <TableCell align="right">{row.date}</TableCell>
-              <TableCell align="right">{row.status}</TableCell>
+              <TableCell align="right">{row.created_at}</TableCell>
+
             </TableRow>
           ))}
         </TableBody>
