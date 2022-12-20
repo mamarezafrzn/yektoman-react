@@ -13,10 +13,12 @@ import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
 import { useCookies } from "react-cookie";
 import { checkIfNumber } from "../../Validation/Validation";
+import ErrorToast from "../../ErrorToast/ErrorToast";
 
 const TransactionForm = (props) => {
     const [createPosts, createError, createLoading, createAxiosFetch] =
     useAxiosFunction();
+    const [showError, setShowError] = useState(true);
     const [cookie, setCookie] = useCookies(["user"]);
     const [dateValue, setDateValue] = useState({value:"", validation: { isValid: true },});
   const [fund,setFund] = useState({value:"", validation: { isValid: true },});
@@ -48,7 +50,9 @@ const TransactionForm = (props) => {
       requestConfig: data,
     });
   };
-
+  const cleanError = () => {
+    setShowError(false);
+  };
   const onFormSubmit = (event) =>{
     event.preventDefault()
     setFund({...fund, validation: fund.value.length <= 0 ? {isValid:false , errorMsg:"این فیلد ضروری است!"}: {isValid:true}})
@@ -79,6 +83,9 @@ const TransactionForm = (props) => {
   const weekDay = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
   return (
     <form className={styles.newForm} onSubmit={onFormSubmit}>
+              {createError.response?.data.status == "failed" && showError == true ? (
+          <ErrorToast error={createError} cleanError={cleanError} />
+        ) : null}
       <label>
         انتخاب صندوق
         <Box
