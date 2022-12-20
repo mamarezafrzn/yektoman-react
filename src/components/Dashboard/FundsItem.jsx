@@ -77,6 +77,8 @@ const FundItem = (props) => {
     // window.location.reload();
   }
 
+
+
   return (
     <React.Fragment>
       <Modal
@@ -114,7 +116,7 @@ const FundItem = (props) => {
               <div className={styles.mainDescription}>
                 <div className={styles.mainDescriptionHeading}>
                   <p className={styles.cardHeading}>{item.title}</p>
-                  <p className={styles.headingDescription}>سر گروه: شهریار</p>
+                  <p className={styles.headingDescription}>سر گروه: {item.user_by.full_name}</p>
                 </div>
                 <div className={styles.cardDetails}>
                   <p>

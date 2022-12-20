@@ -8,3 +8,75 @@
     border: 1px solid rgb(167, 167, 167);
     border-radius: 5px;
 }
+.modal {
+    transform: translate(-50%, 0%); 
+    position: absolute;
+    top: 0px;
+    margin: auto;
+    width: 50%;
+    background-color: white;
+    border: 2px solid #000;
+    box-shadow: 24;
+    padding: 40px;
+    padding-bottom: 10px;
+}
+.closeModalBtn {
+  width: 80px;
+  height: 40px;
+  border: none;
+  background-color: rgb(78, 92, 92);
+  color: white;
+  font-size: 10px;
+  font-weight: 400;
+  border-radius: 5px;
+  margin: 25px 15px 15px 0px;
+  float: right;
+}
+.confirmBtn{
+    width: 50%;
+    height: 40px;
+    margin-top: 10px;
+    margin-right: auto;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(19, 151, 151);
+    color: white;
+}
+.denyBtn{
+    width: 50%;
+    height: 40px;
+    margin-top: 10px;
+    margin-right: auto;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(199, 36, 24);
+    color: white;
+}
+.btnContainer{
+    width: 20%;
+}
+.notifMessage{
+    direction: rtl;
+    text-align: right;
+    padding: 20px;
+
+}
+.modalBtnContainer{
+    width: 30%;
+    min-height: 50px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: row;
+}
+@media (max-width: 950px){
+    .btnContainer{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .btnContainer button{
+        width: 100%;
+    }
+}

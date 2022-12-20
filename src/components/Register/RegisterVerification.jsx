@@ -110,7 +110,7 @@ const RegisterVerification = () => {
       {error.response?.data.status == "failed" && showError==true ? (
         <ErrorToast error={error} cleanError={cleanError}/>
       ) : null}
-      <div className={styles["card-container"]}>
+      <div className={styles["card-container"]} style={{height:"auto"}}>
         <BackBtn/>
         <div className={styles["logo-container"]}>
           <img src={logo} alt="..." className={styles.logo} />
