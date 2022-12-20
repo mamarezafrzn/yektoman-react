@@ -81,7 +81,7 @@ const WithPassword = () => {
               className={
                 !passwordInput.validation.isValid ? styles.inputError : null
               }
-              type="text"
+              type="password"
               placeholder="رمز عبور"
               value={passwordInput.value}
               onChange={passwordInputChange}

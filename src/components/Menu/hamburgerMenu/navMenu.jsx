@@ -12,7 +12,8 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useCookies } from 'react-cookie';
-
+import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
+import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
 import styles from "./navMenu.module.css"
 
 
@@ -69,12 +70,31 @@ const variants = {
 };
 
 export function NavMenu({ isOpen }) {
-  const [cookies, setCookie] = useCookies(['user']);
+  const [cookie, setCookie,removeCookie] = useCookies(["user"]);
+  const [
+    logOutPosts,
+    logOutError,
+    logOutLoading,
+    logOutAxiosFetch,
+  ] = useAxiosFunction();
+  const onLogOut = () => {
+    logOutAxiosFetch({
+      axiosInstance: baseUrlWithAuthFunc(cookie.Token),
+      method: "post",
+      url: "/logout",
+    });
+    removeCookie('Token');
+    removeCookie('Name');
+    removeCookie('user');
+  };
+  //  if(logOutPosts.status == "Success"){
+  //   removeCookie(["user"]);
+  //  }
   return (
     <NavMenuContainer>
       <NavList>
         <p className={styles.details} style={{fontWeight:"700"}}>
-          <span style={{color:"violet"}}>{cookies.Name}{" "}</span>خوش آمدید.
+          <span style={{color:"violet"}}>{cookie.Name}{" "}</span>خوش آمدید.
         </p>
         <p className={styles.details}>
           اعتبار: ۰ تومان
@@ -253,7 +273,7 @@ export function NavMenu({ isOpen }) {
             }}
           >
             <LogoutIcon color="action"/>
-            <Link className={styles.links} to="#"> خروج</Link>
+            <Link className={styles.links} to="#" onClick={onLogOut}> خروج</Link>
           </NavLink>
       </NavList>
     </NavMenuContainer>

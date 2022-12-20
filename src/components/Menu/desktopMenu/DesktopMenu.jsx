@@ -9,8 +9,34 @@ import PersonIcon from "@mui/icons-material/Person";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
+import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
+import { useCookies } from "react-cookie";
 
 const DesktopMenu = () => {
+  const [cookie, setCookie,removeCookie] = useCookies(["user"]);
+  const [
+    logOutPosts,
+    logOutError,
+    logOutLoading,
+    logOutAxiosFetch,
+  ] = useAxiosFunction();
+  const onLogOut = () => {
+    logOutAxiosFetch({
+      axiosInstance: baseUrlWithAuthFunc(cookie.Token),
+      method: "post",
+      url: "/logout",
+    });
+    removeCookie('Token');
+    removeCookie('Name');
+    removeCookie('user');
+  };
+  //  if(logOutPosts.status == "Success"){
+  //   removeCookie('Token');
+  //   removeCookie('Name');
+  //   removeCookie('user');
+
+  //  }
 
   return (
     <div className={styles.menuContainer}>
@@ -70,7 +96,7 @@ const DesktopMenu = () => {
             <SettingsIcon color="action" />
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/" onClick={onLogOut} >
           <div className={styles.menuItems}>
             <h3 className={styles.menuHeadings}>خروج</h3>
             <LogoutIcon color="action" />

@@ -43,6 +43,7 @@ const NotificationModal = (props) => {
     });
   };
 
+  console.log(notificationPosts.data?.notification?.type);
 
   return (
     <Modal
@@ -51,9 +52,8 @@ const NotificationModal = (props) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      {notificationPosts.data?.notification.type == "info" && (
-        <React.Fragment>
-          {" "}
+      {/* {notificationPosts.data?.notification?.type == "info" && (
+        <div>
           <Typography
             className="text-right"
             id="modal-modal-title"
@@ -64,11 +64,11 @@ const NotificationModal = (props) => {
           </Typography>
           <div className={styles.notifMessage}>
             <h6>متن پیام</h6>
-            <p>{notificationPosts.data?.notification.message} </p>
+            <p>{notificationPosts.data?.notification?.message} </p>
           </div>
-        </React.Fragment>
-      )}
-      {notificationPosts.data?.notification.type == "join" &&
+        </div>
+      ) } */}
+      {notificationPosts.data?.notification?.type == "join" &&
       operationPosts.status == "Success" ? (
         <div className={styles.modalSuccess}>
           <p>{operationPosts.meta?.message}</p>
@@ -85,9 +85,9 @@ const NotificationModal = (props) => {
           </Typography>
           <div className={styles.notifMessage}>
             <h6>متن پیام</h6>
-            <p>{notificationPosts.data?.notification.message} </p>
-            {notificationPosts.data?.notification.type == "join" &&
-              notificationPosts.data?.notification.status == "0" && (
+            <p>{notificationPosts.data?.notification?.message} </p>
+            {notificationPosts.data?.notification?.type == "join" &&
+              notificationPosts.data?.notification?.status == "0" && (
                 <div className={styles.modalBtnContainer}>
                   <button
                     className={style.confirmBtn}
@@ -103,14 +103,14 @@ const NotificationModal = (props) => {
                   </button>
                 </div>
               )}
-            {notificationPosts.data?.notification.type == "join" &&
-              notificationPosts.data?.notification.status == "1" && (
+            {notificationPosts.data?.notification?.type == "join" &&
+              notificationPosts.data?.notification?.status == "1" && (
                 <div className={styles.modalBtnContainer}>
                   <p>تایید شده</p>
                 </div>
               )}
-            {notificationPosts.data?.notification.type == "join" &&
-              notificationPosts.data?.notification.status == "-1" && (
+            {notificationPosts.data?.notification?.type == "join" &&
+              notificationPosts.data?.notification?.status == "-1" && (
                 <div className={styles.modalBtnContainer}>
                   <p>رد شده</p>
                 </div>
