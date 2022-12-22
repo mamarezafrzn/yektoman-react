@@ -6,6 +6,7 @@ import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import React, { useState } from "react";
 import ErrorToast from "../../ErrorToast/ErrorToast";
+import { Helmet } from "react-helmet";
 
 const CreateSettingsModal = (props) => {
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
@@ -27,9 +28,11 @@ const CreateSettingsModal = (props) => {
     window.location.reload();
   }
 
-
   return (
     <React.Fragment>
+      <Helmet>
+        <title>یک تومن |‌ تنظیمات جدید</title>
+      </Helmet>
       {error.response?.data.status == "failed" && showError == true ? (
         <ErrorToast error={error} cleanError={cleanError} />
       ) : null}

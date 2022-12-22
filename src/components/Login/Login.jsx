@@ -7,6 +7,7 @@ import axios from "../../apis/axiosBase";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorToast from "../ErrorToast/ErrorToast";
 import BackBtn from "../BackBtn/BackBtn";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -120,6 +121,9 @@ const Login = () => {
   };
   return (
     <div className={styles["main-container"]}>
+      <Helmet>
+        <title>یک تومن |‌ ورود</title>
+      </Helmet>
       {error.response?.data.status == "failed" && showError == true ? (
         <ErrorToast error={error} cleanError={cleanError} />
         ) : null}

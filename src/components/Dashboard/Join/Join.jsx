@@ -14,27 +14,23 @@ import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
 import { useCookies } from "react-cookie";
 import JoinModal from "./JoinModal";
-
+import { Helmet } from "react-helmet";
 
 const Join = () => {
   const [searchInput, setSearchInput] = useState("");
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
   const [cookie, setCookie] = useCookies(["user"]);
   const [openModal, setOpenModal] = useState(false);
-  const [fundId,setFundId] = useState()
-
-
+  const [fundId, setFundId] = useState();
 
   const openModalHandler = (id) => {
-    setFundId(id)  
+    setFundId(id);
     setOpenModal(!openModal);
   };
 
-
   const onSearchInputChange = (event) => {
-    setSearchInput({ value: event.target.value});
+    setSearchInput({ value: event.target.value });
   };
-
 
   const getFund = () => {
     axiosFetch({
@@ -51,10 +47,17 @@ const Join = () => {
     event.preventDefault();
     getFund();
   };
-console.log(posts)
+  console.log(posts);
   return (
     <React.Fragment>
-      <JoinModal openModalHandler={openModalHandler} openModal={openModal} fundId={fundId}/>
+      <Helmet>
+        <title>یک تومن |‌ عضویت</title>
+      </Helmet>
+      <JoinModal
+        openModalHandler={openModalHandler}
+        openModal={openModal}
+        fundId={fundId}
+      />
       <Card
         heading="پیوستن به طرح"
         description="پس از جست و جو به طرح خود بپیوندید"
@@ -62,13 +65,12 @@ console.log(posts)
         <form className={styles.searchForm} onSubmit={onSearchHandler}>
           <label>
             جست و جوی طرح
-
             <input
-                autoFocus
-                type="text"
-                value={searchInput.value}
-                onChange={onSearchInputChange}
-              />
+              autoFocus
+              type="text"
+              value={searchInput.value}
+              onChange={onSearchInputChange}
+            />
           </label>
           <button className={styles.searchBtn} type="submit">
             جست و جو
@@ -102,7 +104,7 @@ console.log(posts)
                 </TableRow>
               </TableHead>
               <TableBody>
-                {posts.data?.fund.map((row, index) => (                 
+                {posts.data?.fund.map((row, index) => (
                   <TableRow
                     key={row.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -128,7 +130,12 @@ console.log(posts)
                     <TableCell align="right">{row.end_date}</TableCell>
                     <TableCell align="right">{row.status?.title}</TableCell>
                     <TableCell align="right">
-                      <button className={styles.tableBtn} onClick={()=>openModalHandler(row.id)}>عضو شدن</button>
+                      <button
+                        className={styles.tableBtn}
+                        onClick={() => openModalHandler(row.id)}
+                      >
+                        عضو شدن
+                      </button>
                     </TableCell>
                   </TableRow>
                 ))}

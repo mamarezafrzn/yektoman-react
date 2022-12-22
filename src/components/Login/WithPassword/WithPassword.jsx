@@ -8,12 +8,13 @@ import axios from "../../../apis/axiosBase";
 import { useCookies } from "react-cookie";
 import ErrorToast from "../../ErrorToast/ErrorToast";
 import BackBtn from "../../BackBtn/BackBtn";
+import { Helmet } from "react-helmet";
 
 const WithPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
-  const [showError,setShowError] = useState(true)
+  const [showError, setShowError] = useState(true);
   const [passwordInput, setPasswordInput] = useState({
     value: "",
     validation: { isValid: true },
@@ -47,7 +48,7 @@ const WithPassword = () => {
 
     if (passwordInput.validation.isValid) {
       loginPost();
-      setShowError(true)
+      setShowError(true);
     } else {
       return;
     }
@@ -59,16 +60,19 @@ const WithPassword = () => {
     // expires:posts.data.token_detail.expires_in
     navigate("/dashboard");
   }
-  const cleanError=()=>{
-    setShowError(false)
-  }
+  const cleanError = () => {
+    setShowError(false);
+  };
   return (
     <div className={styles["main-container"]}>
-      {error.response?.data.status == "failed" && showError==true ? (
-        <ErrorToast error={error} cleanError={cleanError}/>
+      <Helmet>
+        <title>یک تومن |‌ ورود - با رمز عبور</title>
+      </Helmet>
+      {error.response?.data.status == "failed" && showError == true ? (
+        <ErrorToast error={error} cleanError={cleanError} />
       ) : null}
       <div className={styles["card-container"]}>
-        <BackBtn/>
+        <BackBtn />
         <div className={styles["logo-container"]}>
           <img src={logo} alt="..." className={styles.logo} />
         </div>

@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import baseUrlWithAuthFunc from "../../../../apis/axiosBaseWithAuth";
 import { useNavigate } from "react-router-dom";
 import ErrorToast from "../../../ErrorToast/ErrorToast";
+import { Helmet } from "react-helmet";
 
 const EditCoffer = (props) => {
   const [getPosts, getError, getLoading, getAxiosFetch] = useAxiosFunction();
@@ -51,6 +52,9 @@ const EditCoffer = (props) => {
 
   return (
     <React.Fragment>
+      <Helmet>
+      <title>یک تومن |‌ ویرایش صندوق</title>
+      </Helmet>
       {error.response?.data.status == "failed" && showError == true ? (
         <ErrorToast error={error} cleanError={cleanError} />
       ) : null}

@@ -22,6 +22,7 @@ import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import TransactionForm from "./TransactionForm";
+import { Helmet } from "react-helmet";
 
 const Transactions = () => {
   const [
@@ -50,7 +51,7 @@ const Transactions = () => {
   useEffect(() => {
     getTransactions();
     getFunds();
-  }, [ statusPosts]);
+  }, [statusPosts]);
 
   const getFunds = () => {
     fundsAxiosFetch({
@@ -160,6 +161,9 @@ const Transactions = () => {
   const weekDay = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
   return (
     <React.Fragment>
+      <Helmet>
+        <title>یک تومن |‌ تراکنش ها</title>
+      </Helmet>
       <Modal
         open={openModal}
         onClose={modalClickHandler}
@@ -201,7 +205,7 @@ const Transactions = () => {
               جست وجو
             </button>
             {searchBy == "date" ? (
-              <label className={styles.dateLabel} >
+              <label className={styles.dateLabel}>
                 <DatePicker
                   fixMainPosition
                   range

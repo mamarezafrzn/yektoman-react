@@ -14,25 +14,22 @@ import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
 import { useCookies } from "react-cookie";
 import CreateSettingsModal from "./CreateSettingsModal";
 import EditModal from "./EditModal";
-
-
+import { Helmet } from "react-helmet";
 
 const Settings = () => {
   const [searchInput, setSearchInput] = useState("");
   const [cookie, setCookie] = useCookies(["user"]);
   const [configsPosts, configsError, configsLoading, configsAxiosFetch] =
     useAxiosFunction();
-    const [deletePosts, deleteError, deleteLoading, deleteAxiosFetch] =
+  const [deletePosts, deleteError, deleteLoading, deleteAxiosFetch] =
     useAxiosFunction();
-  const [newSettingsModal,setNewSettingsModal] = useState(false);
-  const [editSettingsModal,setEditSettingsModal] = useState(false);
-  const [settingsId,setSettingsId] = useState();
+  const [newSettingsModal, setNewSettingsModal] = useState(false);
+  const [editSettingsModal, setEditSettingsModal] = useState(false);
+  const [settingsId, setSettingsId] = useState();
 
   useEffect(() => {
     getConfigs();
   }, []);
-
-
 
   const getConfigs = () => {
     configsAxiosFetch({
@@ -53,30 +50,44 @@ const Settings = () => {
     setSearchInput(event.target.value);
   };
   const searchBtnHandler = () => {
-        // if (searchInput.length >= 1) {
+    // if (searchInput.length >= 1) {
     //   setTableRows(rows.filter((item) => item.mobile.includes(searchInput)));
     // }
   };
-  const onNewSettingsClick = () =>{
-    setNewSettingsModal(!newSettingsModal)
-  }
-  const onEditSettingsClick = (id) =>{
-    setSettingsId(id)
-    setEditSettingsModal(!editSettingsModal)
-  }
-  
-  const onDeleteSettings = (id,variable)=>{
-    console.log(variable)
-    deleteConfigs(id)
-  }
-  if(deletePosts.status=="Success"){
-    window.location.reload()
+  const onNewSettingsClick = () => {
+    setNewSettingsModal(!newSettingsModal);
+  };
+  const onEditSettingsClick = (id) => {
+    setSettingsId(id);
+    setEditSettingsModal(!editSettingsModal);
+  };
+
+  const onDeleteSettings = (id, variable) => {
+    console.log(variable);
+    deleteConfigs(id);
+  };
+  if (deletePosts.status == "Success") {
+    window.location.reload();
   }
 
   return (
     <React.Fragment>
-      {newSettingsModal && <CreateSettingsModal open={newSettingsModal} close={onNewSettingsClick}/>}
-      {editSettingsModal && settingsId && <EditModal open={editSettingsModal} close={onEditSettingsClick} settingsId={settingsId}/>}
+      <Helmet>
+        <title>یک تومن |‌ تنظیمات</title>
+      </Helmet>
+      {newSettingsModal && (
+        <CreateSettingsModal
+          open={newSettingsModal}
+          close={onNewSettingsClick}
+        />
+      )}
+      {editSettingsModal && settingsId && (
+        <EditModal
+          open={editSettingsModal}
+          close={onEditSettingsClick}
+          settingsId={settingsId}
+        />
+      )}
       <Card
         heading="لیست تنظیمات"
         description="لیست تمامی تنظیمات مربوط به سایت"
@@ -115,10 +126,24 @@ const Settings = () => {
                     </TableCell>
                     <TableCell align="right">{row.variable}</TableCell>
                     <TableCell align="right">
-                      <button className={styles.editBtn} onClick={()=>{onEditSettingsClick(row.id)}}>ویرایش</button>
+                      <button
+                        className={styles.editBtn}
+                        onClick={() => {
+                          onEditSettingsClick(row.id);
+                        }}
+                      >
+                        ویرایش
+                      </button>
                     </TableCell>
                     <TableCell align="right">
-                      <button className={styles.deleteBtn} onClick={()=>{onDeleteSettings(row.id,row.variable)}}>حذف</button>
+                      <button
+                        className={styles.deleteBtn}
+                        onClick={() => {
+                          onDeleteSettings(row.id, row.variable);
+                        }}
+                      >
+                        حذف
+                      </button>
                     </TableCell>
                   </TableRow>
                 ))}

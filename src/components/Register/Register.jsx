@@ -8,12 +8,13 @@ import axios from "../../apis/axiosBase";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorToast from "../ErrorToast/ErrorToast";
 import BackBtn from "../BackBtn/BackBtn";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const navigate = useNavigate();
 
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
-  const [showError,setShowError] = useState(true)
+  const [showError, setShowError] = useState(true);
 
   const [nameInput, setNameInput] = useState({
     value: "",
@@ -58,7 +59,6 @@ const Register = () => {
   const onRuleCheck = (event) => {
     setRules({ checked: event.target.checked, validation: true });
   };
-  
 
   const postData = () => {
     axiosFetch({
@@ -73,7 +73,6 @@ const Register = () => {
         rule: rules.checked,
       },
     });
-
   };
 
   const onFormSubmit = (event) => {
@@ -101,7 +100,7 @@ const Register = () => {
       nationalCodeInput.validation.isValid
     ) {
       postData();
-      setShowError(true)
+      setShowError(true);
     } else {
       return;
     }
@@ -117,18 +116,21 @@ const Register = () => {
     });
   }
 
-  const cleanError=()=>{
-    setShowError(false)
-  }
+  const cleanError = () => {
+    setShowError(false);
+  };
 
   return (
     <div className={styles["main-container"]}>
-      {error.response?.data.status == "failed" && showError==true ? (
-        <ErrorToast error={error} cleanError={cleanError}/>
-        ) : null}
+      <Helmet>
+        <title>یک تومن |‌ ثبت نام</title>
+      </Helmet>
+      {error.response?.data.status == "failed" && showError == true ? (
+        <ErrorToast error={error} cleanError={cleanError} />
+      ) : null}
       <div className={styles["card-container"]}>
         <div className={styles["logo-container"]}>
-        <BackBtn/>
+          <BackBtn />
           <img src={logo} alt="logo" className={styles.logo} />
         </div>
         <hr className="hr-dashed m-0" />
@@ -229,7 +231,17 @@ const Register = () => {
               ثبت نام
             </button>
           </form>
-          <Link to="/login" style={{textAlign:"right",marginTop:"5px",color:"#0000ffc4",fontSize:"14px"}}>ثبت نام کرده اید؟ ورود</Link>
+          <Link
+            to="/login"
+            style={{
+              textAlign: "right",
+              marginTop: "5px",
+              color: "#0000ffc4",
+              fontSize: "14px",
+            }}
+          >
+            ثبت نام کرده اید؟ ورود
+          </Link>
         </div>
       </div>
     </div>

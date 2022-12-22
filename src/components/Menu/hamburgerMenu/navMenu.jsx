@@ -70,7 +70,7 @@ const variants = {
 };
 
 export function NavMenu({ isOpen }) {
-  const [cookie, setCookie,removeCookie] = useCookies(["user"]);
+  const [cookie, setCookie,removeCookie] = useCookies();
   const [
     logOutPosts,
     logOutError,
@@ -84,12 +84,10 @@ export function NavMenu({ isOpen }) {
       url: "/logout",
     });
     removeCookie('Token');
+    removeCookie(["user"])
     removeCookie('Name');
-    removeCookie('user');
   };
-  //  if(logOutPosts.status == "Success"){
-  //   removeCookie(["user"]);
-  //  }
+
   return (
     <NavMenuContainer>
       <NavList>
@@ -273,7 +271,7 @@ export function NavMenu({ isOpen }) {
             }}
           >
             <LogoutIcon color="action"/>
-            <Link className={styles.links} to="#" onClick={onLogOut}> خروج</Link>
+            <Link className={styles.links} to="/" onClick={onLogOut}> خروج</Link>
           </NavLink>
       </NavList>
     </NavMenuContainer>

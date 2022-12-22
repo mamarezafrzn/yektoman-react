@@ -14,7 +14,7 @@ import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
 import { useCookies } from "react-cookie";
 
 const DesktopMenu = () => {
-  const [cookie, setCookie,removeCookie] = useCookies(["user"]);
+  const [cookie, setCookie,removeCookie] = useCookies();
   const [
     logOutPosts,
     logOutError,
@@ -28,15 +28,10 @@ const DesktopMenu = () => {
       url: "/logout",
     });
     removeCookie('Token');
+    removeCookie(["user"])
     removeCookie('Name');
-    removeCookie('user');
   };
-  //  if(logOutPosts.status == "Success"){
-  //   removeCookie('Token');
-  //   removeCookie('Name');
-  //   removeCookie('user');
 
-  //  }
 
   return (
     <div className={styles.menuContainer}>

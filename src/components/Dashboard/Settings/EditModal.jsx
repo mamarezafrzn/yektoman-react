@@ -7,6 +7,7 @@ import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import ErrorToast from "../../ErrorToast/ErrorToast";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const EditModal = (props) => {
   const [configPosts, configError, configLoading, configAxiosFetch] =
@@ -47,6 +48,9 @@ const EditModal = (props) => {
   
   return (
     <React.Fragment>
+      <Helmet>
+      <title>یک تومن |‌ ویرایش تنظیمات </title>
+      </Helmet>
       {putError.response?.data.status == "failed" && showError == true ? (
         <ErrorToast error={putError} cleanError={cleanError} />
       ) : null}

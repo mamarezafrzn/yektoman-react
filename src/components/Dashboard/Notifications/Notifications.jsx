@@ -14,6 +14,8 @@ import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import NotificationModal from "./NotificationModal";
+import { style } from "@mui/system";
+import { Helmet } from "react-helmet";
 
 const Notifications = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -34,7 +36,7 @@ const Notifications = () => {
 
   useEffect(() => {
     getNotifications();
-  }, []);
+  }, [openModal]);
 
   const getNotifications = () => {
     notificationsAxiosFetch({
@@ -49,6 +51,9 @@ const Notifications = () => {
 
   return (
     <React.Fragment>
+      <Helmet>
+        <title>یک تومن |‌ اعلانات</title>
+      </Helmet>
       {openModal && fundId && (
         <NotificationModal
           modalClickHandler={modalClickHandler}
@@ -80,6 +85,7 @@ const Notifications = () => {
                   onClick={() => modalClickHandler(row.id)}
                   key={index}
                   style={{ cursor: "pointer" }}
+                  className={row.status_read=="-1" && styles.messageNotSeen}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell align="right" component="th" scope="row">
@@ -87,10 +93,14 @@ const Notifications = () => {
                   </TableCell>
                   <TableCell align="right">{row.fund?.title}</TableCell>
                   <TableCell align="right">{row.from?.family}</TableCell>
-                  <TableCell align="right">{row.message}</TableCell>
+                  <TableCell align="right">
+                    <div className={styles.notifMessageContainer}>
+                      <p className={styles.notifMessage}>{row.message}</p>
+                    </div>
+                  </TableCell>
                   <TableCell align="right">{row.created_at}</TableCell>
                 </TableRow>
-              ))}
+              )).reverse()}
             </TableBody>
           </Table>
         </TableContainer>

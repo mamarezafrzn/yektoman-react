@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import baseUrlWithAuthFunc from "../../../../apis/axiosBaseWithAuth";
 import { Navigate, redirect, useNavigate } from "react-router-dom";
 import ErrorToast from "../../../ErrorToast/ErrorToast";
+import { Helmet } from "react-helmet";
 
 const CreateCoffer = (props) => {
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
@@ -13,7 +14,6 @@ const CreateCoffer = (props) => {
   const Navigate = useNavigate();
 
   const postData = (formData) => {
-
     axiosFetch({
       axiosInstance: baseUrlWithAuthFunc(cookies.Token),
       method: "post",
@@ -37,6 +37,9 @@ const CreateCoffer = (props) => {
 
   return (
     <React.Fragment>
+      <Helmet>
+        <title>یک تومن |‌ ایجاد صندوق</title>
+      </Helmet>
       {error.response?.data.status == "failed" && showError == true ? (
         <ErrorToast error={error} cleanError={cleanError} />
       ) : null}

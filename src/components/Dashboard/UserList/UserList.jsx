@@ -19,6 +19,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import UserModal from "./UserModal";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const Notifications = () => {
   const [usersPosts, usersError, usersLoading, usersAxiosFetch] =
@@ -30,9 +31,9 @@ const Notifications = () => {
   const [searchBy, setSearchBy] = useState("name");
   const [filterBy, setFilterBy] = useState({});
 
-  useEffect(()=>{
-    getUsers()
-  },[])
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   const openModalHandler = (id) => {
     setUserId(id);
@@ -53,9 +54,6 @@ const Notifications = () => {
       },
     });
   };
-
-  
-
 
   const searchInputHandler = (event) => {
     setSearchInput(event.target.value);
@@ -111,6 +109,9 @@ const Notifications = () => {
 
   return (
     <React.Fragment>
+      <Helmet>
+        <title>یک تومن |‌ کاربران</title>
+      </Helmet>
       <UserModal
         openModalHandler={openModalHandler}
         openModal={openModal}

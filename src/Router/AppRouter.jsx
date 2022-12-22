@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import {Routes,Route, Router, useNavigate} from "react-router-dom"
 import App from "../App";
@@ -25,12 +25,64 @@ import RegisterRouter from "./RegisterRouter";
 
 
 const AppRouter = () =>{
-    const [cookies,setCookies] = useCookies(['user'])
-    const navigate = useNavigate()
+    // useEffect(() => {
+    //     switch (window.location.pathname) {
+    //      case "/":
+          
+    //       document.title = "یک تومن"
+    //        break;
+    //      case "/login":
+    //         document.title = "یک تومن | ورود"
+    //        break;
+    //        case "/login/with-password":
+    //         document.title = "یک تومن | ورود - با رمز عبور"
+    //        break;
+    //        case "/login/with-code":
+    //         document.title = "یک تومن | ورود - با رمز یکبار مصرف"
+    //        break;
+    //        case "/register":
+    //         document.title = "یک تومن | ثبت نام"
+    //        break;
+    //        case "/register/verification":
+    //         document.title = "یک تومن | تایید ثبت نام"
+    //        break;
+    //        case "/verify":
+    //         document.title = "یک تومن | تایید شماره"
+    //        break;
+    //        case "/forget-password":
+    //         document.title = "یک تومن | فراموشی رمز"
+    //        break;
+    //        case "/dashboard":
+    //         document.title = "یک تومن | داشبورد"
+    //        break;
+    //        case "/dashboard/create-coffer":
+    //         document.title = "یک تومن | ایجاد صندوق"
+    //        break;
+    //      case "/dashboard/join":
+    //         document.title = "یک تومن | عضویت"
+    //        break;
+    //        case "/dashboard/notifications":
+    //         document.title = "یک تومن | اعلانات"
+    //        break;
+    //        case "/dashboard/transactions":
+    //         document.title = "یک تومن | تراکنش ها"
+    //        break;
+    //        case "/dashboard/settings":
+    //         document.title = "یک تومن | تنظیمات"
+    //        break;
+    //        case "/dashboard/profile":
+    //         document.title = "یک تومن | پروفایل"
+    //        break;
+    //        case "/dashboard/user-list":
+    //         document.title = "یک تومن | لیست کاربران"
+    //        break;
+    //      default:
+    //     //    setTitleApp("Home");
+    //        break;
+    //    }
+    //   });
 
-    const passToDashboard = () =>{
-        navigate("/dashboard")
-    }
+
     return(
         <React.Fragment>
             <Routes>

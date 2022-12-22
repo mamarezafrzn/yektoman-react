@@ -15,6 +15,7 @@ import useAxiosFunction from "../../axiosFetch/useAxiosFunction";
 import baseUrlWithAuthFunc from "../../apis/axiosBaseWithAuth";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const Dashboard = () => {
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
@@ -32,7 +33,6 @@ const Dashboard = () => {
   //   return { name, moavaghe, payed };
   // }
 
-
   const getFundMember = (id) => {
     axiosFetch({
       axiosInstance: baseUrlWithAuthFunc(cookie.Token),
@@ -49,10 +49,11 @@ const Dashboard = () => {
     getFundMember(id);
   };
 
-
-
   return (
     <React.Fragment>
+      <Helmet>
+        <title>یک تومن |‌ داشبورد</title>
+      </Helmet>
       <Modal
         open={openModal}
         onClose={openModalHandler}
@@ -106,7 +107,15 @@ const Dashboard = () => {
           </button>
         </Box>
       </Modal>
-      <Card heading="داشبورد" description="لیست صندوق های شما" cardBodyStyle={{display:"flex",justifyContent:"space-around",flexWrap:"wrap"}}>
+      <Card
+        heading="داشبورد"
+        description="لیست صندوق های شما"
+        cardBodyStyle={{
+          display: "flex",
+          justifyContent: "space-around",
+          flexWrap: "wrap",
+        }}
+      >
         <FundItem onShowListClick={showId} />
       </Card>
     </React.Fragment>

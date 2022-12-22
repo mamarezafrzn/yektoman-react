@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import ErrorToast from "../ErrorToast/ErrorToast";
 import BackBtn from "../BackBtn/BackBtn";
+import { Helmet } from "react-helmet";
 
 const RegisterVerification = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -17,7 +18,7 @@ const RegisterVerification = () => {
   const [counter, setCounter] = useState(120);
   const [resetCounter, setResetCounter] = useState(false);
   const [sendKey, setSendKey] = useState(location.state.key);
-  const [showError,setShowError] = useState(true)
+  const [showError, setShowError] = useState(true);
 
   const [codeInput, setCodeInput] = useState({
     value: "",
@@ -87,7 +88,7 @@ const RegisterVerification = () => {
     setCodeInput({ ...codeInput, validation: checkIfNumber(codeInput.value) });
     if (codeInput.validation.isValid) {
       postCode();
-      setShowError(true)
+      setShowError(true);
     } else {
       return;
     }
@@ -101,17 +102,20 @@ const RegisterVerification = () => {
     navigate("/dashboard");
   }
 
-  const cleanError=()=>{
-    setShowError(false)
-  }
+  const cleanError = () => {
+    setShowError(false);
+  };
 
   return (
     <div className={styles["main-container"]}>
-      {error.response?.data.status == "failed" && showError==true ? (
-        <ErrorToast error={error} cleanError={cleanError}/>
+      <Helmet>
+        <title>یک تومن |‌ تایید ثبت نام</title>
+      </Helmet>
+      {error.response?.data.status == "failed" && showError == true ? (
+        <ErrorToast error={error} cleanError={cleanError} />
       ) : null}
-      <div className={styles["card-container"]} style={{height:"auto"}}>
-        <BackBtn/>
+      <div className={styles["card-container"]} style={{ height: "auto" }}>
+        <BackBtn />
         <div className={styles["logo-container"]}>
           <img src={logo} alt="..." className={styles.logo} />
         </div>

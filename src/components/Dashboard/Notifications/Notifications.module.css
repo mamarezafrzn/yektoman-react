@@ -76,6 +76,24 @@
     font-size: 20px;
     font-weight: 800;
 }
+.notifMessage{
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    padding: 5px;
+}
+.notifMessageContainer{
+    display: block;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.messageNotSeen{
+    background-color: rgb(234, 234, 234);
+}
 @media (max-width: 950px){
     .btnContainer{
         width: 100%;
@@ -84,5 +102,8 @@
     }
     .btnContainer button{
         width: 100%;
+    }
+    .notifMessageContainer{
+        width: 200px;
     }
 }
