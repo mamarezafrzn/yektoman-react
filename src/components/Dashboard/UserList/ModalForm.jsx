@@ -12,7 +12,9 @@ const ModalForm = (props) => {
         ...nationalCode,
         value: props.userData?.national_code,
       });
+      setRole(props.userData?.roles[0]?.name)
     }
+    console.log(props.userData?.roles[0]?.name)
   }, [props.userData]);
   const [name, setName] = useState({
     value: "",
@@ -30,7 +32,7 @@ const ModalForm = (props) => {
     value: "",
     validation: { isValid: true },
   });
-  const [role, setRole] = useState("accountants");
+  const [role, setRole] = useState();
 
   const onNameChange = (event) => {
     setName({ value: event.target.value, validation: { isValid: true } });
@@ -75,7 +77,7 @@ const ModalForm = (props) => {
         family: family.value,
         national_code: nationalCode.value,
         mobile: mobile.value,
-        role,
+        roles:[role],
       });
     } else {
       return;

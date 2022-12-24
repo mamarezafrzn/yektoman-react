@@ -136,7 +136,7 @@ const FundItem = (props) => {
                   <p>تهداد نفرات: {item.num_member} نفر</p>
                   <p>تعداد قرعه کشی انجام شده: {item.num_lottery}</p>
                   <p>تاریخ قرعه کشی: {item.date_lottery.slice(0, 10)}</p>
-                  <p>اخرین دریافت کننده وام علی بکماز</p>
+                  <p>اخرین دریافت کننده وام: {item.user_member.winner ? item.user_member.winner : "-"} </p>
                 </div>
                 <div className={styles.btnContainer}>
                   <button

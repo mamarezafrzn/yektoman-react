@@ -104,20 +104,18 @@ const SettingsForm = (props) => {
           <textarea value={valueData} onChange={onValueDataChange} />
         </label>
       ) : (
-       <div dir="rtl" style={{direction:"rtl",textAlign:"right"}}> 
-         <CKEditor
-        
-        editor={ClassicEditor}
-        data={editorData}
-        
-        onReady={(editor) => {
-          // console.log("CKEditor5 React Component is ready to use!", editor);
-        }}
-        onChange={(event, editor) => {
-          setEditorData(editor.getData());
-        }}
-      />
-       </div>
+        <div dir="rtl" style={{ direction: "rtl", textAlign: "right" }}>
+          <CKEditor
+            editor={ClassicEditor}
+            data={editorData}
+            onReady={(editor) => {
+              // console.log("CKEditor5 React Component is ready to use!", editor);
+            }}
+            onChange={(event, editor) => {
+              setEditorData(editor.getData());
+            }}
+          />
+        </div>
       )}
       <div>
         <p style={{ marginBottom: "0px", marginTop: "10px" }}>وضعیت</p>
