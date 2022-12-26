@@ -86,26 +86,26 @@ const AppRouter = () =>{
     return(
         <React.Fragment>
             <Routes>
-            <Route path="/" element={<Home/>} exact={true}/>
+            <Route path="/" element={<Home/>} />
             <Route element={<DashboardRouter/>} >
-                <Route path="/dashboard" element={<Dashboard/>} exact={true}/>
-                <Route path="/dashboard/create-coffer" element={<Newcoffer/>} exact={true}/>
-                <Route path="/dashboard/join" element={<Join/>} exact={true}/>
-                <Route path="/dashboard/notifications" element={<Notifications/>} exact={true}/>
-                <Route path="/dashboard/transactions" element={<Transactions/>} exact={true}/> 
-                <Route path="/dashboard/settings" element={<Settings/>} exact={true}/>
-                <Route path="/dashboard/profile" element={<Profile/>} exact={true}/>
-                <Route path="/dashboard/user-list" element={<UserList/>} exact={true}/>
+                <Route path="/dashboard" element={<Dashboard/>} />
+                <Route path="/dashboard/create-coffer" element={<Newcoffer/>} />
+                <Route path="/dashboard/join" element={<Join/>} />
+                <Route path="/dashboard/notifications" element={<Notifications/>} />
+                <Route path="/dashboard/transactions" element={<Transactions/>} /> 
+                <Route path="/dashboard/settings" element={<Settings/>} />
+                <Route path="/dashboard/profile" element={<Profile/>} />
+                <Route path="/dashboard/user-list" element={<UserList/>} />
             </Route>
             <Route element={<RegisterRouter/>}>
-                <Route path="/login" element={<Login/>} exact={true}/>
-                <Route path="/register" element={<Register/>} exact={true}/>
-                <Route path="/login/with-password" element={<WithPassword/>} exact={true}/>
-                <Route path="/login/with-code" element={<WithCode/>} exact={true}/>
-                <Route path="/register" element={<Register/>} exact={true}/>
+                <Route path="/login" element={<Login/>} />
+                <Route path="/register" element={<Register/>} />
+                <Route path="/login/with-password" element={<WithPassword/>} />
+                <Route path="/login/with-code" element={<WithCode/>} />
+                <Route path="/register" element={<Register/>} />
                 <Route path="/register/verification" element={<RegisterVerification/>}/>
-                <Route path="/verify" element={<Verify/>} exact={true}/>
-                <Route path="/forget-password" element={<ForgetPassword/>} exact={true}/>
+                <Route path="/verify" element={<Verify/>} />
+                <Route path="/forget-password" element={<ForgetPassword/>} />
             </Route>
             </Routes>                   
             </React.Fragment>

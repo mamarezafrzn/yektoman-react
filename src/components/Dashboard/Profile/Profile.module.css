@@ -1,164 +1,228 @@
-
-.cardContainer{
-    margin-top: 11px;
-    width: 25%;
-    min-height: 200px;
-    margin-right: 50px;
-
+.cardContainer {
+  margin-top: 11px;
+  width: 25%;
+  min-height: 200px;
+  margin-right: 50px;
 }
 
-.cardHeader{
-    width: 120px;
+.cardHeader {
+  width: 120px;
+  margin: 0px auto;
+  /* padding: 10px; */
+  background-color: rgb(19, 151, 151);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0px 0px 1px 2px rgb(221, 221, 221);
+  height: 120px;
+  position: relative;
+  top: 80px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 100%;
+}
+.cardHeader img {
+  width: 100%;
+  border-radius: 100%;
+}
+.headerTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.headerBtn {
+  border: none;
+  border-radius: 5px;
+  font: 10px;
+  background-color: rgb(68, 123, 123);
+  color: white;
+}
+.cardBody {
+  width: 100%;
+  min-height: 200px;
+  background-color: white;
+  box-shadow: 0px 0px 1px 1px #f0f0f0;
+  border-radius: 5px;
+  padding: 80px 10px 40px 10px;
+}
+.heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+}
+.description {
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+}
+.newForm {
+  width: 100%;
+  margin: 0px auto;
+  box-shadow: 0px 0px 1px 1px rgb(244, 241, 241);
+  border-radius: 5px;
+  direction: rtl;
+  padding: 20px;
+  text-align: right;
+  min-height: 300px;
+  overflow: overlay;
+}
+.newForm label {
+  width: 80%;
+  color: rgb(144, 144, 144);
+  font-size: smaller;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+.newForm input,
+.newForm input :focus-visible,
+.newForm input :focus {
+  width: 90%;
+  border: none !important;
+  border-bottom: 1px solid rgb(177, 177, 177) !important;
+  margin-top: 10px;
+}
+
+.submitBtn {
+  width: 100px;
+  height: 50px;
+  background-color: rgb(72, 155, 109);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: auto;
+}
+.formHorizontal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.formHorizontal label {
+  width: 50%;
+}
+.formVertical {
+  display: flex;
+  flex-direction: column;
+}
+.fileBtn {
+  width: 30%;
+  height: 30px;
+  border: 1px solid rgb(72, 155, 109);
+  border-radius: 5px;
+  background-color: transparent;
+  color: rgb(72, 155, 109);
+  float: right;
+}
+.userInfo {
+  text-align: center;
+  margin-top: 20px;
+}
+.userInfo p {
+  margin: 0px;
+  color: rgb(144, 144, 144);
+}
+.userHeader {
+  color: rgb(82, 82, 82);
+  font-weight: bolder;
+  padding-bottom: 10px;
+}
+.cardPics {
+  margin-top: 30px;
+  gap: 5px;
+  display: flex;
+  flex-direction: row;
+  text-align: right;
+}
+.cardPics p {
+  margin: 0px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(144, 144, 144);
+}
+.inputError,
+.inputError :focus-visible {
+  color: rgb(194, 98, 98) !important;
+  border: 2px solid rgb(194, 98, 98) !important;
+  box-shadow: none;
+}
+
+.errorLine {
+  color: rgb(194, 98, 98);
+  font-size: 10px;
+  font-weight: 600;
+  width: 44%;
+  float: right;
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50vh;
+  background-color: rgba(60, 60, 60, 0.5);
+  border-radius: 10px;
+  border: 2px solid #000;
+  box-shadow: 24;
+  padding: 40px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.modal img {
+  width: 400px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.closeModalBtn {
+  width: 80px;
+  height: 40px;
+  border: none;
+  background-color: rgb(78, 92, 92);
+  color: white;
+  font-size: 10px;
+  font-weight: 400;
+  border-radius: 5px;
+  margin: 25px 15px 15px 0px;
+  float: right;
+}
+@media (max-width: 950px) {
+  .modal {
+    width: 95%;
+  }
+  .newForm label {
+    width: 100%;
+  }
+  .cardContainer {
+    display: block;
     margin: 0px auto;
-    padding: 10px;
-    background-color: rgb(19, 151, 151);
-    box-shadow: 0px 0px 1px 2px rgb(221, 221, 221);
-    height: 120px;
-    position: relative;
-    top: 80px;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-radius: 100%;
-}
-.headerTitle{
-    display: flex;
+    width: 95%;
+  }
+  .fileBtn {
+    width: 100%;
+  }
+  .cardPics {
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
-.headerBtn{
-    border: none;
-    border-radius: 5px;
-    font: 10px;
-    background-color: rgb(68, 123, 123);
-    color: white;
-}
-.cardBody{
-    width: 100%;
-    min-height: 200px;
-    background-color: white;
-    box-shadow: 0px 0px 1px 1px #f0f0f0;
-    border-radius: 5px;
-    padding: 80px 10px 40px 10px;
-}
-.heading{
-    font-size: 18px;
-    font-weight: 700;
-    color: white;
-}
-.description{
-    font-size: 12px;
-    font-weight: 400;
-    color: white;
-}
-.newForm{
-    width: 100%;
+  }
+  .cardPics div {
+    width: 80%;
     margin: 0px auto;
-    box-shadow: 0px 0px 1px 1px rgb(244, 241, 241);
-    border-radius: 5px;
-    direction: rtl;
-    padding: 20px;
-    text-align: right;
-    min-height: 300px;
-    overflow: overlay;
-}
-.newForm label{
-    width: 100%;
-    color: rgb(144, 144, 144);
-    font-size: smaller;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-}
-.newForm input ,.newForm input :focus-visible , .newForm input :focus{
+  }
+  .submitBtn {
+    margin: auto;
     width: 90%;
-    border: none !important;
-    border-bottom: 1px solid rgb(177, 177, 177) !important;
-    margin-top: 10px;
-}
-
-.submitBtn{
-    width: 100px;
-    height: 50px;
-    background-color: rgb(72, 155, 109);
-    color: white;
-    border: none;
-    border-radius: 5px;
-   margin-right: auto;
-}
-.formHorizontal{
-    display: flex;
-    flex-direction: row;
-}
-.formVertical{
-    display: flex;
+  }
+  .formHorizontal {
     flex-direction: column;
+  }
 }
-.fileBtn{
-    width: 20%;
-    height: 30px;
-    border: 1px solid rgb(72, 155, 109);
-    border-radius: 5px;
-    background-color: transparent;
-    color: rgb(72, 155, 109);
-    float: right;
+@media (max-width: 1400px) {
+  .cardContainer {
+    margin-right: 20px;
+  }
 }
-.userInfo{
-    text-align: center;
-    margin-top: 20px;
-}
-.userInfo p{
-    margin: 0px;
-    color: rgb(144, 144, 144);
-}
-.userHeader{
-    color:rgb(82, 82, 82) ;
-    font-weight: bolder;
-    padding-bottom: 10px;
-}
-.cardPics{
-    margin-top: 30px;
-    gap: 5px;
-    display: flex;
-    flex-direction: row;
-    text-align: right;
-}
-.cardPics p{
-    margin: 0px;
-    font-size: 12px;
-    font-weight: 500;
-    color: rgb(144, 144, 144);
-}
-
-@media (max-width: 950px){
-
-    .cardContainer{
-        display: block ;
-        margin: 0px auto;
-        width: 95%;
-    }
-    .fileBtn{
-        width: 100%;
-    }
-    .cardPics{
-        flex-direction: column;
-    }
-    .cardPics div{
-        width: 80%;
-        margin: 0px auto;
-    }
-    .submitBtn{
-        margin: auto;
-        width: 90%;
-    }
-
-}
-@media (max-width: 1400px){
-    .cardContainer{
-        margin-right: 20px;
-     
-    }
-}
-

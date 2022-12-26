@@ -6,21 +6,43 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PersonIcon from "@mui/icons-material/Person";
 import { grey } from "@mui/material/colors";
 import { useCookies } from 'react-cookie';
-
-
+import useAxiosFunction from "../axiosFetch/useAxiosFunction";
+import baseUrlWithAuthFunc from "../apis/axiosBaseWithAuth";
 import Logo from "../assets/img/logo_small.png";
-
 import styles from "./DashboardRouter.module.css";
 
 const DashboardRouter = (props) => {
   const navigate = useNavigate()
-  const [cookies, setCookie] = useCookies(['user']);
+  const [cookies, setCookies] = useCookies(['user']);
+  const [cookie, setCookie,removeCookie] = useCookies('cookie');
+  const [
+    userPosts,
+    userError,
+    userLoading,
+    userAxiosFetch,
+  ] = useAxiosFunction();
 
   useEffect(() => {
     if(!cookies.Token){
       navigate('/login')
     }
   });
+  useEffect(()=>{
+    fetchUserData()
+  },[window.location])
+  const fetchUserData = () =>{
+    userAxiosFetch({
+        axiosInstance: baseUrlWithAuthFunc(cookie.Token),
+        method: "get",
+        url: "/info",
+      });
+  }
+  if(userError?.error?.response?.data?.meta?.code === 401){
+    removeCookie('Token',{path :"/"});
+    removeCookie(["user"],{path :"/"})
+    removeCookie('Name',{path :"/"});
+    navigate("/")
+  }
   return (
     <React.Fragment>
       <Navbar />
@@ -35,11 +57,11 @@ const DashboardRouter = (props) => {
             </p>
             <p>
               اعتبار:
-              ۰
+              {userPosts ? userPosts.data?.user?.credit : 0}
               تومان
             </p>
             <span className={styles.headerNotification} >
-              <p data-count="3" style={{marginTop:"-10px"}}>
+              <p data-count={userPosts ? userPosts?.data?.user?.notifications_count : "0"} style={{marginTop:"-10px"}}>
                 <NotificationsIcon sx={{ color: grey[800] }} />
               </p>
             </span>

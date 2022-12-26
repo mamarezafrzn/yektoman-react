@@ -95,6 +95,7 @@ const RegisterVerification = () => {
   };
 
   if (posts.status == "Success") {
+    debugger
     setCookie("Name", posts.data.user.name, { path: "/" });
     setCookie("Family", posts.data.user.family, { path: "/" });
     setCookie("Token", posts.data.token_detail.token, { path: "/" });

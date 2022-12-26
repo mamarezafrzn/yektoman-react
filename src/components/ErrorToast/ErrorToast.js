@@ -5,11 +5,20 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const ErrorToast = (props) => {
-  console.log(props)
   useEffect(() => {
-
+    console.log(props)
       const errors = [];
-      if (props.error.response.data.meta.code === 400) {
+      if(props.typeResponse == true){
+        if(props.error.meta?.code == 400){
+          errors.push(props.error.meta.message)
+        }
+        if(props.error.meta?.code == 422){
+          Object.keys(props.error.data).map((item) => {
+            errors.push(props.error.data[item]);
+        });
+        }
+      }else{
+        if (props.error.response.data.meta.code === 400) {
           errors.push(props.error.response.data.meta.message);
         }
         if (props.error.response.data.meta.code === 422) {
@@ -18,6 +27,8 @@ const ErrorToast = (props) => {
             });
          
         }
+      }
+
        
     const notify = () =>
       toast.error(

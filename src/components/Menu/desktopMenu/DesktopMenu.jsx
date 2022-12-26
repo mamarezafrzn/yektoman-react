@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./DesktopMenu.module.css";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
@@ -11,10 +11,16 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import useAxiosFunction from "../../../axiosFetch/useAxiosFunction";
 import baseUrlWithAuthFunc from "../../../apis/axiosBaseWithAuth";
-import { useCookies } from "react-cookie";
+import {useNavigate} from "react-router-dom";
+import { useCookies} from "react-cookie";
+import { useEffect } from "react";
+
 
 const DesktopMenu = () => {
-  const [cookie, setCookie,removeCookie] = useCookies();
+  const [cookie, setCookie,removeCookie] = useCookies('cookie');
+  const navigate = useNavigate()
+
+
   const [
     logOutPosts,
     logOutError,
@@ -27,10 +33,18 @@ const DesktopMenu = () => {
       method: "post",
       url: "/logout",
     });
-    removeCookie('Token');
-    removeCookie(["user"])
-    removeCookie('Name');
+
   };
+if(logOutPosts.status == "Success"){
+  debugger
+  removeCookie('Token',{path :"/"});
+  removeCookie(["user"],{path :"/"})
+  removeCookie('Name',{path :"/"});
+  // window.location.replace("/")
+  navigate("/")
+}
+
+
 
 
   return (
@@ -91,12 +105,12 @@ const DesktopMenu = () => {
             <SettingsIcon color="action" />
           </div>
         </Link>
-        <Link to="/" onClick={onLogOut} >
-          <div className={styles.menuItems}>
+        {/* <Link to="/"  > */}
+          <div className={styles.menuItems} onClick={onLogOut}>
             <h3 className={styles.menuHeadings}>خروج</h3>
             <LogoutIcon color="action" />
           </div>
-        </Link>
+        {/* </Link> */}
       </div>
     </div>
   );

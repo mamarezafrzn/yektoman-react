@@ -8,6 +8,7 @@ const RegisterRouter = (props) => {
   const [cookies, setCookie] = useCookies(["user"]);
 
   useEffect(() => {
+    debugger
     if (cookies.Token) {
       navigate("/dashboard");
     }

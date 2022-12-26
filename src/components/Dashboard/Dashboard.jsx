@@ -19,8 +19,8 @@ import { Helmet } from "react-helmet";
 
 const Dashboard = () => {
   const [posts, error, loading, axiosFetch] = useAxiosFunction();
-  const [openModal, setOpenModal] = useState(false);
   const [cookie, setCookie] = useCookies(["user"]);
+  const [openModal, setOpenModal] = useState(false);
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
