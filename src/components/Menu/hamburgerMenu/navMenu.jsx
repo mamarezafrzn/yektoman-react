@@ -213,7 +213,7 @@ export function NavMenu({ isOpen }) {
             }}
           >
            <AttachMoneyIcon color="action"/>
-            <Link className={styles['links','pays']} to="/dashboard/transactions">پرداختی ها</Link>
+            <Link className={styles['links']} to="/dashboard/transactions">پرداختی ها</Link>
           </NavLink>
  
 

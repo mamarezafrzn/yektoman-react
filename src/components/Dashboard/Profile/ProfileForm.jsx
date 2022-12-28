@@ -9,11 +9,11 @@ const ProfileForm = (props) => {
   const { formData } = props;
   const [response,setResponse] = useState()
   const profileFileInput = React.useRef(null);
-  const [profilePic, setProfilePic] = useState(null);
+  const [profilePic, setProfilePic] = useState();
   const idCardFileInput = React.useRef(null);
-  const [idCardPic, setIdCardPic] = useState(null);
+  const [idCardPic, setIdCardPic] = useState();
   const certificateFileInput = React.useRef(null);
-  const [certificatePic, setCertificatePic] = useState(null);
+  const [certificatePic, setCertificatePic] = useState();
   const [name, setName] = useState({
     value: formData?.name,
     validation: { isValid: true },
@@ -83,6 +83,7 @@ const ProfileForm = (props) => {
   };
   const onProfilePicChange = (event) => {
     setProfilePic(event.target.files[0]);
+    
   };
   const onIdCardPicChange = (event) => {
     setIdCardPic(event.target.files[0]);
@@ -90,6 +91,7 @@ const ProfileForm = (props) => {
   const onCertificatePicChange = (event) => {
     setCertificatePic(event.target.files[0]);
   };
+
 
   const onProfileFileInputClick = (event) => {
     event.preventDefault();
@@ -103,11 +105,8 @@ const ProfileForm = (props) => {
     event.preventDefault();
     certificateFileInput.current.click();
   };
-  const blob = new Blob([null], {
-    
-});
 
-
+ 
   const postData =  async() => {
     const newFormData = new FormData();
     const data = {
@@ -118,13 +117,24 @@ const ProfileForm = (props) => {
       IBN: IBN.value,
       number_card: cardNumber.value,
       account_bank: accountNumber.value,
-      image_national_code: idCardPic ? idCardPic : blob,
-      avatar: profilePic ? certificatePic : blob,
-      image_certificate: certificatePic ? certificatePic : blob ,
+      image_national_code: idCardPic ? idCardPic : null,
+      avatar: profilePic ? profilePic : null,
+      image_certificate: certificatePic ? certificatePic : null ,
     };
+
     Object.keys(data).map((key) => {
       newFormData.append(key, data[key]);
     });
+  // newFormData.append("name", name.value)
+  // newFormData.append("family", family.value)
+  // newFormData.append("mobile", mobile.value)
+  // newFormData.append("national_code", nationalCode.value)
+  // newFormData.append("IBN", IBN.value)
+  // newFormData.append("number_card", cardNumber.value)
+  // newFormData.append("account_bank", accountNumber.value)
+  // newFormData.append("image_national_code", idCardPic ? idCardPic : null)
+  // newFormData.append("avatar", profilePic ? profilePic : null)
+  // newFormData.append("image_certificate", certificatePic ? certificatePic : null)
  
       const response = await fetch("https://ws.yektoman.ir/api/v1/profile", {
         body: newFormData,

@@ -23,7 +23,7 @@ const useAxiosFunction = () => {
             setController(ctrl);
             const res = await axiosInstance[method.toLowerCase()](url, {
                 ...requestConfig,
-                signal: ctrl.signal
+                // signal: ctrl.signal
             });
             
             setResponse(res.data);

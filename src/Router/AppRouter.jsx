@@ -6,6 +6,7 @@ import Dashboard from "../components/Dashboard/Dashboard";
 import Join from "../components/Dashboard/Join/Join";
 import Newcoffer from "../components/Dashboard/NewCoffer/NewCoffer";
 import Notifications from "../components/Dashboard/Notifications/Notifications";
+import Payments from "../components/Dashboard/Payments/Payments";
 import Profile from "../components/Dashboard/Profile/Profile";
 import Settings from "../components/Dashboard/Settings/Settings";
 import Transactions from "../components/Dashboard/Transactions/Transactions";
@@ -96,6 +97,7 @@ const AppRouter = () =>{
                 <Route path="/dashboard/settings" element={<Settings/>} />
                 <Route path="/dashboard/profile" element={<Profile/>} />
                 <Route path="/dashboard/user-list" element={<UserList/>} />
+                <Route path="dashboard/payments" element={<Payments/>} />
             </Route>
             <Route element={<RegisterRouter/>}>
                 <Route path="/login" element={<Login/>} />

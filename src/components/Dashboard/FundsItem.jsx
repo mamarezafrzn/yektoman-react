@@ -3,6 +3,7 @@ import styles from "./Dashboard.module.css";
 import WarningIcon from "@mui/icons-material/Warning";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
@@ -65,7 +66,6 @@ const FundItem = (props) => {
   const openModalHandler = (id) => {
     setOpenModal(!openModal);
     setInfoInput({ ...infoInput, id });
-   
   };
 
   if (deletePosts.status == "Success") {
@@ -76,8 +76,6 @@ const FundItem = (props) => {
     setOpenModal(false);
     // window.location.reload();
   }
-
-
 
   return (
     <React.Fragment>
@@ -116,7 +114,9 @@ const FundItem = (props) => {
               <div className={styles.mainDescription}>
                 <div className={styles.mainDescriptionHeading}>
                   <p className={styles.cardHeading}>{item.title}</p>
-                  <p className={styles.headingDescription}>سر گروه: {item.user_by.full_name}</p>
+                  <p className={styles.headingDescription}>
+                    سر گروه: {item.user_by.full_name}
+                  </p>
                 </div>
                 <div className={styles.cardDetails}>
                   <p>
@@ -136,7 +136,10 @@ const FundItem = (props) => {
                   <p>تهداد نفرات: {item.num_member} نفر</p>
                   <p>تعداد قرعه کشی انجام شده: {item.num_lottery}</p>
                   <p>تاریخ قرعه کشی: {item.date_lottery.slice(0, 10)}</p>
-                  <p>اخرین دریافت کننده وام: {item.user_member.winner ? item.user_member.winner : "-"} </p>
+                  <p>
+                    اخرین دریافت کننده وام:{" "}
+                    {item.user_member.winner ? item.user_member.winner : "-"}{" "}
+                  </p>
                 </div>
                 <div className={styles.btnContainer}>
                   <button
@@ -157,6 +160,14 @@ const FundItem = (props) => {
                   >
                     <DeleteIcon sx={{ color: grey[100] }} />
                   </button>
+                  <Link
+                    to="/dashboard/payments"
+                    state={{ itemId: item.id }}
+                  >
+                    <button className={styles.payments}>
+                      <FileCopyIcon sx={{ color: grey[100] }} />
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div className={styles.editBtnContainer}>
