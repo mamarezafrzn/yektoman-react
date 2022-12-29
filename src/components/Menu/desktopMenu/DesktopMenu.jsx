@@ -23,7 +23,7 @@ const DesktopMenu = (props) => {
     useAxiosFunction();
   const [userPosts, userError, userLoading, userAxiosFetch] =
     useAxiosFunction();
-    const [permission,setPermission] = useState()
+  const [permission, setPermission] = useState();
 
   const onLogOut = () => {
     logOutAxiosFetch({
@@ -39,7 +39,7 @@ const DesktopMenu = (props) => {
 
   if (!permission == true && userPosts.status == "Success") {
     userPosts?.data?.user?.roles.map((item) => {
-      item.name == "admin" && setPermission(true) 
+      item.name == "admin" && setPermission(true);
     });
   }
 

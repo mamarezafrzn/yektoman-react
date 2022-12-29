@@ -21,12 +21,31 @@ import RegisterVerification from "../components/Register/RegisterVerification";
 import Verify from "../components/Verify/Verify";
 import DashboardRouter from "./DashboardRouter";
 import RegisterRouter from "./RegisterRouter";
-
-
-
+import useAxiosFunction from "../axiosFetch/useAxiosFunction";
+import baseUrlWithAuthFunc from "../apis/axiosBaseWithAuth";
 
 const AppRouter = () => {
   const [cookies, setCookies] = useCookies(["user"]);
+  const [userPosts, userError, userLoading, userAxiosFetch] =
+    useAxiosFunction();
+  const [permission, setPermission] = useState();
+  useEffect(() => {
+    fetchUserData();
+  }, [cookies.Permission, window.location]);
+
+  if (!permission == true && userPosts.status == "Success") {
+    userPosts?.data?.user?.roles.map((item) => {
+      item.name == "admin" && setPermission(true);
+    });
+  }
+
+  const fetchUserData = () => {
+    userAxiosFetch({
+      axiosInstance: baseUrlWithAuthFunc(cookies.Token),
+      method: "get",
+      url: "/info",
+    });
+  };
 
   return (
     <React.Fragment>
@@ -41,11 +60,11 @@ const AppRouter = () => {
           <Route path="/dashboard/profile" element={<Profile />} />
           <Route
             path="/dashboard/settings"
-            element={cookies.Permission ? <Settings /> : <Dashboard />}
+            element={cookies.Permission || permission ? <Settings /> : <Dashboard />}
           />
           <Route
             path="/dashboard/user-list"
-            element={cookies.Permission ? <UserList /> : <Dashboard />}
+            element={cookies.Permission || permission ? <UserList /> : <Dashboard />}
           />
           <Route path="dashboard/payments" element={<Payments />} />
         </Route>
