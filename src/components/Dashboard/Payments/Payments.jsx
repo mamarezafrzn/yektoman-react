@@ -74,10 +74,9 @@ const Payments = (props) => {
       setTableData(getPaymentsPosts?.data?.payments);
     }
     if (searchBy == "toPay") {
-      setTableData(tableData.filter((item) => item?.status_pay == 2))
+      setTableData(tableData.filter((item) => item?.status_pay == 2));
     }
   };
- 
 
   return (
     <React.Fragment>
@@ -112,11 +111,6 @@ const Payments = (props) => {
       </Modal>
       <Card heading="لیست پرداخت" description="">
         <div className={styles.filterContainer}>
-          <label className={styles.searchLabel}>
-            <button className={styles.searchBtn} onClick={searchBtnHandler}>
-              جست وجو
-            </button>
-          </label>
           <Box
             sx={{
               width: "25%",
@@ -149,6 +143,11 @@ const Payments = (props) => {
               </Select>
             </FormControl>
           </Box>
+          <label className={styles.searchLabel}>
+            <button className={styles.searchBtn} onClick={searchBtnHandler}>
+              جست وجو
+            </button>
+          </label>
         </div>
         <div className={styles.tableContainer}>
           <Typography

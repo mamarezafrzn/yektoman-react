@@ -2,6 +2,9 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import './App.css';
 import AppRouter from './Router/AppRouter';
 import vazir from './fonts/Vazir-FD.woff'
+import Permissions from './Permissions/Permissions';
+import { useEffect } from 'react';
+
 
 
 function App() {
@@ -24,6 +27,8 @@ function App() {
       },
     },
   });
+
+  
   return (
     <ThemeProvider theme={theme}>
       <AppRouter/>

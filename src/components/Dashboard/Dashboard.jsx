@@ -27,11 +27,9 @@ const Dashboard = () => {
     if (openModal && posts.status == "Success") {
       setRows(posts.data?.funds);
     }
-  }, [posts]);
+  }, []);
 
-  // function createData(name, moavaghe, payed) {
-  //   return { name, moavaghe, payed };
-  // }
+  
 
   const getFundMember = (id) => {
     axiosFetch({

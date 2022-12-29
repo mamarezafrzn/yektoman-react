@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import {Routes,Route, Router, useNavigate} from "react-router-dom"
+import { Routes, Route, Router, useNavigate } from "react-router-dom";
 import App from "../App";
 import Dashboard from "../components/Dashboard/Dashboard";
 import Join from "../components/Dashboard/Join/Join";
@@ -25,94 +25,46 @@ import RegisterRouter from "./RegisterRouter";
 
 
 
-const AppRouter = () =>{
-    // useEffect(() => {
-    //     switch (window.location.pathname) {
-    //      case "/":
-          
-    //       document.title = "یک تومن"
-    //        break;
-    //      case "/login":
-    //         document.title = "یک تومن | ورود"
-    //        break;
-    //        case "/login/with-password":
-    //         document.title = "یک تومن | ورود - با رمز عبور"
-    //        break;
-    //        case "/login/with-code":
-    //         document.title = "یک تومن | ورود - با رمز یکبار مصرف"
-    //        break;
-    //        case "/register":
-    //         document.title = "یک تومن | ثبت نام"
-    //        break;
-    //        case "/register/verification":
-    //         document.title = "یک تومن | تایید ثبت نام"
-    //        break;
-    //        case "/verify":
-    //         document.title = "یک تومن | تایید شماره"
-    //        break;
-    //        case "/forget-password":
-    //         document.title = "یک تومن | فراموشی رمز"
-    //        break;
-    //        case "/dashboard":
-    //         document.title = "یک تومن | داشبورد"
-    //        break;
-    //        case "/dashboard/create-coffer":
-    //         document.title = "یک تومن | ایجاد صندوق"
-    //        break;
-    //      case "/dashboard/join":
-    //         document.title = "یک تومن | عضویت"
-    //        break;
-    //        case "/dashboard/notifications":
-    //         document.title = "یک تومن | اعلانات"
-    //        break;
-    //        case "/dashboard/transactions":
-    //         document.title = "یک تومن | تراکنش ها"
-    //        break;
-    //        case "/dashboard/settings":
-    //         document.title = "یک تومن | تنظیمات"
-    //        break;
-    //        case "/dashboard/profile":
-    //         document.title = "یک تومن | پروفایل"
-    //        break;
-    //        case "/dashboard/user-list":
-    //         document.title = "یک تومن | لیست کاربران"
-    //        break;
-    //      default:
-    //     //    setTitleApp("Home");
-    //        break;
-    //    }
-    //   });
+const AppRouter = () => {
+  const [cookies, setCookies] = useCookies(["user"]);
 
-
-    return(
-        <React.Fragment>
-            <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route element={<DashboardRouter/>} >
-                <Route path="/dashboard" element={<Dashboard/>} />
-                <Route path="/dashboard/create-coffer" element={<Newcoffer/>} />
-                <Route path="/dashboard/join" element={<Join/>} />
-                <Route path="/dashboard/notifications" element={<Notifications/>} />
-                <Route path="/dashboard/transactions" element={<Transactions/>} /> 
-                <Route path="/dashboard/settings" element={<Settings/>} />
-                <Route path="/dashboard/profile" element={<Profile/>} />
-                <Route path="/dashboard/user-list" element={<UserList/>} />
-                <Route path="dashboard/payments" element={<Payments/>} />
-            </Route>
-            <Route element={<RegisterRouter/>}>
-                <Route path="/login" element={<Login/>} />
-                <Route path="/register" element={<Register/>} />
-                <Route path="/login/with-password" element={<WithPassword/>} />
-                <Route path="/login/with-code" element={<WithCode/>} />
-                <Route path="/register" element={<Register/>} />
-                <Route path="/register/verification" element={<RegisterVerification/>}/>
-                <Route path="/verify" element={<Verify/>} />
-                <Route path="/forget-password" element={<ForgetPassword/>} />
-            </Route>
-            </Routes>                   
-            </React.Fragment>
-    )
-}
-
+  return (
+    <React.Fragment>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route element={<DashboardRouter />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/create-coffer" element={<Newcoffer />} />
+          <Route path="/dashboard/join" element={<Join />} />
+          <Route path="/dashboard/notifications" element={<Notifications />} />
+          <Route path="/dashboard/transactions" element={<Transactions />} />
+          <Route path="/dashboard/profile" element={<Profile />} />
+          <Route
+            path="/dashboard/settings"
+            element={cookies.Permission ? <Settings /> : <Dashboard />}
+          />
+          <Route
+            path="/dashboard/user-list"
+            element={cookies.Permission ? <UserList /> : <Dashboard />}
+          />
+          <Route path="dashboard/payments" element={<Payments />} />
+        </Route>
+        <Route element={<RegisterRouter />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login/with-password" element={<WithPassword />} />
+          <Route path="/login/with-code" element={<WithCode />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/register/verification"
+            element={<RegisterVerification />}
+          />
+          <Route path="/verify" element={<Verify />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
+        </Route>
+      </Routes>
+    </React.Fragment>
+  );
+};
 
 export default AppRouter;

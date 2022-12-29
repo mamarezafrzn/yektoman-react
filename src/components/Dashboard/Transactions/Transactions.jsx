@@ -200,40 +200,6 @@ const Transactions = () => {
           <input onChange={searchInputHandler} type="text" />
         </label> */}
         <div className={styles.filterContainer}>
-          <label className={styles.searchLabel}>
-            <button className={styles.searchBtn} onClick={searchBtnHandler}>
-              جست وجو
-            </button>
-            {searchBy == "date" ? (
-              <label className={styles.dateLabel}>
-                <DatePicker
-                  fixMainPosition
-                  range
-                  rangeHover
-                  value={dateValue}
-                  onChange={onDateChange}
-                  calendar={persian}
-                  className="rmdp-prime"
-                  locale={persian_fa}
-                  weekDays={weekDay}
-                  hideOnScroll
-                  placeholder="برای مثال ۱/۱/۱۴۰۲ - ۲/۲/۱۴۰۲"
-                  style={{
-                    border: "1px solid grey !important",
-                    height: "30px",
-                    textAlign: "center",
-                  }}
-                ></DatePicker>
-              </label>
-            ) : (
-              <input
-                autoFocus
-                onChange={searchInputHandler}
-                value={searchInput}
-                type="text"
-              />
-            )}
-          </label>
           <Box
             sx={{
               width: "25%",
@@ -268,6 +234,40 @@ const Transactions = () => {
               </Select>
             </FormControl>
           </Box>
+          <label className={styles.searchLabel}>
+            {searchBy == "date" ? (
+              <label className={styles.dateLabel}>
+                <DatePicker
+                  fixMainPosition
+                  range
+                  rangeHover
+                  value={dateValue}
+                  onChange={onDateChange}
+                  calendar={persian}
+                  className="rmdp-prime"
+                  locale={persian_fa}
+                  weekDays={weekDay}
+                  hideOnScroll
+                  placeholder="برای مثال ۱/۱/۱۴۰۲ - ۲/۲/۱۴۰۲"
+                  style={{
+                    border: "1px solid grey !important",
+                    height: "30px",
+                    textAlign: "center",
+                  }}
+                ></DatePicker>
+              </label>
+            ) : (
+              <input
+                autoFocus
+                onChange={searchInputHandler}
+                value={searchInput}
+                type="text"
+              />
+            )}
+            <button className={styles.searchBtn} onClick={searchBtnHandler}>
+              جست وجو
+            </button>
+          </label>
         </div>
         <TableContainer sx={{ padding: "20px" }} component={Paper}>
           <Table

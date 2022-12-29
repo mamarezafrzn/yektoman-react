@@ -10,6 +10,7 @@ import useAxiosFunction from "../axiosFetch/useAxiosFunction";
 import baseUrlWithAuthFunc from "../apis/axiosBaseWithAuth";
 import Logo from "../assets/img/logo_small.png";
 import styles from "./DashboardRouter.module.css";
+import { useState } from "react";
 
 const DashboardRouter = (props) => {
   const navigate = useNavigate();
@@ -23,6 +24,12 @@ const DashboardRouter = (props) => {
       navigate("/login");
     }
   });
+  if (!cookies.Permission == true && userPosts.status == "Success") {
+    console.log("checkedd");
+    userPosts?.data?.user?.roles.map((item) => {
+      item.name == "admin" && setCookies("Permission", true, { path: "/" });
+    });
+  }
   useEffect(() => {
     fetchUserData();
   }, [window.location]);
@@ -33,12 +40,15 @@ const DashboardRouter = (props) => {
       url: "/info",
     });
   };
+
   if (userError?.error?.response?.data?.meta?.code === 401) {
     removeCookie("Token", { path: "/" });
     removeCookie(["user"], { path: "/" });
     removeCookie("Name", { path: "/" });
+    removeCookie("Permission", { path: "/" });
     navigate("/");
   }
+
   return (
     <React.Fragment>
       <Navbar />

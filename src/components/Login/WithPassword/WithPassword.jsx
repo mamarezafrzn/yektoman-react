@@ -62,7 +62,7 @@ const WithPassword = () => {
     // expires:posts.data.token_detail.expires_in
     navigate("/dashboard");
   }
-  console.log(posts)
+
   const cleanError = () => {
     setShowError(false);
   };

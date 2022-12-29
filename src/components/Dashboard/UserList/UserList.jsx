@@ -119,17 +119,6 @@ const Notifications = () => {
       />
       <Card heading="لیست کاربران" description="مدیریت کاربران">
         <div className={styles.filterContainer}>
-          <label className={styles.searchLabel}>
-            <button className={styles.searchBtn} onClick={searchBtnHandler}>
-              جست وجو
-            </button>
-            <input
-              autoFocus
-              onChange={searchInputHandler}
-              value={searchInput}
-              type="text"
-            />
-          </label>
           <Box
             sx={{
               width: "25%",
@@ -164,6 +153,17 @@ const Notifications = () => {
               </Select>
             </FormControl>
           </Box>
+          <label className={styles.searchLabel}>
+            <input
+              autoFocus
+              onChange={searchInputHandler}
+              value={searchInput}
+              type="text"
+            />
+            <button className={styles.searchBtn} onClick={searchBtnHandler}>
+              جست وجو
+            </button>
+          </label>
         </div>
         <TableContainer sx={{ padding: "20px" }} component={Paper}>
           <Table
