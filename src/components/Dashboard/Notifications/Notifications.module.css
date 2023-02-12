@@ -1,24 +1,24 @@
-.searchLabel{
-    float: right;
+.searchLabel {
+  float: right;
 }
-.searchLabel input{
-    margin-right: 10px;
+.searchLabel input {
+  margin-right: 10px;
 }
-.searchBtn{
-    border: 1px solid rgb(167, 167, 167);
-    border-radius: 5px;
+.searchBtn {
+  border: 1px solid rgb(167, 167, 167);
+  border-radius: 5px;
 }
 .modal {
-    transform: translate(-50%, 0%); 
-    position: absolute;
-    top: 0px;
-    margin: auto;
-    width: 50%;
-    background-color: white;
-    border: 2px solid #000;
-    box-shadow: 24;
-    padding: 40px;
-    padding-bottom: 10px;
+  transform: translate(-50%, 0%);
+  position: absolute;
+  top: 0px;
+  margin: auto;
+  width: 50%;
+  background-color: white;
+  border: 2px solid #000;
+  box-shadow: 24;
+  padding: 40px;
+  padding-bottom: 10px;
 }
 .closeModalBtn {
   width: 80px;
@@ -32,78 +32,83 @@
   margin: 25px 15px 15px 0px;
   float: right;
 }
-.confirmBtn{
-    width: 50%;
-    height: 40px;
-    margin-top: 10px;
-    margin-right: auto;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(19, 151, 151);
-    color: white;
+.confirmBtn {
+  width: 50%;
+  height: 40px;
+  margin-top: 10px;
+  margin-right: auto;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(19, 151, 151);
+  color: white;
 }
-.denyBtn{
-    width: 50%;
-    height: 40px;
-    margin-top: 10px;
-    margin-right: auto;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(199, 36, 24);
-    color: white;
+.denyBtn {
+  width: 50%;
+  height: 40px;
+  margin-top: 10px;
+  margin-right: auto;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(199, 36, 24);
+  color: white;
 }
-.btnContainer{
-    width: 20%;
+.btnContainer {
+  width: 20%;
 }
-.notifMessage{
-    direction: rtl;
-    text-align: right;
-    padding: 20px;
-
+.notifMessage {
+  direction: rtl;
+  text-align: right;
+  padding: 20px;
 }
-.modalBtnContainer{
-    width: 30%;
-    min-height: 50px;
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    display: flex;
-    flex-direction: row;
+.modalBtnContainer {
+  width: 30%;
+  min-height: 50px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: row;
 }
-.modalSuccess p{
-    color: rgb(23, 130, 23);
-    text-align: center;
-    font-size: 20px;
-    font-weight: 800;
+.modalSuccess p {
+  color: rgb(23, 130, 23);
+  text-align: center;
+  font-size: 20px;
+  font-weight: 800;
 }
-.notifMessage{
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.notifMessage {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  padding: 5px;
+}
+.notifMessageContainer {
+  display: block;
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.messageNotSeen {
+  background-color: rgb(234, 234, 234);
+}
+@media (max-width: 950px) {
+  .modal {
+    width: 95%;
+    left: 0px;
+    right: 0px;
+    transform: translate(0, 0);
+  }
+  .btnContainer {
     width: 100%;
-    padding: 5px;
-}
-.notifMessageContainer{
-    display: block;
-    width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.messageNotSeen{
-    background-color: rgb(234, 234, 234);
-}
-@media (max-width: 950px){
-    .btnContainer{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .btnContainer button{
-        width: 100%;
-    }
-    .notifMessageContainer{
-        width: 200px;
-    }
+    display: flex;
+    flex-direction: column;
+  }
+  .btnContainer button {
+    width: 100%;
+  }
+  .notifMessageContainer {
+    width: 200px;
+  }
 }

@@ -129,6 +129,12 @@
     color: white;
 }
 @media (max-width: 950px){
+  .modal{
+    width: 95%;
+    left: 0px;
+    right: 0px;
+   transform: translate(0,0);
+  }
     .newForm{
         width: 95%;
     }
