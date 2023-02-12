@@ -99,6 +99,8 @@
     left: 0px;
     right: 0px;
     transform: translate(0, 0);
+    max-height: 100vh;
+    overflow: scroll;
   }
   .btnContainer {
     width: 100%;

@@ -97,6 +97,8 @@
     .modal{
         width: 95%;
         transform: translate(-2.5%, 0%); 
+        max-height: 100vh;
+        overflow: scroll;
     }
     .infoForm button{
         width: 100%;
